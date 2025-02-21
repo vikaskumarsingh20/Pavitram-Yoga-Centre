@@ -75,19 +75,19 @@ function NavBar() {
                 <ul className="dropdown-menu">
                   <li>
                     <Link className="dropdown-item" to="/about">
-                      <i className="bi bi-chevron-down rotate-180"></i>
+                      {/* <i className="bi bi-chevron-down rotate-180"></i> */}
                       Pavitram
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/our-story">
-                      <i className="bi bi-chevron-down rotate-180"></i>
+                      {/* <i className="bi bi-chevron-down rotate-180"></i> */}
                       Acharya Vivekaditya
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/our-team">
-                      <i className="bi bi-chevron-down rotate-180"></i>
+                      {/* <i className="bi bi-chevron-down rotate-180"></i> */}
                       Our Centers
                     </Link>
                   </li>

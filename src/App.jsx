@@ -3,6 +3,8 @@ import './App.css'
 import RootRoutes from './routes/RootRoutes';
 import Carousels from './components/Home/Carousel';
 import LatestServices from './components/Home/LatestServices';
+import LatestCourses from './components/Home/LatestCourses';
+import UpcomingEvent from './components/Home/UpcomingEvent';
 function App() {
 
   return (
@@ -13,6 +15,8 @@ function App() {
 
     <Carousels/>
     <LatestServices/>
+    <LatestCourses/>
+    <UpcomingEvent/>
     </>
   )
 }
