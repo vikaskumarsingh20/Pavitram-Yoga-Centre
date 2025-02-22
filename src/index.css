@@ -1,3 +1,4 @@
+ 
 body {
   font-family: 'Rubik', sans-serif !important;
 }
@@ -16,4 +17,46 @@ body {
   .dropdown-menu {
     margin-top: -44px !important;
   }
+}
+
+.testimonial{
+  background-image: url("https://source.unsplash.com/random/1920x1080");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: rgba(40, 21, 110, 0.91);
+}
+
+.footer-newsletter {
+  padding: 50px 0;
+  background: #db127a;
+  /* border-bottom: solid 2px #fff; */
+}
+.footer-newsletter form {
+  /* margin-top: 30px; */
+  background: #fff;
+  padding: 6px 10px;
+  position: relative;
+  border-radius: 50px;
+}
+.footer-newsletter form input[type="submit"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  margin: 3px;
+  background: #27146e;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 50px;
+}
+.footer-newsletter form input[type="email"] {
+  border: 0;
+  padding: 4px;
+  width: calc(100% - 100px);
 }

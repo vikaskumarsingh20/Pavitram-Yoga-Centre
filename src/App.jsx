@@ -6,6 +6,9 @@ import LatestServices from './components/Home/LatestServices';
 import LatestCourses from './components/Home/LatestCourses';
 import UpcomingEvent from './components/Home/UpcomingEvent';
 import OurInstractor from './components/Home/OurInstractor';
+import Testimonial from './components/Home/Testimonial';
+import OurBlogs from './components/Home/OurBlogs';
+import OurGallery from './components/Home/OurGallery';
 function App() {
 
   return (
@@ -19,6 +22,9 @@ function App() {
     <LatestCourses/>
     <UpcomingEvent/>
     <OurInstractor/>
+    <Testimonial/>
+    <OurBlogs/>
+    <OurGallery/>
     </>
   )
 }
