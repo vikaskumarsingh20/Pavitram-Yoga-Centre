@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <>
+    <div className="fixed-top">
       <header
         style={{ backgroundColor: colors.navcolor }}
         className="container-fluid py-3"
@@ -44,7 +44,7 @@ function NavBar() {
         </div>
       </header>
 
-      <nav className="navbar navbar-expand-md navbar-light shadow">
+      <nav className="navbar navbar-expand-md navbar-light shadow" style={{backgroundColor:"#fff"}}>
         <div className="container-fluid d-flex justify-content-end">
           <button
             className="navbar-toggler me-3"
@@ -133,7 +133,7 @@ function NavBar() {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 }
 

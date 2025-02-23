@@ -13,10 +13,11 @@ function Carousels() {
   };
 
   return (
+    <div className="laptop-margin"  >
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
-          className="d-block w-100 h-100"
+          className="d-block w-100 h-100 "
           style={{ maxHeight: '400px', objectFit: 'cover' }}
           src={img1}
           alt="First slide"
@@ -51,6 +52,7 @@ function Carousels() {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    </div>
   );
 }
 

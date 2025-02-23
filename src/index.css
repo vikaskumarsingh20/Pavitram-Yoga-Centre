@@ -69,3 +69,32 @@ body {
 ul.list-unstyled li a:hover {
   text-decoration: underline;
 }
+
+@media (min-width: 1024px) {
+  .laptop-margin {
+    margin-top: 155px;
+  }
+}
+@media (max-width: 712px) {
+  .laptop-margin {
+    margin-top: 137px;
+  }
+}
+.bg-image {
+  background-image: url("./assets/blogs/blog2.jpg") !important;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.bg-image::after {
+  content: "";
+  background-color: rgba(41, 22, 110, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+

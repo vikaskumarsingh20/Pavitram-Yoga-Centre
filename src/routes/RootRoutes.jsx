@@ -1,17 +1,16 @@
-/* eslint-disable no-unused-vars */
-import React from 'react'
-import { Outlet, Route, Routes } from 'react-router-dom'
-import NavBar from '../components/common/NavBar'
-import Carousels from '../components/Home/Carousel'
+import { Route, Routes } from 'react-router-dom';
+import Login from '../components/common/Login';
+import LandingPage from '../components/Home/LandingPage';
+import PageNotFound from '../components/Home/PageNotFound';
 
 function RootRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<NavBar />}>
-        <Route path="*" element={<Outlet />} />
-      </Route>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="*" element={<PageNotFound/>} />
     </Routes>
-  )
+  );
 }
 
-export default RootRoutes
+export default RootRoutes;
