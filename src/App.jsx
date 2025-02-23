@@ -9,6 +9,7 @@ import OurInstractor from './components/Home/OurInstractor';
 import Testimonial from './components/Home/Testimonial';
 import OurBlogs from './components/Home/OurBlogs';
 import OurGallery from './components/Home/OurGallery';
+import Footer from './components/Home/FooterCopyright';
 function App() {
 
   return (
@@ -25,6 +26,7 @@ function App() {
     <Testimonial/>
     <OurBlogs/>
     <OurGallery/>
+    <Footer/>
     </>
   )
 }
