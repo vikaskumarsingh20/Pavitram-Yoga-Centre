@@ -12,7 +12,6 @@ function Login() {
                 <div className="d-flex flex-column align-items-center justify-content-center p-5 bg-image">
                     <h1 className="text-center text-white">Namaste</h1>
 
-
                 </div>
 
 
