@@ -93,8 +93,8 @@ function OurInstructors() {
 
 
   return (
-    <div className="container-fluid mt-4 mb-5 ">
-      <p className="border border-3 border-dark bg-light"></p>
+    <div className="container-fluid mt-2 mb-2 ">
+      {/* <p className="border border-3 border-dark bg-light"></p> */}
       <h2 className="text-center">
         Meet Our <span className="text-danger">Instructors</span>
       </h2>

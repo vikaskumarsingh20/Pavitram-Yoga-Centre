@@ -1,9 +1,21 @@
+import Footer from '../Home/FooterCopyright'
+import NavBar from '../common/NavBar'
+import { Button } from 'bootstrap/dist/js/bootstrap.bundle.min'
 import img1 from "../../assets/Services/event1.jpg"
 import img2 from "../../assets/Services/event2.jpg"
-import { Button } from 'react-bootstrap'
-function UpcomingEvent() {
+
+function UpComingEvent() {
     return (
-        <div className="bg-light p-2">
+        <>
+            <NavBar />
+            {/* Header Section */}
+            <div className="container-fluid laptop-margin">
+                <div className="d-flex flex-column align-items-center justify-content-center py-5  text-white" style={{ backgroundColor: 'rgb(42, 23, 111)' }}>
+                    <h1 className="text-center">UP COMING EVENT</h1>
+                    <p>Home &nbsp; ◦ &nbsp;  Upcoming Event</p>
+                </div>
+            </div>
+
             <div>
                 <h4 className='text-center mt-1 mb-2 fs-5'>UPCOMING EVENTS AND WORKSHOPS, WEBINARS.</h4>
             </div>
@@ -46,12 +58,12 @@ function UpcomingEvent() {
 
                 </div>
                 <div className="d-flex justify-content-center align-items-center mb-3 mt-3">
-                                    <Button variant="danger" className="me-2 mb-1">More</Button>
-                                    </div>
+                    <Button variant="danger" className="me-2 mb-1">More</Button>
+                </div>
             </div>
-
-        </div>
+            <Footer />
+        </>
     )
 }
 
-export default UpcomingEvent
+export default UpComingEvent

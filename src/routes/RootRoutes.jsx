@@ -8,6 +8,9 @@ import Acharya_VivekAditya from '../components/pages/Acharya_VivekAditya';
 import Our_centers from '../components/pages/Our_centers';
 import Courses from '../components/pages/Courses';
 import Services from '../components/pages/Services';
+import UpComingEvent from '../components/pages/UpComingEvent';
+import ContactUs from '../components/pages/ContactUs';
+import Galllery from '../components/pages/Galllery';
 
 function RootRoutes() {
   return (
@@ -20,6 +23,9 @@ function RootRoutes() {
       <Route path="/home/our_centers" element={<Our_centers />} />
       <Route path="/home/Courses" element={<Courses />} />
       <Route path="/home/service" element={<Services />} />
+      <Route path='/home/upcoming_events' element={<UpComingEvent/>} />
+      <Route path="/home/contactus" element={<ContactUs/>} />
+      <Route path="/home/gallery" element={<Galllery/>} />
       <Route path="*" element={<PageNotFound/>} />
     </Routes>
   );

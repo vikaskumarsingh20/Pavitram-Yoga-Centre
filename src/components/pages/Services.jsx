@@ -84,7 +84,7 @@ function Services() {
               <div className="card   p-3 border-0">
                 <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{minHeight: '250px', maxHeight: '250px'}} />
                 <h5 className="mt-3 text-center fw-bold">{service.title}</h5>
-                <p className="text-center"><small> <i className="fa-solid fa-user-group text-danger"></i> By {service.trainer} | <i className="fa-solid fa-calendar-days text-danger"></i> {service.duration} | 🎯 {service.audience}</small></p>
+                <p className="text-center"><small> <i className="fa-solid fa-user-group text-danger me-1"></i> By {service.trainer} | <i className="fa-solid fa-calendar-days text-danger me-1"></i> {service.duration} | 🎯 {service.audience}</small></p>
                 <p className="text-center"><small>Available Service: 🏠 Online & At Center</small></p>
                 {service.morningSlots && service.morningSlots.length > 0 && (
                   <p><strong>Morning :</strong> {service.morningSlots.map(slot => <button className="btn btn-danger btn-sm m-1" key={slot}>{slot}</button>)}</p>

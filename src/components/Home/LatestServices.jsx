@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 // import { FaRegCalendarAlt } from "react-icons/fa";
@@ -14,194 +15,105 @@ import Button from 'react-bootstrap/Button';
 
 
 function LatestServices() {
-    return (
-        <div className='bg-light'>
-            <p className='border border-3 border-dark'></p>
-            <h2 className='text-center'>Latest <span className='text-danger'>Services</span> </h2>
-            <img src={titlelogo} className='mx-auto d-block mb-3' alt="Title Logo" />
+    const services = [
+        {
+            title: 'GROUP YOGA CLASSES',
+            trainer: 'Shri VikasAnanda',
+            duration: '60 min',
+            audience: 'EVERYONE',
+            image: img1,
+            availableService: 'Online & At Center',
+            morningSlots: ['6-7', '7-8', '8-9'],
+            eveningSlots: ['5-6', '6-7']
+        },
+        {
+            title: 'THERAPY SESSION',
+            trainer: 'Sh Pramod Sharma',
+            duration: '60 min',
+            audience: 'EVERYONE',
+            image: img2,
+            availableService: 'Online & At Center',
+            morningSlots: ['9-10', '10-11', '11-12'],
+            eveningSlots: ['5-6', '7-8', '8-9']
+        },
+        {
+            title: 'SPIRITUAL COUNSELLING',
+            trainer: 'SHRI. GURU JI',
+            duration: '90 min',
+            audience: 'TO ALL',
+            image: img3,
+            availableService: 'Online & At Center',
+            eveningSlots: ['5-6', '6-7', '7-8']
+        },
+        {
+            title: 'HOME CLASSES',
+            trainer: 'Pavitram Team',
+            duration: '60 min',
+            audience: 'EVERYONE',
+            image: img4,
+            availableService: 'Online & At Center',
+            morningSlots: ['7-8', '9-10', '11-12'],
+            eveningSlots: ['5-6', '7-8', '8-9']
+        },
+        {
+            title: 'MEDITATION SESSIONS',
+            trainer: 'SHRI. GURU JI',
+            duration: '60 min',
+            audience: 'TO ALL',
+            image: img5,
+            availableService: 'Online & At Center',
+            morningSlots: ['7-8'],
+            eveningSlots: ['7-8']
+        },
+        {
+            title: 'DIET',
+            trainer: 'Pavitram Team',
+            duration: '50 min',
+            audience: 'TO ALL',
+            image: img6,
+            availableService: 'Offline Only'
+        }
+    ];
 
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-4">
-                        <div className="card mb-3 border-0">
-                            <h4 className='text-center mt-1 mb-2 fs-5'>GROUP YOGA CLASSES</h4>
-                            <img src={img1} className="card-img-top" alt="..." style={{ height: "278px" }} />
-                            <div className="card-body d-flex flex-wrap justify-content-between align-items-start">
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> By Shri Vikeshananda</p>
-                                <p className="card-text"><i className="fa-solid fa-calendar-days text-danger"></i> 60 min</p>
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> Everyone</p>
-                                <p className="card-text">Available Service : <i className="fa fa-fire text-danger"></i>  Online & At Center</p>
-                            </div>
-                            <div className="d-flex flex-column justify-content-between">
-                                <div className='mb-1 d-flex flex-wrap justify-content-between'>
-                                    <div className="d-none d-md-block">Morning:</div>
-                                    <div className="d-md-none text-center">Morning</div>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(8-9)</Button>
-                                </div>
-
-                                <div className="d-flex flex-wrap justify-content-between">
-                                    <div className="d-none d-md-block">Evening:</div>
-                                    <div className="d-md-none text-center">Evening</div>
-                                    <Button variant="danger" className="me-2 mb-1">(5-6)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card mb-3 border-0">
-                            <h4 className='text-center mt-1 mb-2 fs-5'>THERAPY SESSION</h4>
-                            <img src={img2} className="card-img-top" alt="..." />
-                            <div className="card-body d-flex flex-wrap justify-content-between align-items-start">
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> By Sh.Pramod ku. sharma</p>
-                                <p className="card-text"><i className="fa-solid fa-calendar-days text-danger"></i> 60 min</p>
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> Everyone</p>
-                                <p className="card-text">Available Service : <i className="fa fa-fire text-danger"></i>  Online & At Center</p>
-                            </div>
-                            <div className="d-flex flex-column justify-content-between">
-                                <div className='mb-1 d-flex flex-wrap justify-content-between'>
-                                    <div className="d-none d-md-block">Morning:</div>
-                                    <div className="d-md-none text-center">Morning</div>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(8-9)</Button>
-                                </div>
-
-                                <div className="d-flex flex-wrap justify-content-between">
-                                    <div className="d-none d-md-block">Evening:</div>
-                                    <div className="d-md-none text-center">Evening</div>
-                                    <Button variant="danger" className="me-2 mb-1">(5-6)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card mb-3 border-0">
-                            <h4 className='text-center mt-1 mb-2 fs-5'>SPIRITUAL COUNSELLING</h4>
-                            <img src={img3} className="card-img-top" alt="..." />
-                            <div className="card-body d-flex flex-wrap justify-content-between align-items-start">
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i>By SHRI. GURU JI </p>
-                                <p className="card-text"><i className="fa-solid fa-calendar-days text-danger"></i> 60 min</p>
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> Everyone</p>
-                                <p className="card-text">Available Service : <i className="fa fa-fire text-danger"></i>  Online & At Center</p>
-                            </div>
-                            <div className="d-flex flex-column justify-content-between">
-                                <div className='mb-1 d-flex flex-wrap justify-content-between'>
-                                    <div className="d-none d-md-block">Morning:</div>
-                                    <div className="d-md-none text-center">Morning</div>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(8-9)</Button>
-                                </div>
-
-                                <div className="d-flex flex-wrap justify-content-between">
-                                    <div className="d-none d-md-block">Evening:</div>
-                                    <div className="d-md-none text-center">Evening</div>
-                                    <Button variant="danger" className="me-2 mb-1">(5-6)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card mb-3 border-0">
-                            <h4 className='text-center mt-1 mb-2 fs-5'>SPIRITUAL COUNSELLING</h4>
-                            <img src={img4} className="card-img-top" alt="..." />
-                            <div className="card-body d-flex flex-wrap justify-content-between align-items-start">
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i>By SHRI. GURU JI </p>
-                                <p className="card-text"><i className="fa-solid fa-calendar-days text-danger"></i> 60 min</p>
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> Everyone</p>
-                                <p className="card-text">Available Service : <i className="fa fa-fire text-danger"></i>  Online & At Center</p>
-                            </div>
-                            <div className="d-flex flex-column justify-content-between">
-                                <div className='mb-1 d-flex flex-wrap justify-content-between'>
-                                    <div className="d-none d-md-block">Morning:</div>
-                                    <div className="d-md-none text-center">Morning</div>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(8-9)</Button>
-                                </div>
-
-                                <div className="d-flex flex-wrap justify-content-between">
-                                    <div className="d-none d-md-block">Evening:</div>
-                                    <div className="d-md-none text-center">Evening</div>
-                                    <Button variant="danger" className="me-2 mb-1">(5-6)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card mb-3 border-0">
-                            <h4 className='text-center mt-1 mb-2 fs-5'>SPIRITUAL COUNSELLING</h4>
-                            <img src={img5} className="card-img-top" alt="..." style={{ height: "278px" }} />
-                            <div className="card-body d-flex flex-wrap justify-content-between align-items-start">
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i>By SHRI. GURU JI </p>
-                                <p className="card-text"><i className="fa-solid fa-calendar-days text-danger"></i> 60 min</p>
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> Everyone</p>
-                                <p className="card-text">Available Service : <i className="fa fa-fire text-danger"></i>  Online & At Center</p>
-                            </div>
-                            <div className="d-flex flex-column justify-content-between">
-                                <div className='mb-1 d-flex flex-wrap justify-content-between'>
-                                    <div className="d-none d-md-block">Morning:</div>
-                                    <div className="d-md-none text-center">Morning</div>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(8-9)</Button>
-                                </div>
-
-                                <div className="d-flex flex-wrap justify-content-between">
-                                    <div className="d-none d-md-block">Evening:</div>
-                                    <div className="d-md-none text-center">Evening</div>
-                                    <Button variant="danger" className="me-2 mb-1">(5-6)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card mb-3 border-0">
-                            <h4 className='text-center mt-1 mb-2 fs-5'>SPIRITUAL COUNSELLING</h4>
-                            <img src={img6} className="card-img-top" alt="..." style={{ height: "281px" }}/>
-                            <div className="card-body d-flex flex-wrap justify-content-between align-items-start">
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i>By SHRI. GURU JI </p>
-                                <p className="card-text"><i className="fa-solid fa-calendar-days text-danger"></i> 60 min</p>
-                                <p className="card-text"><i className="fa-solid fa-user-group text-danger"></i> Everyone</p>
-                                <p className="card-text">Available Service : <i className="fa fa-fire text-danger"></i>  Online & At Center</p>
-                            </div>
-                            <div className="d-flex flex-column justify-content-between">
-                                <div className='mb-1 d-flex flex-wrap justify-content-between'>
-                                    <div className="d-none d-md-block">Morning:</div>
-                                    <div className="d-md-none text-center">Morning</div>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(8-9)</Button>
-                                </div>
-
-                                <div className="d-flex flex-wrap justify-content-between">
-                                    <div className="d-none d-md-block">Evening:</div>
-                                    <div className="d-md-none text-center">Evening</div>
-                                    <Button variant="danger" className="me-2 mb-1">(5-6)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(6-7)</Button>
-                                    <Button variant="danger" className="me-2 mb-1">(7-8)</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    const ServiceCard = ({ service }) => {
+        return (
+            <div className="col-md-4 mb-4">
+                <div className="card  border-0 p-3">
+                    <h5 className="text-center mt-1 mb-2 fs-5">{service.title}</h5>
+                    <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{ minHeight: '250px', maxHeight: '250px' }} />
+                    <p className="text-center">
+                        <small> <i className="fa-solid fa-user-group text-danger me-1"></i>By {service.trainer} | <i className="fa-solid fa-calendar-days text-danger"></i> {service.duration} | 🎯 {service.audience}</small>
+                    </p>
+                    <p className="text-center lh-1">
+                        <small>Available Service: <i className="fa-solid fa-home text-danger me-1"></i> {service.availableService}</small>
+                    </p>
+                    {service.morningSlots && service.morningSlots.length > 0 && (
+                        <p><strong>Morning :</strong> {service.morningSlots.map(slot => <button className="btn btn-danger btn-sm m-1" key={slot}>{slot}</button>)}</p>
+                    )}
+                    {service.eveningSlots && service.eveningSlots.length > 0 && (
+                        <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <button className="btn btn-danger btn-sm m-1" key={slot}>{slot}</button>)}</p>
+                    )}
                 </div>
-                <div className="d-flex justify-content-center align-items-center mb-3 mt-3">
-                    <Button variant="danger" className="me-2 mb-3">More</Button>
-                    </div>
             </div>
-        </div>
+        );
+    };
+    return (
+        <>
+            <div className="container-fluid mb-3 ">
+                <p className='border border-3 border-dark bg-light'></p>
+                          <h2 className='text-center'>Latest <span className='text-danger'>Services</span></h2>
+                          <img src={titlelogo} className='mx-auto d-block mb-3' alt="Title Logo" />
+                <div className="row">
+                    {services.map((service, index) => (
+                        <ServiceCard key={index} service={service} />
+                    ))}
+                </div>
+                {/* More Button */}
+                <div className="text-center mt-3">
+                    <button className="btn btn-danger">More</button>
+                </div>
+            </div>
+        </>
     )
 }
 

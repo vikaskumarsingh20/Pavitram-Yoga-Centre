@@ -115,17 +115,17 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/upcoming-events">
+                <Link className="nav-link" to="/home/upcoming_events">
                   Our Upcoming Events
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/gallery">
+                <Link className="nav-link" to="/home/gallery">
                   Gallery
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contact">
+                <Link className="nav-link" to="/home/contactus">
                   Contact
                 </Link>
               </li>
