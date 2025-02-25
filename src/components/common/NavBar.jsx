@@ -65,7 +65,7 @@ function NavBar() {
               <li className="nav-item dropdown mt-0">
                 <Link
                   className="nav-link dropdown-toggle"
-                  to="/about"
+                  to="/home/aboutus"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -74,19 +74,19 @@ function NavBar() {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="/about">
+                    <Link className="dropdown-item" to="/home/aboutus">
                       {/* <i className="bi bi-chevron-down rotate-180"></i> */}
                       Pavitram
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/our-story">
+                    <Link className="dropdown-item" to="/home/Acharya_VivekAditya">
                       {/* <i className="bi bi-chevron-down rotate-180"></i> */}
                       Acharya Vivekaditya
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/our-team">
+                    <Link className="dropdown-item" to="/home/our_centers">
                       {/* <i className="bi bi-chevron-down rotate-180"></i> */}
                       Our Centers
                     </Link>
@@ -94,12 +94,12 @@ function NavBar() {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/trainer">
+                <Link className="nav-link" to="/home/Courses">
                   Trainers Course
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/yoga">
+                <Link className="nav-link" to="/home/service">
                   Our Yoga Services
                 </Link>
               </li>
