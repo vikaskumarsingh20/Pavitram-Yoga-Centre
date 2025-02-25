@@ -85,6 +85,7 @@ ul.list-unstyled li a:hover {
   background-position: center;
   background-size: cover;
   position: relative;
+  width: 100%;
 }
 
 .bg-image::after {

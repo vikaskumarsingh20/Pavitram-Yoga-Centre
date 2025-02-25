@@ -35,7 +35,7 @@ function NavBar() {
             </Link>
             <Link
               style={{ textDecoration: "none" }}
-              to="/login"
+              to="/home/login"
               className="text-white"
             >
               Login
