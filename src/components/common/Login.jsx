@@ -11,6 +11,12 @@ function Login() {
             <div className='container-fluid laptop-margin '>
                 <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
                     <h1 className="text-center text-white">Login</h1>
+                    <div style={{zIndex: 1}}>
+                        <Link to="/" className="text-white text-decoration-none">Home</Link>
+                        <span> • </span>
+                        <Link to="/home/cart" className="text-white text-decoration-none">Add to Cart</Link>
+                    </div>
+
                 </div>
                 <div className="container mt-5 mb-5">
                     <div className="row justify-content-center">
@@ -31,7 +37,8 @@ function Login() {
                                 <label className="form-label">Password*</label>
                                 <input type="password" className="form-control" placeholder="Password" />
                             </div>
-                            <p className="text-muted">Forgot Password?</p>
+                            <Link to="/Home/forget_password"> <p className="text-muted text-decoration-none">Forgot Password?</p></Link>
+                           
                             <button className="btn btn-primary">Login</button>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import NavBar from "../common/NavBar";
 import img1 from "../../assets/Services/course1.png";
 import img2 from "../../assets/Services/course2.jpg";
 import img3 from "../../assets/Services/course3.jpeg";
+import { Link } from "react-router-dom";
 
 function Courses() {
   const courses = [
@@ -37,7 +38,11 @@ function Courses() {
         style={{ backgroundColor: 'rgb(42, 23, 111)' }}
         >
           <h1 className="text-center">OUR COURSES</h1>
-          <p>Home &nbsp; ◦ &nbsp; Our Courses</p>
+          <div>
+            <Link to="/" className="btn btn-link text-white text-decoration-none">Home</Link>
+            <span> • </span>
+            <Link to="/home/cart" className="btn btn-link text-white text-decoration-none"> Courses</Link>
+          </div>
         </div>
       </div>
 

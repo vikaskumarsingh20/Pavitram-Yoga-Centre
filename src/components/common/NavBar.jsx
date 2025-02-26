@@ -29,7 +29,7 @@ function NavBar() {
             <Link
               style={{ textDecoration: "none" }}
               className="me-3 text-white"
-              to="/cart"
+              to="/home/cart"
             >
               Cart
             </Link>

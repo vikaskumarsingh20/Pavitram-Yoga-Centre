@@ -11,6 +11,8 @@ import Services from '../components/pages/Services';
 import UpComingEvent from '../components/pages/UpComingEvent';
 import ContactUs from '../components/pages/ContactUs';
 import Galllery from '../components/pages/Galllery';
+import Cart from '../components/pages/Cart';
+import ForgetPassword from '../components/Home/ForgetPassword';
 
 function RootRoutes() {
   return (
@@ -26,6 +28,8 @@ function RootRoutes() {
       <Route path='/home/upcoming_events' element={<UpComingEvent/>} />
       <Route path="/home/contactus" element={<ContactUs/>} />
       <Route path="/home/gallery" element={<Galllery/>} />
+      <Route path='/home/cart' element={<Cart/>} /> 
+      <Route path="/Home/forget_password" element={<ForgetPassword/>} />
       <Route path="*" element={<PageNotFound/>} />
     </Routes>
   );

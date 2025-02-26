@@ -6,6 +6,7 @@ import img3 from "../../assets/Services/img-3.jpg"
 import img4 from "../../assets/Services/img4.jpg"
 import img5 from "../../assets/Services/img5.jpg"
 import img6 from "../../assets/Services/img6.jpg"
+import { Link } from "react-router-dom";
 
 
 function Services() {
@@ -72,7 +73,11 @@ function Services() {
       <div className="container-fluid laptop-margin">
         <div className="d-flex flex-column align-items-center justify-content-center py-5  text-white" style={{ backgroundColor: 'rgb(42, 23, 111)' }}>
           <h1 className="text-center">OUR SERVICES</h1>
-          <p>Home &nbsp; ◦ &nbsp; Our Services</p>
+          <div>
+            <Link to="/" className="btn btn-link text-white text-decoration-none">Home</Link>
+            <span> • </span>
+            <Link to="/home/cart" className="btn btn-link text-white text-decoration-none"> Services</Link>
+          </div>
         </div>
       </div>
 

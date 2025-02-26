@@ -86,8 +86,12 @@ ul.list-unstyled li a:hover {
   background-size: cover;
   position: relative;
   width: 100%;
+  pointer-events: auto !important;
+  z-index: 0;
 }
-
+.bg-image a {
+  pointer-events: auto !important;
+}
 .bg-image::after {
   content: "";
   background-color: rgba(41, 22, 110, 0.7);
