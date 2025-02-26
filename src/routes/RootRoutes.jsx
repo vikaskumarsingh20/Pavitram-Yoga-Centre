@@ -17,6 +17,7 @@ import ForgetPassword from '../components/Home/ForgetPassword';
 function RootRoutes() {
   return (
     <Routes>
+
       <Route path="/" element={<LandingPage />} />
       <Route path="/home/login" element={<Login />} />
       <Route path="/home/registration" element={<Registration />} />
