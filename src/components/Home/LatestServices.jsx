@@ -10,6 +10,7 @@ import img5 from "../../assets/Services/img5.jpg"
 import img6 from "../../assets/Services/img6.jpg"
 import titlelogo from "../../assets/images/title-icon.png"
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom'
 
 
 
@@ -88,10 +89,10 @@ function LatestServices() {
                         <small>Available Service: <i className="fa-solid fa-home text-danger me-1"></i> {service.availableService}</small>
                     </p>
                     {service.morningSlots && service.morningSlots.length > 0 && (
-                        <p><strong>Morning :</strong> {service.morningSlots.map(slot => <button className="btn btn-danger btn-sm m-1" key={slot}>{slot}</button>)}</p>
+                        <p><strong>Morning : </strong> {service.morningSlots.map(slot => <Link to="/home/service_detail" className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
                     )}
                     {service.eveningSlots && service.eveningSlots.length > 0 && (
-                        <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <button className="btn btn-danger btn-sm m-1" key={slot}>{slot}</button>)}</p>
+                        <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <Link to="/home/service_detail" className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
                     )}
                 </div>
             </div>

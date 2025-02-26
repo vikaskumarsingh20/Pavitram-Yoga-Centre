@@ -1,14 +1,17 @@
 import colors from "../../styles/colors";
 import logo from "../../assets/images/pavitramlogo.jpeg";
 import { Link } from "react-router-dom";
+import "./navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   return (
     <div className="fixed-top">
-      <header
+        <header
         style={{ backgroundColor: colors.navcolor }}
-        className="container-fluid py-3"
-      >
+        className="container-fluid py-3 header-top"
+        >
         <div className="row justify-content-between align-items-center text-white">
           <div className="col-12 col-md-6 d-flex justify-content-center">
             <a
@@ -31,14 +34,14 @@ function NavBar() {
               className="me-3 text-white"
               to="/home/cart"
             >
-              Cart
+                <FontAwesomeIcon icon={faShoppingCart} className="me-1" /> Cart
             </Link>
             <Link
               style={{ textDecoration: "none" }}
               to="/home/login"
               className="text-white"
             >
-              Login
+                <FontAwesomeIcon icon={faUser} className="me-1" /> Login
             </Link>
           </div>
         </div>
@@ -64,31 +67,28 @@ function NavBar() {
             <ul className="navbar-nav mb-lg-0">
               <li className="nav-item dropdown mt-0">
                 <Link
-                  className="nav-link dropdown-toggle"
-                  to="/home/aboutus"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                className="nav-link"
+                to="/home/aboutus"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
                 >
-                  About us
+                About us <FontAwesomeIcon icon={faChevronDown} className="dropdown-icon" />
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
                     <Link className="dropdown-item" to="/home/aboutus">
-                      {/* <i className="bi bi-chevron-down rotate-180"></i> */}
-                      Pavitram
+                    Pavitram
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/home/Acharya_VivekAditya">
-                      {/* <i className="bi bi-chevron-down rotate-180"></i> */}
-                      Acharya Vivekaditya
+                    Acharya Vivekaditya
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/home/our_centers">
-                      {/* <i className="bi bi-chevron-down rotate-180"></i> */}
-                      Our Centers
+                    Our Centers
                     </Link>
                   </li>
                 </ul>

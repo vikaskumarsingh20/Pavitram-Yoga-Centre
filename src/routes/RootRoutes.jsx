@@ -13,6 +13,7 @@ import ContactUs from '../components/pages/ContactUs';
 import Galllery from '../components/pages/Galllery';
 import Cart from '../components/pages/Cart';
 import ForgetPassword from '../components/Home/ForgetPassword';
+import ServiceDetails from '../components/pages/ServiceDetails';
 
 function RootRoutes() {
   return (
@@ -31,6 +32,7 @@ function RootRoutes() {
       <Route path="/home/gallery" element={<Galllery/>} />
       <Route path='/home/cart' element={<Cart/>} /> 
       <Route path="/Home/forget_password" element={<ForgetPassword/>} />
+      <Route path="/home/service_detail" element={<ServiceDetails/>} />
       <Route path="*" element={<PageNotFound/>} />
     </Routes>
   );
