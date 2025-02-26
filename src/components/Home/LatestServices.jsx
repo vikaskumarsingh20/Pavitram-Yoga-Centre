@@ -76,7 +76,7 @@ function LatestServices() {
         }
     ];
 
-    const ServiceCard = ({ service }) => {
+    const ServiceCard = ({ service, index }) => {
         return (
             <div className="col-md-4 mb-4">
                 <div className="card  border-0 p-3">
@@ -89,10 +89,10 @@ function LatestServices() {
                         <small>Available Service: <i className="fa-solid fa-home text-danger me-1"></i> {service.availableService}</small>
                     </p>
                     {service.morningSlots && service.morningSlots.length > 0 && (
-                        <p><strong>Morning : </strong> {service.morningSlots.map(slot => <Link to="/home/service_detail" className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
+                        <p><strong>Morning : </strong> {service.morningSlots.map(slot => <Link to={`/home/service_detail/${index}`} state={{ service, timeSlot: slot, period: "Morning" }} className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
                     )}
                     {service.eveningSlots && service.eveningSlots.length > 0 && (
-                        <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <Link to="/home/service_detail" className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
+                        <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <Link to={`/home/service_detail/${index}`} state={{ service, timeSlot: slot, period: "Evening" }} className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
                     )}
                 </div>
             </div>
@@ -106,7 +106,7 @@ function LatestServices() {
                           <img src={titlelogo} className='mx-auto d-block mb-3' alt="Title Logo" />
                 <div className="row">
                     {services.map((service, index) => (
-                        <ServiceCard key={index} service={service} />
+                        <ServiceCard key={index} service={service} index={index} />
                     ))}
                 </div>
                 {/* More Button */}

@@ -1,12 +1,25 @@
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NavBar from '../common/NavBar';
 import Footer from '../Home/FooterCopyright';
 import cartLogo from "../../assets/Services/course1.png";
-import { Link } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 
 function ServiceDetails() {
-  const [quantity, setQuantity] = useState(1);
-  const [selectedType, setSelectedType] = useState(null);
+const [quantity, setQuantity] = useState(1);
+const [selectedType, setSelectedType] = useState(null);
+const { serviceId } = useParams();
+const location = useLocation();
+// Extract service, timeSlot, and period directly from location.state
+const service = location.state?.service || {};
+const timeSlot = location.state?.timeSlot || "";
+const period = location.state?.period || "";
+
+// Set default data if state is not available
+const serviceName = service.title || "THERAPY SESSION";
+const serviceDuration = service.duration || "60 min";
+const serviceTime = timeSlot ? `(${timeSlot})` : "(9-10)";
+const serviceImage = service.image || cartLogo;
+const serviceTrainer = service.trainer || "Not specified";
 
   const handleQuantityChange = (type) => {
     setQuantity((prev) => (type === "increase" ? prev + 1 : prev > 1 ? prev - 1 : 1));
@@ -33,14 +46,14 @@ function ServiceDetails() {
           <div className="row">
             {/* Image Section */}
             <div className="col-md-5 text-center">
-              <img src={cartLogo} className="img-fluid rounded" alt="Therapy Session" />
+            <img src={serviceImage} className="img-fluid rounded" alt={serviceName} />
             </div>
 
             {/* Details Section */}
             <div className="col-md-7">
-              <h3 className="fw-bold">THERAPY SESSION</h3>
-              <p><strong>Duration:</strong> 60 min</p>
-              <p><strong>Morning:</strong> (9-10)</p>
+            <h3 className="fw-bold">{serviceName}</h3>
+            <p><strong>Duration:</strong> {serviceDuration}</p>
+            <p><strong>Time:</strong> {serviceTime}</p>
 
               {/* Session Selection */}
               <div className="d-flex flex-wrap gap-4">

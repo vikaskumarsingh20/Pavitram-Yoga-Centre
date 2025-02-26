@@ -33,6 +33,7 @@ function RootRoutes() {
       <Route path='/home/cart' element={<Cart/>} /> 
       <Route path="/Home/forget_password" element={<ForgetPassword/>} />
       <Route path="/home/service_detail" element={<ServiceDetails/>} />
+      <Route path="/home/service_detail/:serviceId" element={<ServiceDetails/>} />
       <Route path="*" element={<PageNotFound/>} />
     </Routes>
   );
