@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
+import { useCart } from '../context/CartContext';
+import toast, { Toaster } from 'react-hot-toast';
 import NavBar from '../common/NavBar';
 import Footer from '../Home/FooterCopyright';
 import cartLogo from "../../assets/Services/course1.png";
 import { Link, useParams, useLocation } from 'react-router-dom';
 
 function ServiceDetails() {
+const { addToCart } = useCart();
 const [quantity, setQuantity] = useState(1);
 const [selectedType, setSelectedType] = useState(null);
+const [selectedPeriod, setSelectedPeriod] = useState(null);
+const [selectedPrice, setSelectedPrice] = useState(0);
 const { serviceId } = useParams();
 const location = useLocation();
 // Extract service, timeSlot, and period directly from location.state
@@ -31,7 +36,8 @@ const serviceTrainer = service.trainer || "Not specified";
 
   return (
     <>
-      <NavBar />
+    <Toaster />
+    <NavBar />
       <div className="container-fluid laptop-margin">
         {/* Banner Section */}
         <div className="bg-purple text-white text-center py-5 bg-image">
@@ -64,12 +70,22 @@ const serviceTrainer = service.trainer || "Not specified";
                   <label htmlFor="online" className="ms-2 fw-bold">ONLINE</label>
                   <div className="session-box border p-3 mt-2">
                     {[['1 YEAR', 7000, 4500], ['6 MONTHS', 4200, 3000], ['3 MONTHS', 2100, 1600], ['1 MONTH', 700, 600]].map(([label, oldPrice, newPrice], index) => (
-                      <label key={index} className="d-flex justify-content-between align-items-center mb-2">
-                        <input type="radio" name="session" disabled={selectedType !== "online"} className="me-2" />
+                    <label key={index} className="d-flex justify-content-between align-items-center mb-2">
+                        <input 
+                        type="radio" 
+                        name="session" 
+                        disabled={selectedType !== "online"} 
+                        className="me-2"
+                        onChange={() => {
+                            setSelectedPeriod(label);
+                            setSelectedPrice(newPrice);
+                        }}
+                        checked={selectedPeriod === label && selectedType === "online"} 
+                        />
                         <span>{label}</span>
                         <del className="text-muted">₹{oldPrice}.00</del>
                         <span className="text-danger">₹{newPrice}.00</span>
-                      </label>
+                    </label>
                     ))}
                   </div>
                 </div>
@@ -81,12 +97,22 @@ const serviceTrainer = service.trainer || "Not specified";
                   <label htmlFor="center" className="ms-2 fw-bold">AT CENTRE</label>
                   <div className="session-box border p-3 mt-2">
                     {[['1 YEAR', 7000, 4500], ['6 MONTHS', 4200, 3000], ['3 MONTHS', 2100, 1600], ['1 MONTH', 700, 600]].map(([label, oldPrice, newPrice], index) => (
-                      <label key={index} className="d-flex justify-content-between align-items-center mb-2">
-                        <input type="radio" name="session" disabled={selectedType !== "center"} className="me-2" />
+                    <label key={index} className="d-flex justify-content-between align-items-center mb-2">
+                        <input 
+                        type="radio" 
+                        name="session" 
+                        disabled={selectedType !== "center"} 
+                        className="me-2"
+                        onChange={() => {
+                            setSelectedPeriod(label);
+                            setSelectedPrice(newPrice);
+                        }}
+                        checked={selectedPeriod === label && selectedType === "center"} 
+                        />
                         <span>{label}</span>
                         <del className="text-muted">₹{oldPrice}.00</del>
                         <span className="text-danger">₹{newPrice}.00</span>
-                      </label>
+                    </label>
                     ))}
                   </div>
                 </div>
@@ -104,7 +130,34 @@ const serviceTrainer = service.trainer || "Not specified";
                 </div>
 
                 <div className="d-flex justify-content-start align-items-center">
-                  <Link to="/home/cart" className='mt-3 mb-3 btn btn-primary'>Add to Cart</Link>
+                    <button 
+                    className='mt-3 mb-3 btn btn-primary'
+                    onClick={() => {
+                        if (!selectedType || !selectedPeriod) {
+                        toast.error("Please select a session type and period");
+                        return;
+                        }
+                        
+                        const cartItem = {
+                        id: serviceId || Date.now().toString(),
+                        name: serviceName,
+                        image: serviceImage,
+                        sessionType: selectedType,
+                        sessionPeriod: selectedPeriod,
+                        price: selectedPrice,
+                        quantity: quantity,
+                        time: serviceTime,
+                        duration: serviceDuration,
+                        trainer: serviceTrainer
+                        };
+                        
+                        addToCart(cartItem);
+                        toast.success("Added to cart successfully!");
+                    }}
+                    >
+                    Add to Cart
+                    </button>
+                    <Link to="/home/cart" className='mt-3 mb-3 ms-3 btn btn-outline-primary'>View Cart</Link>
                 </div>
               </div>
             </div>
