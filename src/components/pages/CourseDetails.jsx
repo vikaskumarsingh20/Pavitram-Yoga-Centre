@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
 import NavBar from "../common/NavBar";
 import Footer from "../Home/FooterCopyright";
+import toast, { Toaster } from 'react-hot-toast';
 import { useCart } from "../context/CartContext";
 import course1Image from "../../assets/Services/course1.png";
 import course2Image from "../../assets/Services/course2.jpg";
@@ -46,7 +46,7 @@ const coursesData = [
 ];
 
 function CourseDetails() {
-const { addToCart } = useCart();
+  const { addToCart } = useCart();
 const [quantity, setQuantity] = useState(1);
 const { courseId } = useParams();
 
@@ -55,9 +55,9 @@ const { courseId } = useParams();
 
   return (
     <>
-    <NavBar />
-    <Toaster position="top-center" />
-    <div className="container-fluid laptop-margin">
+    <Toaster/>
+      <NavBar />
+      <div className="container-fluid laptop-margin">
         {/* Banner Section */}
         <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
           <h1 className="text-center text-white z-2">Course Details</h1>
@@ -109,11 +109,12 @@ const { courseId } = useParams();
                     };
                     addToCart(courseItem);
                     toast.success("Course added to cart successfully!");
-                    }}
+                  }}
                 >
                   Add to cart
                 </button>
-              </div>
+
+             </div>
             </div>
           )}
         </div>

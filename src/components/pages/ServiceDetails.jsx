@@ -41,7 +41,7 @@ const serviceTrainer = service.trainer || "Not specified";
       <div className="container-fluid laptop-margin">
         {/* Banner Section */}
         <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-            <h1 className="text-center text-white z-2" > {serviceName}</h1>
+            <h1 className="text-center text-white z-2" >  {serviceName}</h1>
             <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
                 Home
             </Link>
