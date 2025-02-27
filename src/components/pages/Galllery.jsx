@@ -9,6 +9,7 @@ import img6 from "../../assets/gallery/img6.jpg";
 import img7 from "../../assets/gallery/imh7.jpg";
 import NavBar from '../common/NavBar';
 import Footer from '../Home/FooterCopyright';
+import { Link } from 'react-router-dom';
 const images = [
     img1,
     img2,
@@ -27,9 +28,12 @@ function Gallery() {
             <NavBar />
 
             <div className='container-fluid laptop-margin mb-5 '>
-                <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-                    <h1 className="text-center text-white"> Gallery</h1>
-                </div>
+            <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" >Gallery</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
+        </div>
 
             <div className="d-flex justify-content-center mb-3 mt-3">
                 <button

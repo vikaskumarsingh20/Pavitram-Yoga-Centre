@@ -201,4 +201,21 @@ transition: all 0.3s ease;
     margin-left: 1rem;
 }
 }
-
+/* Ensure dropdown menus show on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    margin-top: 5px !important;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Remove Bootstrap's click requirement */
+  .dropdown-toggle.nav-link::after {
+    display: none;
+  }
+  
+  /* Remove Bootstrap's default a tag background color */
+  .nav-link, .dropdown-item {
+    background-color: transparent !important;
+  }

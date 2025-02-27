@@ -1,14 +1,17 @@
 import Footer from '../Home/FooterCopyright'
 import NavBar from '../common/NavBar'
+import {Link} from 'react-router-dom'
 
 function Our_centers() {
   return (
     <>
     <NavBar />
     <div className='container-fluid laptop-margin '>
-        <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-            <h1 className="text-center text-white">Our Centers</h1>
-             
+    <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" > Our Centers</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
         <div className="container my-5">
         <div className="row justify-content-center">

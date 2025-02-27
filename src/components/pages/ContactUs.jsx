@@ -2,15 +2,19 @@
 import React from 'react'
 import NavBar from '../common/NavBar'
 import Footer from '../Home/FooterCopyright'
+import { Link } from 'react-router-dom'
 
 function ContactUs() {
     return (
         <>
             <NavBar />
             <div className='container-fluid laptop-margin mb-5 '>
-                <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-                    <h1 className="text-center text-white"> Contact Us</h1>
-                </div>
+            <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" >Contact Us</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
+        </div>
                 <div className="container mt-5">
                     
                     <div className="row">

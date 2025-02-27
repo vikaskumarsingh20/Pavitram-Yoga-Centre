@@ -50,22 +50,20 @@ function UpComingEvent() {
             </div>
         </div>
     );
-    const HeaderSection = ({ title, subtitle }) => (
+    const HeaderSection = ({ title }) => (
         <div className="container-fluid laptop-margin">
-            <div className="d-flex flex-column align-items-center justify-content-center py-5 text-white" style={{ backgroundColor: 'rgb(42, 23, 111)' }}>
-                <Link to="/">
-                    <button className="btn  text-white">
-                        <h1 className="text-center ">{title}</h1>
-                        <p>{subtitle}</p>
-                    </button>
-                </Link>
-            </div>
+            <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" > {title}</h1>  
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
+        </div>
         </div>
     );
     return (
 <>
             <NavBar />
-            <HeaderSection title="UPCOMING EVENT" subtitle="Home  • Upcoming Event" />
+            <HeaderSection title="upcoming Event" subtitle="Home  • Upcoming Event" />
             <div>
                 <h4 className='text-center mt-1 mb-2 fs-5 mt-4'>UPCOMING EVENTS AND WORKSHOPS, WEBINARS.</h4>
             </div>

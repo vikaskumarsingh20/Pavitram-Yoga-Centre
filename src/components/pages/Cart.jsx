@@ -12,20 +12,15 @@ const { cart, total, removeFromCart, clearCart } = useCart();
       <NavBar />
 
       <div className="container-fluid laptop-margin">
-        <div 
-          className="d-flex flex-column align-items-center justify-content-center py-5 text-white"
-          style={{ backgroundColor: "rgb(42, 23, 111)" }} 
-        >
-          <h1 className="text-center">ADD TO CART</h1>
-          <div>
-            <Link to="/" className="btn btn-link text-white text-decoration-none">Home</Link>
-            <span> • </span>
-            <Link to="/home/cart" className="btn btn-link text-white text-decoration-none">Add to Cart</Link>
-          </div>
+      <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" >  Cart Details</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
       </div>
 
-      <div className="container mt-4">
+      <div className="container mt-4 table-responsive">
         <table className="table table-bordered text-center">
           <thead>
             <tr>
@@ -80,7 +75,7 @@ const { cart, total, removeFromCart, clearCart } = useCart();
         <div className="row">
         <div className="col-md-6">
             <button 
-            className="btn btn-outline-danger"
+            className="btn btn-outline-danger mt-3 mb-3"
             onClick={() => clearCart()}
             >
             Clear Cart

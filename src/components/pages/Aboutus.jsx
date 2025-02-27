@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Footer from '../Home/FooterCopyright'
 import NavBar from '../common/NavBar'
+import { Link } from 'react-router-dom'
 import gardenImg from '../../assets/gallery/about-pavitram1.jpg'
 import gardenImg1 from '../../assets/gallery/about-pavitram2.jpg'
 
@@ -10,7 +11,10 @@ function Aboutus() {
     <NavBar />
     <div className='container-fluid laptop-margin '>
         <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-            <h1 className="text-center text-white">About Us</h1>
+            <h1 className="text-center text-white z-2" >About Us</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
  
         <div className="container my-5">

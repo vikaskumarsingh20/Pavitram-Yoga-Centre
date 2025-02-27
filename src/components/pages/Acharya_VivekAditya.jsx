@@ -1,14 +1,18 @@
 import NavBar from '../common/NavBar'
 import Footer from '../Home/FooterCopyright'
 import gurujilogo from '../../assets/gallery/acharya-vivekaditya.jpg'
+import { Link } from 'react-router-dom'
 
 function Acharya_VivekAditya() {
   return (
     <>
     <NavBar />
     <div className='container-fluid laptop-margin '>
-        <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-            <h1 className="text-center text-white">Acharya Vivekaditya</h1>
+    <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" > Acharya Vivekaditya</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
  
         <div className="container my-5">

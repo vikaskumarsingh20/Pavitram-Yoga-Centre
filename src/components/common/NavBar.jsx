@@ -70,7 +70,6 @@ function NavBar() {
                 className="nav-link"
                 to="/home/aboutus"
                 role="button"
-                data-bs-toggle="dropdown"
                 aria-expanded="false"
                 >
                 About us <FontAwesomeIcon icon={faChevronDown} className="dropdown-icon" />

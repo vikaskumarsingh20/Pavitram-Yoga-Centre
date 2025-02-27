@@ -34,15 +34,11 @@ function Courses() {
       <NavBar />
       {/* Header Section */}
       <div className="container-fluid laptop-margin">
-        <div className="d-flex flex-column align-items-center justify-content-center py-5 text-white"
-        style={{ backgroundColor: 'rgb(42, 23, 111)' }}
-        >
-          <h1 className="text-center">OUR COURSES</h1>
-          <div>
-            <Link to="/" className="btn btn-link text-white text-decoration-none">Home</Link>
-            <span> • </span>
-            <Link to="/home/cart" className="btn btn-link text-white text-decoration-none"> Courses</Link>
-          </div>
+      <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" >  Courses</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
       </div>
 

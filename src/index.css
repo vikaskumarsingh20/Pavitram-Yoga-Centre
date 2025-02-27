@@ -3,6 +3,12 @@ body {
   font-family: 'Rubik', 'Lato', 'Raleway', 'Open Sans', 'Roboto', 'Helvetica Neue', sans-serif !important;
 }
 
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .active {
   text-decoration: underline;
 }
@@ -85,7 +91,11 @@ ul.list-unstyled li a:hover {
   background-position: center;
   background-size: cover;
   position: relative;
-  width: 100%;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   pointer-events: auto !important;
   z-index: 0;
 }
@@ -137,6 +147,11 @@ box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
 /* background: linear-gradient(135deg, #3a3a3a 0%, #202020 100%); */
 position: relative;
 background-color: #27146e !important;
+width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .widget-title {
@@ -255,4 +270,24 @@ box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 .footer p, .footer li {
 font-size: 0.95rem;
 line-height: 1.6;
+}
+
+
+/* Home link styling for navigation on image backgrounds */
+.home-link {
+text-decoration: none;
+position: relative;
+z-index: 2;
+background-color: rgba(255, 255, 255, 0.2);
+border: 2px solid white;
+border-radius: 5px;
+font-weight: bold;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+display: inline-block;
+}
+
+.home-link:hover {
+background-color: rgba(255, 255, 255, 0.3);
+transform: translateY(-2px);
+transition: all 0.3s ease;
 }

@@ -40,11 +40,11 @@ const serviceTrainer = service.trainer || "Not specified";
     <NavBar />
       <div className="container-fluid laptop-margin">
         {/* Banner Section */}
-        <div className="bg-purple text-white text-center py-5 bg-image">
-          <h2 className="fw-bold">VIEW DETAILS</h2>
-          <p>
-            <a href="/" className="text-white text-decoration-none">Home</a> ○ View Details
-          </p>
+        <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" > {serviceName}</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
 
         {/* Therapy Session Section */}
