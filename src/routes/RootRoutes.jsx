@@ -31,7 +31,7 @@ function RootRoutes() {
       <Route path='/home/course_details/:courseId' element={<CourseDetails />} />
       <Route path="/home/service" element={<Services />} />
       <Route path='/home/upcoming_events' element={<UpComingEvent />} />
-      <Route path="/home/upcoming_events_details" element={<UpcomingEventDetails />} />
+    <Route path="/home/upcoming_events_details/:eventId" element={<UpcomingEventDetails />} />
       <Route path="/home/contactus" element={<ContactUs />} />
       <Route path="/home/gallery" element={<Galllery />} />
       <Route path='/home/cart' element={<Cart />} />
