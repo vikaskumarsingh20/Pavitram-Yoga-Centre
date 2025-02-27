@@ -6,28 +6,31 @@ import img3 from "../../assets/Services/course3.jpeg";
 import { Link } from "react-router-dom";
 
 function Courses() {
-  const courses = [
-    {
-      title: "ONE YEAR TRAINING COURSE",
-      time: "9 - 11",
-      trainer: "Pavitram Team",
-      price: "25000.00",
-      image:img1,
-    },
-    {
-      title: "SIX MONTHS TRAINING",
-      time: "9 - 11",
-      trainer: "Pavitram Team",
-      price: "18000.00",
-      image:img2,
-    },
-    {
-      title: "THREE MONTHS TRAINING",
-      time: "9 - 12",
-      trainer: "Pavitram Team",
-      price: "9700.00",
-      image: img3,
-    },
+const courses = [
+{
+    id: 1,
+    title: "ONE YEAR TRAINING COURSE",
+    time: "9 - 11",
+    trainer: "Pavitram Team",
+    price: "25000.00",
+    image:img1,
+},
+{
+    id: 2,
+    title: "SIX MONTHS TRAINING",
+    time: "9 - 11",
+    trainer: "Pavitram Team",
+    price: "18000.00",
+    image:img2,
+},
+{
+    id: 3,
+    title: "THREE MONTHS TRAINING",
+    time: "9 - 12",
+    trainer: "Pavitram Team",
+    price: "9700.00",
+    image: img3,
+},
   ];
   return (
     <>
@@ -50,10 +53,10 @@ function Courses() {
               <h5 className="  fw-bold " style={{ color: 'rgb(42, 23, 111)' }}>
                 <i className="bi bi-calendar"></i> {course.title}
               </h5>
-              <p><strong>Time:</strong> {course.time}</p>
-              <p><strong>Trainer:</strong> {course.trainer}</p>
-              <p><strong>Price:</strong> {course.price}</p>
-              <button className="btn btn-info me-2">View Details</button>
+              <p><strong>Time :</strong> {course.time}</p>
+              <p><strong>Trainer :</strong> {course.trainer}</p>
+            <p><strong>Price :</strong> ₹{course.price}</p>
+            <Link to={`/home/course_details/${course.id}`} className="btn btn-info me-2">View Details</Link>
               {index === 2 && <button className="btn btn-primary">At Center</button>}
             </div>
             <div className="col-md-6 text-center mt-2">

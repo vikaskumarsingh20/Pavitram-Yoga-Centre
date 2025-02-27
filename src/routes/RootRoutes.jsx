@@ -14,6 +14,7 @@ import Galllery from '../components/pages/Galllery';
 import Cart from '../components/pages/Cart';
 import ForgetPassword from '../components/Home/ForgetPassword';
 import ServiceDetails from '../components/pages/ServiceDetails';
+import CourseDetails from '../components/pages/CourseDetails';
 
 function RootRoutes() {
   return (
@@ -26,6 +27,7 @@ function RootRoutes() {
       <Route path='/home/Acharya_VivekAditya' element={<Acharya_VivekAditya />} />
       <Route path="/home/our_centers" element={<Our_centers />} />
       <Route path="/home/Courses" element={<Courses />} />
+    <Route path='/home/course_details/:courseId' element={<CourseDetails />} />
       <Route path="/home/service" element={<Services />} />
       <Route path='/home/upcoming_events' element={<UpComingEvent/>} />
       <Route path="/home/contactus" element={<ContactUs/>} />

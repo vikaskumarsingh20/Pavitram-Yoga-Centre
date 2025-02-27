@@ -94,7 +94,7 @@ function NavBar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/home/Courses">
-                  Trainers Course
+                  Trainer's Course
                 </Link>
               </li>
               <li className="nav-item">

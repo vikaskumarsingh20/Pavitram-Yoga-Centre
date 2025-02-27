@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import titlelogo from "../../assets/images/title-icon.png"
-import { Button } from 'react-bootstrap'
 import img1 from "../../assets/Services/course1.png"
 import img2 from "../../assets/Services/course2.jpg"
 import img3 from "../../assets/Services/course3.jpeg"
