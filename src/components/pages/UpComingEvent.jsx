@@ -72,9 +72,9 @@ function UpComingEvent() {
                     <EventCard key={index} {...event} />
                 ))}
             </div>
-            <div className="d-flex justify-content-center align-items-center mb-3 mt-3">
+            {/* <div className="d-flex justify-content-center align-items-center mb-3 mt-3">
                 <Button variant="danger" className="me-2 mb-1">More</Button>
-            </div>
+            </div> */}
             <Footer />
         </>
     )

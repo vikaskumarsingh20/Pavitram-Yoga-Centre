@@ -2,13 +2,16 @@
 body {
   font-family: 'Rubik', 'Lato', 'Raleway', 'Open Sans', 'Roboto', 'Helvetica Neue', sans-serif !important;
 }
+html, body {
+  overflow-x: hidden;
+}
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
 
+}
 .active {
   text-decoration: underline;
 }
@@ -147,11 +150,6 @@ box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
 /* background: linear-gradient(135deg, #3a3a3a 0%, #202020 100%); */
 position: relative;
 background-color: #27146e !important;
-width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
 }
 
 .widget-title {

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import titlelogo from "../../assets/images/title-icon.png"
 import img1 from "../../assets/Services/course1.png"
 import img2 from "../../assets/Services/course2.jpg"
@@ -31,9 +32,9 @@ function LatestCourses() {
               {/* <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{ minHeight: '250px', maxHeight: '250px' }} /> */}
               <div className="d-flex justify-content-center">
                 {course.buttons.map((btn, index) => (
-                  <button key={index} className={`btn ${btn === 'View Details' ? 'btn-danger' : 'btn-primary'} me-2 mb-2 mt-1`}>
+                  <Link to="/home/course_details/${course.id}" key={index} className={`btn ${btn === 'View Details' ? 'btn-danger' : 'btn-primary'} me-2 mb-2 mt-1`}>
                     {btn}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -54,7 +55,7 @@ function LatestCourses() {
               ))}
             </div>
             <div className="d-flex justify-content-center align-items-center ">
-              <button className="btn btn-danger mb-3">More</button>
+              <Link to="/home/Courses" className="btn btn-danger mb-3">More</Link>
             </div>
           </div>
         </>

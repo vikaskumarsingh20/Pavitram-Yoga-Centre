@@ -1,11 +1,31 @@
 import colors from "../../styles/colors";
+import { useCart } from "../../components/context/CartContext";
 import logo from "../../assets/images/pavitramlogo.jpeg";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
+const { cart } = useCart();
+const [cartCount, setCartCount] = useState(0);
+const [animate, setAnimate] = useState(false);
+
+useEffect(() => {
+    if (cart && cart.length > 0) {
+    setCartCount(cart.length);
+    setAnimate(true);
+    
+    const timeout = setTimeout(() => {
+        setAnimate(false);
+    }, 500);
+    
+    return () => clearTimeout(timeout);
+    } else {
+    setCartCount(0);
+    }
+}, [cart]);
   return (
     <div className="fixed-top">
         <header
@@ -34,7 +54,15 @@ function NavBar() {
               className="me-3 text-white"
               to="/home/cart"
             >
-                <FontAwesomeIcon icon={faShoppingCart} className="me-1" /> Cart
+            <div className="cart-icon-container position-relative">
+                <FontAwesomeIcon icon={faShoppingCart} className="me-1" />
+                {cartCount > 0 && (
+                <span className={`cart-badge ${animate ? 'badge-bounce' : ''}`}>
+                    {cartCount}
+                </span>
+                )}
+                <span className="ms-1">Cart</span>
+            </div>
             </Link>
             <Link
               style={{ textDecoration: "none" }}
@@ -137,3 +165,37 @@ function NavBar() {
 }
 
 export default NavBar;
+
+/* CSS for cart badge and animation */
+/* Add this to navbar.css, including here for reference */
+/*
+.cart-icon-container {
+display: inline-block;
+}
+
+.cart-badge {
+position: absolute;
+top: -8px;
+right: -8px;
+background-color: #f00;
+color: white;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+font-size: 12px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight: bold;
+}
+
+.badge-bounce {
+animation: badge-bounce-animation 0.5s;
+}
+
+@keyframes badge-bounce-animation {
+0% { transform: scale(1); }
+50% { transform: scale(1.5); }
+100% { transform: scale(1); }
+}
+*/

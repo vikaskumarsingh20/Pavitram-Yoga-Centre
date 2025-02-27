@@ -20,7 +20,7 @@ const { cart, total, removeFromCart, clearCart } = useCart();
         </div>
       </div>
 
-      <div className="container mt-4 table-responsive">
+      <div className="container mt-4 table-responsive text-nowrap">
         <table className="table table-bordered text-center">
           <thead>
             <tr>

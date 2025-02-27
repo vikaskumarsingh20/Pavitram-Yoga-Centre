@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import img1 from "../../assets/Services/event1.jpg"
 import img2 from "../../assets/Services/event2.jpg"
 import { Button } from 'react-bootstrap'
@@ -34,8 +35,8 @@ function UpcomingEvent() {
                         <p><i className="fa-solid fa-calendar-days text-danger me-1"></i>Dec 16, 2020 - Dec 18, 2020</p>
 
                         <div className='d-flex justify-content-center align-items-center'>
-                            <Button variant="danger" className="me-2 mb-1 mt-1">View Details</Button>
-                            <Button variant="primary" className="me-2 mb-1 mt-1">Paid</Button>
+                            <Link to="/home/upcoming_events_details"n className="me-2 mb-1 mt-1 btn btn-primary">View Details</Link>
+                            <Button variant="primary" className="me-2 mb-1 mt-1 cursor-none">Paid</Button>
                             <Button variant="info" className="me-2 mb-1 mt-1">Online</Button>
                         </div>
                     </div>
@@ -46,8 +47,8 @@ function UpcomingEvent() {
 
                 </div>
                 <div className="d-flex justify-content-center align-items-center mb-3 mt-3">
-                                    <Button variant="danger" className="me-2 mb-1">More</Button>
-                                    </div>
+                    <Link to="/home/upcoming_events"   className="me-2 mb-1 btn btn-danger">More</Link>
+                </div>
             </div>
 
         </div>

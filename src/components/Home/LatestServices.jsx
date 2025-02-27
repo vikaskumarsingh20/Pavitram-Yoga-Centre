@@ -111,7 +111,7 @@ function LatestServices() {
                 </div>
                 {/* More Button */}
                 <div className="text-center mt-3">
-                    <button className="btn btn-danger">More</button>
+                    <Link to="/home/service" className="btn btn-danger">More</Link>
                 </div>
             </div>
         </>
