@@ -8,19 +8,22 @@ import img3 from "../../assets/Services/course3.jpeg"
 function LatestCourses() {
     const courses = [
         {
-          title: 'ONE YEAR TRAINING COURSE',
-          image:img1,
-          buttons: ['View Details']
+        id: 1,
+        title: 'ONE YEAR TRAINING COURSE',
+        image:img1,
+        buttons: ['View Details']
         },
         {
-          title: 'SIX MONTHS TRAINING',
-          image:img2,
-          buttons: ['View Details']
+        id: 2,
+        title: 'SIX MONTHS TRAINING',
+        image:img2,
+        buttons: ['View Details']
         },
         {
-          title: 'THREE MONTHS TRAINING',
-          image: img3,
-          buttons: ['View Details', 'At Center']
+        id: 3,
+        title: 'THREE MONTHS TRAINING',
+        image: img3,
+        buttons: ['View Details', 'At Center']
         }
       ];
       const CourseCard = ({ course }) => {
@@ -32,7 +35,7 @@ function LatestCourses() {
               {/* <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{ minHeight: '250px', maxHeight: '250px' }} /> */}
               <div className="d-flex justify-content-center">
                 {course.buttons.map((btn, index) => (
-                  <Link to="/home/course_details/${course.id}" key={index} className={`btn ${btn === 'View Details' ? 'btn-danger' : 'btn-primary'} me-2 mb-2 mt-1`}>
+                <Link to={`/home/course_details/${course.id}`} key={index} className={`btn ${btn === 'View Details' ? 'btn-danger' : 'btn-primary'} me-2 mb-2 mt-1`}>
                     {btn}
                   </Link>
                 ))}

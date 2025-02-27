@@ -50,8 +50,15 @@ function CourseDetails() {
 const [quantity, setQuantity] = useState(1);
 const { courseId } = useParams();
 
-  // Find the course that matches the courseId
-  const course = coursesData.find((course) => course.id === parseInt(courseId));
+// Find the course that matches the courseId
+const course = coursesData.find((course) => course.id === parseInt(courseId));
+
+// Display toast notification when course is loaded successfully
+useState(() => {
+if (course) {
+    // toast.success(`${course.title} details loaded successfully!`);
+}
+}, [course]);
 
   return (
     <>
@@ -82,7 +89,7 @@ const { courseId } = useParams();
               {/* Content Section */}
               <div className="col-lg-7 col-md-6">
                 <h2 className="fw-bold">{course.title}</h2>
-                <p><strong>Price :</strong> ₹{course.price.toLocaleString()}.00</p>
+                <p><strong>Price :</strong> ₹{course.price.toLocaleString()}</p>
                 <p><strong>Time :</strong> {course.time}</p>
                 <p><strong>Days :</strong> {course.days}</p>
                 <p><strong>Duration :</strong> {course.duration}</p>
@@ -90,7 +97,7 @@ const { courseId } = useParams();
 
                 {/* Quantity Selector */}
                 <div className="d-flex align-items-center">
-                  <strong className="me-2">Qty:</strong>
+                  <strong className="me-2">Qty :</strong>
                   <button className="btn btn-light" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
                   <input type="text" value={quantity} readOnly className="text-center mx-2 form-control" style={{ width: "50px" }} />
                   <button className="btn btn-light" onClick={() => setQuantity(quantity + 1)}>+</button>

@@ -56,7 +56,7 @@ const courses = [
               <p><strong>Time :</strong> {course.time}</p>
               <p><strong>Trainer :</strong> {course.trainer}</p>
             <p><strong>Price :</strong> ₹{course.price}</p>
-            <Link to={`/home/course_details/${course.id}`} className="btn btn-info me-2">View Details</Link>
+            <Link to={`/home/course_details/${course.id}`} className="btn btn-danger me-2">View Details</Link>
               {index === 2 && <button className="btn btn-primary">At Center</button>}
             </div>
             <div className="col-md-6 text-center mt-2">
