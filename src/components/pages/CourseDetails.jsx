@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import NavBar from "../common/NavBar";

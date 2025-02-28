@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import toast, { Toaster } from 'react-hot-toast';
 import NavBar from '../common/NavBar';
@@ -17,7 +17,7 @@ const location = useLocation();
 // Extract service, timeSlot, and period directly from location.state
 const service = location.state?.service || {};
 const timeSlot = location.state?.timeSlot || "";
-const period = location.state?.period || "";
+// const period = location.state?.period || "";
 
 // Set default data if state is not available
 const serviceName = service.title || "THERAPY SESSION";

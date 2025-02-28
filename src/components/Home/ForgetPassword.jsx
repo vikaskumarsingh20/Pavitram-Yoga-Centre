@@ -10,14 +10,11 @@ function ForgetPassword() {
      <NavBar />
       
       <div className="container-fluid laptop-margin">
-        {/* Background Section */}
-        <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-          <h1 className="text-center text-white">FORGET PASSWORD</h1>
-          <div>
-            <Link to="/" className="btn btn-link text-white text-decoration-none">Home</Link>
-            <span> • </span>
-            <Link to="/forget-password" className="btn btn-link text-white text-decoration-none">Forget Password</Link>
-          </div>
+      <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
+            <h1 className="text-center text-white z-2" >   Forget Password</h1>
+            <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
+                Home
+            </Link>
         </div>
 
         {/* Form Section */}
@@ -29,7 +26,9 @@ function ForgetPassword() {
               className="form-control mb-3" 
               placeholder="Your registered Email" 
             />
-            <button className="btn btn-outline-primary ">Reset Password</button>
+            <div className='d-flex align-items-center justify-content-center'>
+            <button className="btn btn-outline-primary mt-3">Reset</button>
+            </div>
           </div>
         </div>
       </div>

@@ -41,24 +41,24 @@ function ContactUs() {
                             <h4>Interested in discussing?</h4>
                             <form>
                                 <div className="mb-3">
-                                    <label className="form-label">Name *</label>
-                                    <input type="text" className="form-control" placeholder="Enter Name" required />
+                                    <label className="form-label">Name <span className='text-danger'>*</span></label>
+                                    <input type="text" className="form-control"   required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Email *</label>
-                                    <input type="email" className="form-control" placeholder="Enter Email" required />
+                                    <label className="form-label">Email  <span className='text-danger'>*</span></label>
+                                    <input type="email" className="form-control"  required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Subject *</label>
-                                    <input type="text" className="form-control" placeholder="Enter Subject" required />
+                                    <label className="form-label">Subject  <span className='text-danger'>*</span></label>
+                                    <input type="text" className="form-control"   required />
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Phone</label>
-                                    <input type="text" className="form-control" placeholder="Enter Phone" />
+                                    <input type="text" className="form-control"  />
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Message</label>
-                                    <textarea className="form-control" rows="4" placeholder="Enter Message"></textarea>
+                                    <textarea className="form-control" rows="4"></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-outline-success me-2">Send your message</button>
                                 <button type="reset" className="btn btn-outline-danger">Reset</button>
