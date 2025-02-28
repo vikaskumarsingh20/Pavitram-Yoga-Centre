@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import img1 from "../../assets/Services/event1.jpg";
 import img2 from "../../assets/Services/event2.jpg";  
 import { toast,Toaster } from "react-hot-toast";
+import { useCart } from "../context/CartContext";
 import NavBar from "../common/NavBar";
 import Footer from "../Home/FooterCopyright";
 
@@ -41,6 +42,7 @@ function UpcomingEventDetails() {
 const { eventId } = useParams();
 const [quantity, setQuantity] = useState(1);
 const [event, setEvent] = useState(null);
+const { addToCart } = useCart();
 
 useEffect(() => {
     // Find the event with the matching ID
@@ -56,31 +58,24 @@ const decrementQuantity = () => {
     setQuantity(prevQuantity => prevQuantity > 1 ? prevQuantity - 1 : 1);
 };
 
-const addToCart = () => {
+const handleAddToCart = () => {
     if (!event) return;
     
-    // Get existing cart items from localStorage or initialize empty array
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    
-    // Check if item already exists in cart
-    const existingItemIndex = cartItems.findIndex(item => item.id === event.id);
-    
-    if (existingItemIndex !== -1) {
-    // Update quantity if item already exists
-    cartItems[existingItemIndex].quantity += quantity;
-    } else {
-    // Add new item to cart
-    cartItems.push({
+    // Create cart item object formatted according to what the Cart component expects
+    const cartItem = {
         id: event.id,
-        title: event.title,
+        name: event.title,
         price: event.price,
         image: event.image,
-        quantity: quantity
-    });
-    }
+        quantity: quantity,
+        duration: event.duration,
+        time: `Morning: ${event.morning}, Evening: ${event.evening}`,
+        sessionPeriod: event.date,
+        sessionType: "Event"
+    };
     
-    // Save updated cart to localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // Use the addToCart function from CartContext
+    addToCart(cartItem);
     toast.success('Item added to cart!');
 };
 
@@ -143,7 +138,7 @@ return (
                 <button className="btn btn-light border" onClick={incrementQuantity}>+</button>
             </div>
 
-            <button className="btn btn-primary mt-3 mb-3" onClick={addToCart}>Add to Cart</button>
+            <button className="btn btn-primary mt-3 mb-3" onClick={handleAddToCart}>Add to Cart</button>
             </div>
           </div>
         </div>
