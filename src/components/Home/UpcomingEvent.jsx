@@ -1,18 +1,19 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
-import { events } from "../data/eventData"
+import img1 from "../../assets/Services/event1.jpg"
+import img2 from "../../assets/Services/event2.jpg"
 
 function EventCard({ event }) {
     return (
         <div className='col-md-6 d-md-flex flex-md-row d-flex flex-column justify-content-between align-items-center'>
             <div className='d-md-flex flex-md-column d-flex flex-column'>
                 <p><i className="fa-solid fa-calendar-days text-danger"></i> :{event.title}</p>
-                <p><i className="fa-solid fa-user-group text-danger me-1"></i> BY {event.teacher}</p>
+                <p><i className="fa-solid fa-user-group text-danger me-1"></i> BY {event.speaker}</p>
                 <p><i className="fa-solid fa-calendar-days text-danger"></i> {event.date}</p>
 
                 <div className='d-flex justify-content-center align-items-center'>
                     {event.buttons.map((button, index) => (
-                        <Link to={`/home/upcoming_events_details/${event.id}`} key={index} className={`me-2 mb-1 mt-1 btn btn-${button.type}`}>
+                        <Link to={`/home/upcoming_events_details/${event.id}`} key={index} className={`me-2 mb-1 mt-1 btn btn-${button.variant}`}>
                             {button.label}
                         </Link>
                     ))}
@@ -20,14 +21,39 @@ function EventCard({ event }) {
             </div>
 
             <div>
-                <img src={event.image} className="card-img-top" alt={event.title} style={{ height: '175px', borderRadius: '8px' }} />
+                <img src={event.imgSrc} className="card-img-top" alt={event.title} style={{ height: '175px', borderRadius: '8px' }} />
             </div>
         </div>
     );
 }
-
+const events = [
+    {
+        id: 1,
+        title: 'THREE DAYS MEDITATION',
+        speaker: 'BY VIVEKADITYA JI',
+        date: 'Nov 22, 2020 - Nov 24, 2020',
+        imgSrc: img1,
+        buttons: [
+            { variant: 'danger', label: 'View Details' },
+            { variant: 'primary', label: 'Paid' },
+            { variant: 'info', label: 'Online & Offline' }
+        ]
+    },
+    {
+        id: 2,
+        title: 'HOW TO MANAGE STRESS',
+        speaker: 'GURU JI',
+        date: 'Dec 16, 2020 - Dec 18, 2020',
+        imgSrc: img2,
+        buttons: [
+            { variant: 'danger', label: 'View Details' },
+            { variant: 'primary', label: 'Paid' },
+            { variant: 'info', label: 'Online' }
+        ]
+    }
+];
 function UpcomingEvent() {
-    // Using imported events data from eventData.js
+
     return (
         <div className="bg-light p-2">
             <div>
