@@ -18,20 +18,20 @@ function HomeClasses() {
         </div>
       </div>
 
-      <div className="container my-5">
+      <div className="container">
         <div className="row">
           {homeclass.map((service, index) => (
             <div key={index} className="col-md-4 mb-4">
               <div className="card   p-3 border-0">
+              <h5 className="mt-3 text-center  fs-5">{service.title}</h5>
                 <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{ minHeight: '250px', maxHeight: '250px' }} />
-                <h5 className="mt-3 text-center fw-bold">{service.title}</h5>
                 <p className="text-center"><small> <i className="fa-solid fa-user-group text-danger me-1"></i> By {service.trainer} | <i className="fa-solid fa-calendar-days text-danger me-1"></i> {service.duration} | 🎯 {service.audience}</small></p>
                 <p className="text-center"><small>Available Service: 🏠 {service.availableService}</small></p>
                 {service.morningSlots && service.morningSlots.length > 0 && (
-                  <p><strong>Morning : </strong> {service.morningSlots.map(slot => <Link to={`/home/service_detail/${index}`} state={{ service, timeSlot: slot, period: "Morning" }} className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
+                  <p><strong>Morning : </strong> {service.morningSlots.map(slot => <Link to={`/home/homeclass_details/${index}`} state={{ service, timeSlot: slot, period: "Morning" }} className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
                 )}
                 {service.eveningSlots && service.eveningSlots.length > 0 && (
-                  <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <Link to={`/home/service_detail/${index}`} state={{ service, timeSlot: slot, period: "Evening" }} className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
+                  <p><strong>Evening :</strong> {service.eveningSlots.map(slot => <Link to={`/home/homeclass_details/${index}`} state={{ service, timeSlot: slot, period: "Evening" }} className="btn btn-danger btn-sm m-1" key={slot}>{slot}</Link>)}</p>
                 )}
               </div>
             </div>

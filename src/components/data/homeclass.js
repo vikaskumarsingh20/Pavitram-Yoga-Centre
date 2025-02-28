@@ -2,7 +2,7 @@ import img1 from "../../assets/gallery/homeclass.jpg"
 
 export const homeclass = [
     {
-        title: 'GROUP YOGA CLASSES',
+        title: 'HOME YOGA CLASSES',
         trainer: 'Pavitram Team',
         duration: '60 min',
         audience: 'EVERYONE',

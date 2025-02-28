@@ -17,6 +17,7 @@ import ServiceDetails from '../components/pages/ServiceDetails';
 import CourseDetails from '../components/pages/CourseDetails';
 import UpcomingEventDetails from '../components/pages/UpcomingEventDetails';
 import HomeClasses from '../components/pages/HomeClasses';
+import HomeclassDetails from '../components/pages/Homeclass_details';
 
 function RootRoutes() {
   return (
@@ -25,6 +26,7 @@ function RootRoutes() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/home/login" element={<Login />} />
       <Route path="home/homeclasses" element={<HomeClasses />} />
+      <Route path="/home/homeclass_details/:classId" element={<HomeclassDetails />} />
       <Route path="/home/registration" element={<Registration />} />
       <Route path="/home/aboutus" element={<Aboutus />} />
       <Route path='/home/Acharya_VivekAditya' element={<Acharya_VivekAditya />} />
