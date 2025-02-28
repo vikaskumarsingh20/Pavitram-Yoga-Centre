@@ -1,31 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import titlelogo from "../../assets/images/title-icon.png"
-import img1 from "../../assets/Services/course1.png"
-import img2 from "../../assets/Services/course2.jpg"
-import img3 from "../../assets/Services/course3.jpeg"
+import { coursesData } from '../data/coursedata'
+
 
 function LatestCourses() {
-    const courses = [
-        {
-        id: 1,
-        title: 'ONE YEAR TRAINING COURSE',
-        image:img1,
-        buttons: ['View Details']
-        },
-        {
-        id: 2,
-        title: 'SIX MONTHS TRAINING',
-        image:img2,
-        buttons: ['View Details']
-        },
-        {
-        id: 3,
-        title: 'THREE MONTHS TRAINING',
-        image: img3,
-        buttons: ['View Details', 'At Center']
-        }
-      ];
       const CourseCard = ({ course }) => {
         return (
           <div className="col-md-4 mb-4">
@@ -53,7 +32,7 @@ function LatestCourses() {
     
           <div className="container">
             <div className="row">
-              {courses.map((course, index) => (
+            {coursesData.map((course, index) => (
                 <CourseCard key={index} course={course} />
               ))}
             </div>

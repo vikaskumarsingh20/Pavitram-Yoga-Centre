@@ -39,7 +39,6 @@ const serviceTrainer = service.trainer || "Not specified";
     <Toaster />
     <NavBar />
       <div className="container-fluid laptop-margin">
-        {/* Banner Section */}
         <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
             <h1 className="text-center text-white z-2" >  {serviceName}</h1>
             <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
@@ -47,21 +46,17 @@ const serviceTrainer = service.trainer || "Not specified";
             </Link>
         </div>
 
-        {/* Therapy Session Section */}
         <div className="container py-5">
           <div className="row">
-            {/* Image Section */}
             <div className="col-md-5 text-center">
             <img src={serviceImage} className="img-fluid rounded" alt={serviceName} />
             </div>
 
-            {/* Details Section */}
             <div className="col-md-7">
             <h3 className="fw-bold">{serviceName}</h3>
             <p><strong>Duration:</strong> {serviceDuration}</p>
             <p><strong>Time:</strong> {serviceTime}</p>
 
-              {/* Session Selection */}
               <div className="d-flex flex-wrap gap-4">
                 <div className="flex-grow-1">
                   <input type="radio" id="online" name="sessionType"
@@ -118,7 +113,6 @@ const serviceTrainer = service.trainer || "Not specified";
                 </div>
               </div>
 
-              {/* Quantity and Add to Cart */}
               <div className="mt-3">
                 <p><strong>Getting more details? Set time slot, please call us.</strong></p>
 

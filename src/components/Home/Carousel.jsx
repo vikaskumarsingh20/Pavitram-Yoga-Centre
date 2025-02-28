@@ -4,6 +4,7 @@ import img1 from '../../assets/images/pexels-apasaric-325185.jpg';
 import img2 from '../../assets/images/pexels-eberhardgross-443446.jpg';
 import img3 from '../../assets/images/pexels-pixabay-50594.jpg';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 function Carousels() {
   const [index, setIndex] = useState(0);
@@ -23,7 +24,7 @@ function Carousels() {
           alt="First slide"
         />
         <Carousel.Caption>
-        <Button variant="danger">Book Now</Button>
+        <Link to="home/homeclasses"  className='btn btn-danger'>Book Now</Link>
           <p>Rs.1316/-PER MONTH WITH THREE MONTHS PACKAGE</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -35,7 +36,7 @@ function Carousels() {
           alt="Second slide"
         />
         <Carousel.Caption>
-        <Button variant="danger">Book Now</Button>
+        <Link to="home/homeclasses"  className='btn btn-danger'>Book Now</Link>
           <p>Rs.1316/-PER MONTH WITH THREE MONTHS PACKAGE</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -47,7 +48,7 @@ function Carousels() {
           alt="Third slide"
         />
         <Carousel.Caption>
-        <Button variant="danger">Book Now</Button>
+        <Link  to="home/homeclasses"  className='btn btn-danger'>Book Now</Link>
           <p>Rs.1316/-PER MONTH WITH THREE MONTHS PACKAGE</p>
         </Carousel.Caption>
       </Carousel.Item>
