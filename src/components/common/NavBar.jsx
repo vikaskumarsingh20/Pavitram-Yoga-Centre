@@ -68,7 +68,7 @@ useEffect(() => {
               style={{ textDecoration: "none" }}
               to="/home/login"
               className="text-white"
-            >
+                >
                 <FontAwesomeIcon icon={faUser} className="me-1" /> Login
             </Link>
           </div>
@@ -165,37 +165,3 @@ useEffect(() => {
 }
 
 export default NavBar;
-
-/* CSS for cart badge and animation */
-/* Add this to navbar.css, including here for reference */
-/*
-.cart-icon-container {
-display: inline-block;
-}
-
-.cart-badge {
-position: absolute;
-top: -8px;
-right: -8px;
-background-color: #f00;
-color: white;
-border-radius: 50%;
-width: 20px;
-height: 20px;
-font-size: 12px;
-display: flex;
-justify-content: center;
-align-items: center;
-font-weight: bold;
-}
-
-.badge-bounce {
-animation: badge-bounce-animation 0.5s;
-}
-
-@keyframes badge-bounce-animation {
-0% { transform: scale(1); }
-50% { transform: scale(1.5); }
-100% { transform: scale(1); }
-}
-*/
