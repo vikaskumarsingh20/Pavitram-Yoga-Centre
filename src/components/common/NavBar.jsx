@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import colors from "../../styles/colors";
 import { useCart } from "../../components/context/CartContext";
 import { useAuth } from "../../components/context/AuthContext";
