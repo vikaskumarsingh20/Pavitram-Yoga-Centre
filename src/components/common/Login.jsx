@@ -1,12 +1,50 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from './NavBar'
 import Footer from '../Home/FooterCopyright'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import toast, { Toaster } from 'react-hot-toast'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 function Login() {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+    const [showPassword, setShowPassword] = useState(false);
+
+
+    const { login, error } = useAuth();
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('Login credentials:', formData);
+        const success = await login(formData.email, formData.password);
+        if (success) {
+            toast.success("Registration successful!", { duration: 5000 });
+          }
+          if (success) {
+            setTimeout(() => navigate('/'), 1000);
+        }
+    };
+
+    const togglePasswordVisiblity = (event) => {
+        event.preventDefault();
+        setShowPassword(!showPassword);
+      };
     return (
         <>
+        <Toaster />
             <NavBar />
             <div className='container-fluid laptop-margin '>
                 <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
@@ -28,17 +66,49 @@ function Login() {
                             <p>If you have an account with us, please log in.</p>
                             <div className="mb-3">
                                 <label className="form-label">Email Address*</label>
-                                <input type="email" className="form-control"  />
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Password*</label>
-                                <input type="password" className="form-control"   />
+                                <div className="input-group">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        className="form-control"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleChange}
+                                    />
+                                    <button
+                                        className="btn btn-outline-secondary border-1"
+                                        type="button"
+                                        onClick={togglePasswordVisiblity}
+                                    >
+                                        {showPassword ? <FaEye /> : <FaEyeSlash />}
+                                    </button>
+                                </div>
                             </div>
                             <div className='d-flex flex-column'>
                                 <Link to="/Home/forget_password" className="text-muted text-decoration-none mb-3"> Forgot Password? </Link>
 
                                 <div className='d-flex justify-content-start align-items-center'>
-                                    <button className="btn btn-primary">Login</button>
+                                    <button type="button" className="btn btn-primary" onClick={handleSubmit}
+                                        disabled={
+                                            !(
+
+                                                formData.email &&
+                                                formData.password &&
+                                                formData.email.trim() !== '' &&
+                                                formData.password.trim() !== ''
+
+                                            )
+                                        }
+                                    >Login</button>
                                 </div>
                             </div>
                         </div>

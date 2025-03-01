@@ -1,5 +1,6 @@
 import colors from "../../styles/colors";
 import { useCart } from "../../components/context/CartContext";
+import { useAuth } from "../../components/context/AuthContext";
 import logo from "../../assets/images/pavitramlogo.jpeg";
 import { Link } from "react-router-dom";
 import "./navbar.css";
@@ -9,8 +10,10 @@ import { faChevronDown, faShoppingCart, faUser } from "@fortawesome/free-solid-s
 
 function NavBar() {
 const { cart } = useCart();
+const { currentUser, logout } = useAuth();
 const [cartCount, setCartCount] = useState(0);
 const [animate, setAnimate] = useState(false);
+const [showDropdown, setShowDropdown] = useState(false);
 
 useEffect(() => {
     if (cart && cart.length > 0) {
@@ -64,13 +67,47 @@ useEffect(() => {
                 <span className="ms-1">Cart</span>
             </div>
             </Link>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/home/login"
-              className="text-white"
+            {currentUser ? (
+            <div className="position-relative">
+                <div 
+                style={{ textDecoration: "none", cursor: "pointer" }}
+                className="text-white d-flex align-items-center"
+                onClick={() => setShowDropdown(!showDropdown)}
                 >
+                <FontAwesomeIcon icon={faUser} className="me-1" /> 
+                {currentUser.email || "User"} <FontAwesomeIcon icon={faChevronDown} className="ms-1" />
+                </div>
+                {showDropdown && (
+                <div className="position-absolute bg-white shadow rounded py-2 mt-1 " style={{ zIndex: 1000, right: 0, minWidth: "150px" }}>
+                    <Link 
+                    to="/home/profile" 
+                    className="dropdown-item text-decoration-none  text-dark py-1 px-3"
+                    onClick={() => setShowDropdown(false)}
+                    >
+                    Profile
+                    </Link>
+                    <div 
+                    className="dropdown-item text-decoration-none text-dark py-1 px-3" 
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        logout();
+                        setShowDropdown(false);
+                    }}
+                    >
+                    Logout
+                    </div>
+                </div>
+                )}
+            </div>
+            ) : (
+            <Link
+                style={{ textDecoration: "none" }}
+                to="/home/login"
+                className="text-white"
+            >
                 <FontAwesomeIcon icon={faUser} className="me-1" /> Login
             </Link>
+            )}
           </div>
         </div>
       </header>
