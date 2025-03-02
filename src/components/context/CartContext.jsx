@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
@@ -17,7 +18,6 @@ const [cart, setCart] = useState(() => {
 
 const [total, setTotal] = useState(0);
 
-// Update localStorage whenever cart changes
 useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
     
