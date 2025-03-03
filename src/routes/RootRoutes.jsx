@@ -18,6 +18,7 @@ import CourseDetails from '../components/pages/CourseDetails';
 import UpcomingEventDetails from '../components/pages/UpcomingEventDetails';
 import HomeClasses from '../components/pages/HomeClasses';
 import HomeclassDetails from '../components/pages/Homeclass_details';
+import BlogDetails from '../components/pages/BlogDetails';
 
 function RootRoutes() {
   return (
@@ -35,10 +36,12 @@ function RootRoutes() {
       <Route path='/home/course_details/:courseId' element={<CourseDetails />} />
       <Route path="/home/service" element={<Services />} />
       <Route path='/home/upcoming_events' element={<UpComingEvent />} />
-    <Route path="/home/upcoming_events_details/:eventId" element={<UpcomingEventDetails />} />
+      <Route path="/home/upcoming_events_details/:eventId" element={<UpcomingEventDetails />} />
       <Route path="/home/contactus" element={<ContactUs />} />
       <Route path="/home/gallery" element={<Galllery />} />
       <Route path='/home/cart' element={<Cart />} />
+      <Route path="/home/blogdetail" element={<BlogDetails />} />
+      <Route path="/home/blogdetail/:blogId" element={<BlogDetails />} />
       <Route path="/Home/forget_password" element={<ForgetPassword />} />
       <Route path="/home/service_detail" element={<ServiceDetails />} />
       <Route path="/home/service_detail/:serviceId" element={<ServiceDetails />} />

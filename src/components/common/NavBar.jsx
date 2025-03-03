@@ -79,10 +79,10 @@ useEffect(() => {
                 {currentUser.email || "User"} <FontAwesomeIcon icon={faChevronDown} className="ms-1" />
                 </div>
                 {showDropdown && (
-                <div className="position-absolute bg-white shadow rounded py-2 mt-1 " style={{ zIndex: 1000, right: 0, minWidth: "150px" }}>
+                <div className="position-absolute bg-white shadow rounded py-2 mt-1  " style={{ zIndex: 1000, right: 0, minWidth: "150px" }}>
                     <Link 
                     to="/home/profile" 
-                    className="dropdown-item text-decoration-none  text-dark py-1 px-3"
+                    className="dropdown-item text-decoration-none  text-dark py-1 px-3 "
                     onClick={() => setShowDropdown(false)}
                     >
                     Profile
