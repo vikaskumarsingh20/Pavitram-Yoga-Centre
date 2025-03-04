@@ -2,16 +2,10 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import Slider from "react-slick";
-import img1 from "../../assets/Instractor/guruji.jpg";
+import {testimonial} from "../data/Testimonial"
 
 function Testimonial() {
-  const instructors = [
-    { id: 1, name: "John Doe", profession: "Software Engineer", title: "Great Experience!", content: "This was an amazing journey. Highly recommend it!", img: img1 },
-    { id: 2, name: "John Doe", profession: "Software Engineer", title: "Absolutely Worth It!", content: "The experience was beyond my expectations. Truly transformative!", img: img1 },
-    { id: 3, name: "John Doe", profession: "Software Engineer", title: "Loved Every Moment!", content: "I gained so much knowledge and confidence. A fantastic journey!", img: img1 },
-    { id: 4, name: "John Doe", profession: "Software Engineer", title: "Highly Recommended!", content: "A well-structured and insightful program. Definitely worth it!", img: img1 },
-    { id: 5, name: "John Doe", profession: "Software Engineer", title: "Life-Changing!", content: "This experience has truly shaped my career. Thank you!", img: img1 },
-  ];
+ 
   
 
   
@@ -19,7 +13,7 @@ function Testimonial() {
   const InstructorCard = ({ instructor }) => {
     return (
       // <div className="container"></div>
-      <div className="text-center mb-5   p-2">
+      <div className="text-center mb-5 p-2">
         <div className="card shadow-sm border-0 p-4 mx-auto h-80" style={{minHeight:"300px", maxWidth: "500px", borderRadius: "12px" }}>
           <div className="card-body">
             <span className="fs-5 fw-semibold text-primary">{instructor.title}</span>
@@ -38,12 +32,14 @@ function Testimonial() {
   };
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 2,
     autoplay: true,
     speed: 4000,
+    nextArrow: false,
+    prevArrow: false,
     autoplaySpeed: 4000,
     cssEase: "linear",
     adaptiveHeight: true,
@@ -76,11 +72,18 @@ function Testimonial() {
   };
 
   return (
-    <div className="container mx-auto mt-5 mb-5 testimonial">
-      <h2 className="text-center mb-4 text-light py-4">Testimonials</h2>
+    <div className="container-fluid mx-auto mt-5 mb-5 testimonial">
+      <div className="text-center mb-4">
+        <h2 className="text-light py-4 fw-bold fs-3">What Our Students Say</h2>
+        <div className="animate__animated animate__fadeInUp animate__slow">
+          <div className="animate__animated animate__heartBeat animate__infinite animate__slow">
+            <i className="fa fa-quote-left text-primary" style={{ fontSize: "40px" }}></i>
+          </div>
+        </div>
+      </div>
       <div className="slider-container">
         <Slider {...settings}>
-          {instructors.map((instructor) => (
+          {testimonial.map((instructor) => (
             <InstructorCard key={instructor.id} instructor={instructor} />
           ))}
         </Slider>

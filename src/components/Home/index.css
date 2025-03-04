@@ -1,0 +1,235 @@
+/* ===== Testimonial Section Styles ===== */
+
+.testimonial-section {
+padding: 80px 0;
+background-color: #f9f7f4;
+position: relative;
+overflow: hidden;
+}
+
+.testimonial-section::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image: radial-gradient(#e0d8c8 1px, transparent 1px);
+background-size: 20px 20px;
+opacity: 0.3;
+z-index: 0;
+}
+
+.testimonial-container {
+position: relative;
+z-index: 1;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.testimonial-heading {
+text-align: center;
+margin-bottom: 60px;
+position: relative;
+}
+
+.testimonial-heading h2 {
+font-size: 2.5rem;
+color: #3a3a3a;
+margin-bottom: 15px;
+font-weight: 600;
+position: relative;
+display: inline-block;
+}
+
+.testimonial-heading h2::after {
+content: "";
+position: absolute;
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+width: 80px;
+height: 3px;
+background: linear-gradient(to right, #8e7057, #d4b695);
+border-radius: 2px;
+}
+
+.testimonial-heading p {
+font-size: 1.1rem;
+color: #666;
+max-width: 700px;
+margin: 20px auto 0;
+line-height: 1.6;
+}
+
+.testimonial-wrapper {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 30px;
+margin-top: 40px;
+}
+
+.testimonial-card {
+background-color: white;
+border-radius: 12px;
+box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+padding: 30px;
+transition: all 0.4s ease;
+position: relative;
+overflow: hidden;
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.testimonial-card::before {
+content: "";
+position: absolute;
+top: -20px;
+left: 20px;
+font-size: 150px;
+font-family: Georgia, serif;
+color: rgba(212, 182, 149, 0.1);
+line-height: 1;
+}
+
+.testimonial-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card:hover .quote-icon {
+transform: rotate(10deg) scale(1.1);
+color: #8e7057;
+}
+
+.testimonial-card:hover .client-image img {
+transform: scale(1.05);
+border-color: #8e7057;
+}
+
+.quote-icon {
+font-size: 30px;
+color: #d4b695;
+margin-bottom: 15px;
+transition: all 0.3s ease;
+}
+
+.testimonial-text {
+font-size: 1rem;
+line-height: 1.7;
+color: #555;
+margin-bottom: 25px;
+position: relative;
+flex-grow: 1;
+font-style: italic;
+}
+
+.client-info {
+display: flex;
+align-items: center;
+border-top: 1px solid rgba(0, 0, 0, 0.06);
+padding-top: 20px;
+margin-top: auto;
+}
+
+.client-image {
+width: 60px;
+height: 60px;
+border-radius: 50%;
+overflow: hidden;
+margin-right: 15px;
+border: 3px solid #f0e6d9;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.client-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: all 0.3s ease;
+}
+
+.client-details {
+flex: 1;
+}
+
+.client-name {
+font-size: 1.1rem;
+font-weight: 600;
+color: #3a3a3a;
+margin-bottom: 5px;
+}
+
+.client-role {
+font-size: 0.85rem;
+color: #8e7057;
+font-weight: 500;
+}
+
+.rating {
+color: #ffc107;
+font-size: 14px;
+margin-top: 8px;
+}
+
+/* Animation for testimonial cards */
+@keyframes fadeInUp {
+from {
+    opacity: 0;
+    transform: translateY(20px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+.testimonial-card {
+animation: fadeInUp 0.6s ease-out forwards;
+opacity: 0;
+}
+
+.testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.3s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.5s; }
+.testimonial-card:nth-child(4) { animation-delay: 0.7s; }
+.testimonial-card:nth-child(5) { animation-delay: 0.9s; }
+.testimonial-card:nth-child(6) { animation-delay: 1.1s; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+.testimonial-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.testimonial-heading h2 {
+    font-size: 2rem;
+}
+
+.testimonial-card {
+    padding: 25px;
+}
+}
+
+@media (max-width: 480px) {
+.testimonial-section {
+    padding: 60px 0;
+}
+
+.testimonial-wrapper {
+    grid-template-columns: 1fr;
+}
+
+.testimonial-heading h2 {
+    font-size: 1.8rem;
+}
+
+.client-image {
+    width: 50px;
+    height: 50px;
+}
+}
+

@@ -289,3 +289,34 @@ background-color: rgba(255, 255, 255, 0.3);
 transform: translateY(-2px);
 transition: all 0.3s ease;
 }
+
+.instructor-card {
+transition: all 0.3s ease;
+border-radius: 8px;
+}
+
+.instructor-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.instructor-card:hover .instructor-img {
+transform: scale(1.1);
+}
+
+.instructor-card:hover .overlay {
+opacity: 1 !important;
+}
+
+.instructor-card:hover .social-icon {
+transform: translateY(0) !important;
+opacity: 1 !important;
+}
+
+.social-icon:hover {
+transform: translateY(-5px) !important;
+}
+
+.instructor-section {
+background-color: #f8f9fa;
+}
