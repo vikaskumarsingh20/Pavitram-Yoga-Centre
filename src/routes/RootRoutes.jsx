@@ -19,11 +19,11 @@ import UpcomingEventDetails from '../components/pages/UpcomingEventDetails';
 import HomeClasses from '../components/pages/HomeClasses';
 import HomeclassDetails from '../components/pages/Homeclass_details';
 import BlogDetails from '../components/pages/BlogDetails';
+import DashboardRoutes from '../components/pages/dashboard/dashboardRoutes';
 
 function RootRoutes() {
   return (
     <Routes>
-
       <Route path="/" element={<LandingPage />} />
       <Route path="/home/login" element={<Login />} />
       <Route path="home/homeclasses" element={<HomeClasses />} />
@@ -45,6 +45,7 @@ function RootRoutes() {
       <Route path="/Home/forget_password" element={<ForgetPassword />} />
       <Route path="/home/service_detail" element={<ServiceDetails />} />
       <Route path="/home/service_detail/:serviceId" element={<ServiceDetails />} />
+      <Route path="/user/*" element={<DashboardRoutes />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
