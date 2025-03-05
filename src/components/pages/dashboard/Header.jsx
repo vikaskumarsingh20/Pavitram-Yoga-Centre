@@ -1,33 +1,35 @@
-import React from "react";
-import { Navbar, Nav, Dropdown, Image } from "react-bootstrap";
 import "./Header.css";
 import profilePic from "../../../assets/Instractor/guruji.jpg"; // Add a sample profile picture
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <Navbar expand="lg" className="header-navbar">
-      <Navbar.Brand href="#" className="brand">
-        <span className="brand-name">Pavitram</span> <span className="brand-highlight">Yoga</span>
-      </Navbar.Brand>
+    <nav className="header-navbar d-flex d-sm-flex-column align-items-center justify-content-between">
+      <div className="brand">
+        <Link to="/user" style={{ textDecoration: "none", marginRight: "10px" }}>
+          <span className="brand-name">Pavitram</span>
+          <span className="brand-highlight" style={{ marginLeft: "10px" }}>Yoga</span>
+        </Link>
+      </div>
 
-      <Nav className="ms-auto d-flex align-items-center">
+      <ul className="nav ms-auto d-flex align-items-center justify-content-end">
         {/* Notification Bell */}
-        <Nav.Link href="#" className="notification-icon">
-          🔔 <span className="badge">4</span>
-        </Nav.Link>
+        <li className="nav-item">
+          <a href="#" className="notification-icon">
+            <i className="fa-solid fa-bell"></i> <span className="badge">4</span>
+          </a>
+        </li>
 
-        {/* Profile Dropdown */}
-        <Dropdown align="end">
-          <Dropdown.Toggle className="profile-toggle">
-            <Image src={profilePic} roundedCircle className="profile-pic" /> Delilah Dillon
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item href="#">Logout</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Nav>
-    </Navbar>
+        <li className="nav-item dropdown">
+          <button className="profile-toggle" type="button">
+            <img src={profilePic} alt="Profile" className="profile-pic img-fluid rounded-4" /> Delilah Dillon
+          </button>
+          <ul className="dropdown-menu">
+            <li><a href="#" className="dropdown-item">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

@@ -1,34 +1,67 @@
 import { ListGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
+import { FaUser, FaFileAlt, FaKey, FaShoppingCart, FaVideo, FaQuestionCircle } from "react-icons/fa";
+import "./sidebar.css";
 const Sidebar = () => {
+    const location = useLocation();
+    const isActive = (path) => location.pathname === path;
     return (
-    <div className="sidebar">
-    <Link to="/user">
-        <h3 className="brand">Pavitram <span className="highlight">Yoga</span></h3>
-    </Link>
-        <ListGroup variant="flush">
-        <Link to="/user/profile">
-            <ListGroup.Item className="sidebar-item">👤 Profile</ListGroup.Item>
-        </Link>
-        <Link to="/user/account-info">
-            <ListGroup.Item className="sidebar-item">📂 Account Info</ListGroup.Item>
-        </Link>
-        <Link to="/user/change-password">
-            <ListGroup.Item className="sidebar-item">🔑 Change Password</ListGroup.Item>
-        </Link>
-        <Link to="/user/orders">
-            <ListGroup.Item className="sidebar-item">🛒 View Orders</ListGroup.Item>
-        </Link>
-        <Link to="/user/live-classes">
-            <ListGroup.Item className="sidebar-item">🎥 Live Classes</ListGroup.Item>
-        </Link>
-        <Link to="/help">
-            <ListGroup.Item className="sidebar-item">❓ Help</ListGroup.Item>
-        </Link>
-        </ListGroup>
-    </div>
+        <div className="sidebar-container">
+            <div className="sidebar-header">
+            </div>
+            
+            <div className="sidebar-content">
+                <ListGroup variant="flush" className="sidebar-menu">
+                    <Link to="/user/profile" className="menu-link">
+                        <ListGroup.Item className={`sidebar-item ${isActive("/user/profile") ? "active" : ""} d-flex`}>
+                            <div className="item-icon me-2"><FaUser /></div>
+                            <div className="item-text">Profile</div>
+                        </ListGroup.Item>
+                    </Link>
+                    
+                    <Link to="/user/account-info" className="menu-link">
+                        <ListGroup.Item className={`sidebar-item ${isActive("/user/account-info") ? "active" : ""} d-flex`}>
+                            <div className=" me-2"><FaFileAlt /></div>
+                            <div className="item-text">Account Info</div>
+                        </ListGroup.Item>
+                    </Link>
+                    
+                    <Link to="/user/change-password" className="menu-link">
+                        <ListGroup.Item className={`sidebar-item ${isActive("/user/change-password") ? "active" : ""} d-flex`}>
+                            <div className=" me-2"><FaKey /></div>
+                            <div className="item-text">Change Password</div>
+                        </ListGroup.Item>
+                    </Link>
+                    
+                    <Link to="/user/orders" className="menu-link">
+                        <ListGroup.Item className={`sidebar-item ${isActive("/user/orders") ? "active" : ""} d-flex`}>
+                            <div className=" me-2"><FaShoppingCart /></div>
+                            <div className="item-text">View Orders</div>
+                        </ListGroup.Item>
+                    </Link>
+                    
+                    <Link to="/user/live-classes" className="menu-link">
+                        <ListGroup.Item className={`sidebar-item ${isActive("/user/live-classes") ? "active" : ""} d-flex`}>
+                            <div className=" me-2"><FaVideo /></div>
+                            <div className="item-text">Live Classes</div>
+                        </ListGroup.Item>
+                    </Link>
+                    
+                    <Link to="/help" className="menu-link">
+                        <ListGroup.Item className={`sidebar-item ${isActive("/help") ? "active" : ""} d-flex`}>
+                            <div className=" me-2"><FaQuestionCircle /></div>
+                            <div className="item-text">Help</div>
+                        </ListGroup.Item>
+                    </Link>
+                </ListGroup>
+            </div>
+            
+            <div className="sidebar-footer">
+                <p>© 2023 Pavitram Yoga</p>
+            </div>
+        </div>
     );
 };
 
 export default Sidebar;
+
