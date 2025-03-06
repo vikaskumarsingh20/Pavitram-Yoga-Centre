@@ -11,12 +11,14 @@ const Header = () => {
           <span className="brand-highlight" style={{ marginLeft: "10px" }}>Yoga</span>
         </Link>
       </div>
-
+      <div className="hamburger-menu">
+        <i className="fa fa-bars"></i>
+      </div>
       <ul className="nav ms-auto d-flex align-items-center justify-content-end">
         {/* Notification Bell */}
         <li className="nav-item">
           <a href="#" className="notification-icon">
-            <i className="fa-solid fa-bell"></i> <span className="badge">4</span>
+            <i className="fa-solid fa-bell text-dark"></i> <span className="badge text-danger">4</span>
           </a>
         </li>
 

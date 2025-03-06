@@ -2,9 +2,8 @@
     max-width: 300px;
     min-width: 214px;
 } 
-.item-text a{
-    text-decoration:none;
-    color: black;
+.item-text{
+    text-decoration:none !important;
     font-size: 17px;
 }
 .item-text a:hover{

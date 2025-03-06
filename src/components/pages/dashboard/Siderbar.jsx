@@ -56,8 +56,8 @@ const Sidebar = () => {
                 </ListGroup>
             </div>
             
-            <div className="sidebar-footer">
-                <p>© 2023 Pavitram Yoga</p>
+            <div className="sidebar-footer fixed-bottom border-top py-2">
+                <span className="text-muted"> &copy; 2025 Pavitram Yoga</span>
             </div>
         </div>
     );
