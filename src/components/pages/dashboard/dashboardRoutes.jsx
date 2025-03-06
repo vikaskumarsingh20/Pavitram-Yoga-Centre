@@ -1,11 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-import AccountInfo from './AccountInfo';
+import AccountInfo from './account/AccountInfo';
 import Dashboard from './Dashboard';
-import Profile from './Profile';
-// TODO: Create and import these components
-// import ChangePassword from './ChangePassword';
-// import Orders from './Orders';
-// import LiveClasses from './LiveClasses';
+import Profile from './profile/Profile';
+import Forget from './forgetpassword/forget';
+import ViewOrder from './vieworder/ViewOrder';
+import LiveClass from './liveclasses/LiveClass';
+import Help from './help/Help';
+ 
+
 const DashboardRoutes = () => {
 return (
     <Routes>
@@ -13,10 +15,10 @@ return (
         <Route index element={<Profile />} />
         <Route path="profile" element={<Profile />} />
         <Route path="account-info" element={<AccountInfo />} />
-        {/* TODO: Create these components */}
-        <Route path="change-password" element={<h1>Change Password (Component to be created)</h1>} />
-        <Route path="orders" element={<h1>Orders (Component to be created)</h1>} />
-        <Route path="live-classes" element={<h1>Live Classes (Component to be created)</h1>} />
+        <Route path="change-password" element={<Forget/>} />
+        <Route path="orders" element={<ViewOrder/>} />
+        <Route path="live-classes" element={<LiveClass/>} />
+        <Route path="help" element={<Help/>} />
     </Route>
     </Routes>
 );

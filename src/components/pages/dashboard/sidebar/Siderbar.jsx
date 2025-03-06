@@ -47,7 +47,7 @@ const Sidebar = () => {
                         </ListGroup.Item>
                     </Link>
                     
-                    <Link to="/help" className="menu-link">
+                    <Link to="/user/help" className="menu-link">
                         <ListGroup.Item className={`sidebar-item ${isActive("/help") ? "active" : ""} d-flex`}>
                             <div className=" me-2"><FaQuestionCircle /></div>
                             <div className="item-text">Help</div>

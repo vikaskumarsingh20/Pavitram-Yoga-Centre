@@ -85,3 +85,27 @@ padding: 20px;
 background-color: #e1e1e1;
 overflow-y: auto;
 }
+.account-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.breadcrumb {
+  background: none;
+  padding: 0;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+.table th {
+  width: 30%;
+  background: #f8f9fa;
+}
