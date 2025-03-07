@@ -2,11 +2,12 @@ import { ListGroup } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { FaUser, FaFileAlt, FaKey, FaShoppingCart, FaVideo, FaQuestionCircle } from "react-icons/fa";
 import "./sidebar.css";
-const Sidebar = () => {
+import "../dashboard.css"
+const Sidebar = ({ isVisible }) => {
     const location = useLocation();
     const isActive = (path) => location.pathname === path;
     return (
-        <div className="sidebar-container">
+        <div className={`sidebar-container ${isVisible ? 'visible' : ''}`}>
             <div className="sidebar-header">
             </div>
 

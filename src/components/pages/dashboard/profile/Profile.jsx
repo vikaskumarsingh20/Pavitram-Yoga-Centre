@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 function Profile() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h2 className="account-title">Profile</h2>
 
       {/* Breadcrumb Navigation */}

@@ -6,7 +6,7 @@ import "../dashboard.css"
 
 const AccountInfo = () => {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h2 className="account-title">Account Info</h2>
 
       {/* Breadcrumb Navigation */}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 function Help() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h2 className="account-title">  Help Section</h2>
 
       {/* Breadcrumb Navigation */}

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function LiveClass() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h2 className="account-title"> Live-Class</h2>
 
       {/* Breadcrumb Navigation */}

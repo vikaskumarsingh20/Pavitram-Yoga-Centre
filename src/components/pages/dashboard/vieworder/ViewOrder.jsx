@@ -4,8 +4,8 @@ import "../dashboard.css"
 
 function ViewOrder() {
   return (
-    <div className="container">
-      <h2 className="account-title">Forget Password</h2>
+    <div className="container-fluid">
+      <h2 className="account-title"> View Order</h2>
 
       {/* Breadcrumb Navigation */}
       <nav aria-label="breadcrumb">

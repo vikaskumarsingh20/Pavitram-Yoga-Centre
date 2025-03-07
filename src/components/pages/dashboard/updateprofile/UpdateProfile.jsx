@@ -3,7 +3,7 @@ import "./update.css"
 
 function UpdateProfile() {
     return (
-        <div className="container">
+        <div className="container-fluid">
             <h2 className="account-title"> Live-Class</h2>
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb bg-light py-2 px-3 rounded-3">

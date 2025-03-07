@@ -64,21 +64,22 @@
 
 /* Dashboard Layout */
 .dashboard-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
 }
 
 .dashboard-content {
-  display: flex;
-  flex: 1;
+display: flex;
+flex: 1;
 }
 
 .dashboard-main {
-  flex: 1;
-  padding: 20px;
-  background-color: #e1e1e1;
-  overflow-y: auto;
+flex: 1;
+padding: 20px;
+background-color: #e1e1e1;
+overflow-y: auto;
+transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 .account-title {
@@ -105,9 +106,14 @@
   width: 30%;
   background: #f8f9fa;
 }
-
+.marginleft-3{
+  margin-left: 72px;
+}
 .bg-primary1 {
   background-color: #5d80b3 !important;
+}
+.primary1{
+  color: #5d80b3 !important;
 }
 .breadcrumb-item a {
   text-decoration: none;
@@ -128,4 +134,164 @@
 .breadcrumb-item a:hover {
   text-decoration: underline;
   color: #5d80b3 !important;
+}
+
+/* Hamburger icon */
+.hamburger-menu {
+  cursor: pointer;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.sidebar-container {
+position: fixed;
+top: 0;
+left: -280px; /* Initially hidden */
+width: 280px;
+height: 100%;
+background: #ffffff;
+color: white;
+padding-top: 20px;
+transition: transform 0.3s ease-in-out;
+z-index: 1000;
+box-shadow: 3px 0 5px rgba(0, 0, 0, 0.2);
+overflow-y: auto;
+}
+
+.sidebar-container.visible {
+transform: translateX(280px); /* Slide in */
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #34495e; */
+  padding: 15px;
+}
+
+/* Close Icon */
+.close-icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Sidebar Menu */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sidebar-menu li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+.dashboard-content {
+    flex-direction: column;
+}
+
+.sidebar-container {
+    width: 250px;
+    left: -250px;
+    /* For mobile, sidebar overlays content */
+}
+
+.sidebar-container.visible {
+    transform: translateX(250px);
+}
+
+.hamburger-menu {
+    display: block;
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dashboard-main {
+    width: 100%;
+    margin-left: 0;
+    /* No margin change needed for overlay style */
+}
+
+/* Overlay effect when sidebar is open */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.visible {
+    display: block;
+    opacity: 1;
+}
+.header-navbar {
+  background-color: white;
+  padding: 0px 20px !important;
+}
+}
+
+@media (min-width: 769px) {
+/* For desktop, sidebar pushes content */
+.sidebar-container {
+    position: fixed;
+    left: -280px;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar-container.visible {
+    transform: translateX(280px);
+}
+
+/* Main content should be pushed when sidebar is visible */
+.dashboard-main {
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* When sidebar is visible, push content to the right */
+.sidebar-container.visible ~ .dashboard-main {
+    margin-left: 280px;
+}
+
+/* Hamburger menu always visible */
+.hamburger-menu {
+    display: block;
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+}
 }

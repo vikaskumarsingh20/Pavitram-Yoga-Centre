@@ -20,7 +20,7 @@ return (
         <Route path="orders" element={<ViewOrder/>} />
         <Route path="live-classes" element={<LiveClass/>} />
         <Route path="help" element={<Help/>} />
-        <Route path="/user/update_profile" element={<UpdateProfile/>} />
+        <Route path="update_profile" element={<UpdateProfile/>} />
     </Route>
     </Routes>
 );

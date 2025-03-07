@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function Forget() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h2 className="account-title">Forget Password</h2>
 
       {/* Breadcrumb Navigation */}

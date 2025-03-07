@@ -1,19 +1,20 @@
+/* eslint-disable react/prop-types */
 import "./Header.css";
 import profilePic from "../../../../assets/Instractor/guruji.jpg"; // Add a sample profile picture
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
   return (
     <nav className="header-navbar d-flex d-sm-flex-column align-items-center justify-content-between">
       <div className="brand">
         <Link to="/user" style={{ textDecoration: "none", marginRight: "10px" }}>
-          <span className="brand-name">Pavitram</span>
+          <span className="brand-name primary1">Pavitram</span>
           <span className="brand-highlight" style={{ marginLeft: "10px" }}>Yoga</span>
         </Link>
-      </div>
-      <div className="hamburger-menu">
-        <i className="fa fa-bars"></i>
-      </div>
+    </div>
+    <div className="hamburger-menu d-block" onClick={toggleSidebar}>
+        <i className="fa fa-bars marginleft-3"></i>
+    </div>
       <ul className="nav ms-auto d-flex align-items-center justify-content-end">
         {/* Notification Bell */}
         <li className="nav-item">
@@ -27,11 +28,7 @@ const Header = () => {
             <img src={profilePic} alt="Profile" className="profile-pic img-fluid rounded-4" /> Delilah Dillon
           </button>
           <ul className="dropdown-menu">
-            <li>
-              <a href="#" className="dropdown-item">
-                <i className="fa fa-sign-out-alt me-2 "></i> Logout
-              </a>
-            </li>
+            <li><a href="#" className="dropdown-item">Logout</a></li>
           </ul>
         </li>
       </ul>
