@@ -1,0 +1,19 @@
+.card {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    font-weight: bold;
+  }
+  
+  .table th ,td{
+    text-align: center;
+  }
+  
+ 
+  
+  .btn-sm {
+    font-size: 0.875rem;
+  }
+  

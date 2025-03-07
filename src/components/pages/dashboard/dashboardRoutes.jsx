@@ -6,19 +6,21 @@ import Forget from './forgetpassword/forget';
 import ViewOrder from './vieworder/ViewOrder';
 import LiveClass from './liveclasses/LiveClass';
 import Help from './help/Help';
+import UpdateProfile from './updateprofile/UpdateProfile';
  
 
 const DashboardRoutes = () => {
 return (
     <Routes>
     <Route path="/" element={<Dashboard />}>
-        <Route index element={<Profile />} />
-        <Route path="profile" element={<Profile />} />
+        <Route index element={<AccountInfo />} />
         <Route path="account-info" element={<AccountInfo />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="change-password" element={<Forget/>} />
         <Route path="orders" element={<ViewOrder/>} />
         <Route path="live-classes" element={<LiveClass/>} />
         <Route path="help" element={<Help/>} />
+        <Route path="/user/update_profile" element={<UpdateProfile/>} />
     </Route>
     </Routes>
 );

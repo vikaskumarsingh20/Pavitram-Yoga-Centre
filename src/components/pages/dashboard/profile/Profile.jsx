@@ -17,6 +17,27 @@ function Profile() {
           </li>
         </ol>
       </nav>
+
+      <div className="card shadow-lg">
+        <div className="card-header bg-primary1 text-white d-flex justify-content-between align-items-center">
+          <h5 className="mb-0">
+            <i className="bi bi-person-fill me-2"></i>  Profile
+          </h5>
+        </div>
+
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">
+            <i className="bi bi-envelope-fill me-2"></i> Email : <span className="fw-bold">example@example.com</span>
+          </li>
+          <li className="list-group-item">
+            <i className="bi bi-phone-fill me-2"></i> Phone : <span className="fw-bold">123-456-7890</span>
+          </li>
+          <li className="list-group-item">
+            <i className="bi bi-map-fill me-2"></i> Address : <span className="fw-bold">New York, USA</span>
+          </li>
+        </ul>
+      
+      </div>
     </div>
   )
 }

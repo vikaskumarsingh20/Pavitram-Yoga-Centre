@@ -6,6 +6,6 @@
     text-decoration:none !important;
     font-size: 17px;
 }
-.item-text a:hover{
-    color: #007bff;
+.menu-link {
+    text-decoration: none !important;
 }

@@ -27,7 +27,11 @@ const Header = () => {
             <img src={profilePic} alt="Profile" className="profile-pic img-fluid rounded-4" /> Delilah Dillon
           </button>
           <ul className="dropdown-menu">
-            <li><a href="#" className="dropdown-item">Logout</a></li>
+            <li>
+              <a href="#" className="dropdown-item">
+                <i className="fa fa-sign-out-alt me-2 "></i> Logout
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
