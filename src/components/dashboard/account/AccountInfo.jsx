@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./AccountInfo.css"; 
-import profilePic from "../../../../assets/Instractor/guruji.jpg";
+import profilePic from "../../../assets/Instractor/guruji.jpg";
 import "../dashboard.css"
 
 

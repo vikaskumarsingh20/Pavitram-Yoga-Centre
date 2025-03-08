@@ -19,7 +19,7 @@ import UpcomingEventDetails from '../components/pages/UpcomingEventDetails';
 import HomeClasses from '../components/pages/HomeClasses';
 import HomeclassDetails from '../components/pages/Homeclass_details';
 import BlogDetails from '../components/pages/BlogDetails';
-import DashboardRoutes from '../components/pages/dashboard/dashboardRoutes';
+import DashboardRoutes from '../components/dashboard/dashboardRoutes';
 
 function RootRoutes() {
   return (

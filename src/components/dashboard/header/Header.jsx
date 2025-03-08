@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./Header.css";
-import profilePic from "../../../../assets/Instractor/guruji.jpg"; // Add a sample profile picture
+import profilePic from "../../../assets/Instractor/guruji.jpg"; // Add a sample profile picture
 import { Link } from "react-router-dom";
 
 const Header = ({ toggleSidebar }) => {
