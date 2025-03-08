@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import "./AccountInfo.css"; 
-import profilePic from "../../../assets/Instractor/guruji.jpg";
+import "./AccountInfo.css";
+import defaultProfilePic from "../../../assets/Instractor/defaultimage.png";
 import "../dashboard.css"
 import { useAuth } from "../../context/AuthContext";
 const AccountInfo = () => {
-  
-const { currentUser } = useAuth();
+
+  const { currentUser } = useAuth();
   return (
     <div className="container-fluid">
       <h2 className="account-title">Account Info</h2>
@@ -14,7 +14,7 @@ const { currentUser } = useAuth();
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb bg-light py-2 px-3 rounded-3">
           <li className="breadcrumb-item">
-          <i className="bi bi-house-door-fill me-2"></i>
+            <i className="bi bi-house-door-fill me-2"></i>
             <Link to="/user">Dashboard</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
@@ -29,70 +29,72 @@ const { currentUser } = useAuth();
         </div>
         <div className="card-body row align-items-center">
           {/* Profile Image */}
-          <div className="col-md-4 text-center">
+          <div className="col-md-4 text-center mb-md-0 mb-3">
             <img
-              src={profilePic}
+              src={currentUser?.profileImage || defaultProfilePic}
               alt="Profile"
               className="img-thumbnail"
-              style={{ minHeight: "200px", maxHeight: "200px" }}
+              style={{ minHeight: "200px", maxHeight: "200px", objectFit: "cover" }}
             />
           </div>
 
           {/* Account Details */}
           <div className="col-md-8">
-  <table className="table table-bordered align-middle">
-    <tbody>
-    <tr>
-        <th className="text-start align-middle w-25">
-          <i className="bi bi-person-fill me-2"></i> Name
-        </th>
-        <td className="text-start">{currentUser?.fullName || "Not provided"}</td>
-    </tr>
-      <tr>
-        <th className="text-start align-middle w-25">
-          <i className="bi bi-envelope-fill me-2"></i> E-mail
-        </th>
-        <td className="text-start">{currentUser?.email || "Not provided"}</td>
-      </tr>
-      <tr>
-        <th className="text-start align-middle">
-          <i className="bi bi-telephone-fill me-2"></i> Phone Number
-        </th>
-        <td className="text-start">{currentUser?.phone || "Not provided"}</td>
-      </tr>
-      <tr>
-        <th className="text-start align-middle">
-          <i className="bi bi-gender-ambiguous me-2"></i> Gender
-        </th>
-        <td className="text-start">{currentUser?.gender || "Not provided"}</td>
-      </tr>
-      <tr>
-        <th className="text-start align-middle">
-          <i className="bi bi-globe me-2"></i> Country
-        </th>
-        <td className="text-start">{currentUser?.country || "Not provided"}</td>
-      </tr>
-      <tr>
-        <th className="text-start align-middle">
-          <i className="bi bi-map-fill me-2"></i> State
-        </th>
-        <td className="text-start">{currentUser?.state || "Not provided"}</td>
-      </tr>
-      <tr>
-        <th className="text-start align-middle">
-          <i className="fa fa-map-marker me-2"></i> City
-        </th>
-        <td className="text-start">{currentUser?.city || "Not provided"}</td>
-      </tr>
-      <tr>
-        <th className="text-start align-middle">
-          <i className="bi bi-house-door-fill me-2"></i> Address
-        </th>
-        <td className="text-start">{currentUser?.address || "Not provided"}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+            <div className="table-responsive">
+              <table className="table table-bordered align-middle">
+                <tbody>
+                  <tr className="text-nowrap">
+                    <th className="text-start align-middle w-25">
+                      <i className="bi bi-person-fill me-2"></i> Name
+                    </th>
+                    <td className="text-start">{currentUser?.fullName || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="bi bi-envelope-fill me-2"></i> E-mail
+                    </th>
+                    <td className="text-start">{currentUser?.email || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="bi bi-telephone-fill me-2"></i> Phone Number
+                    </th>
+                    <td className="text-start">{currentUser?.phone || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="bi bi-gender-ambiguous me-2"></i> Gender
+                    </th>
+                    <td className="text-start">{currentUser?.gender || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="bi bi-globe me-2"></i> Country
+                    </th>
+                    <td className="text-start">{currentUser?.country || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="bi bi-map-fill me-2"></i> State
+                    </th>
+                    <td className="text-start">{currentUser?.state || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="fa fa-map-marker me-2"></i> City
+                    </th>
+                    <td className="text-start">{currentUser?.city || "Not provided"}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-start align-middle w-25 text-nowrap">
+                      <i className="bi bi-house-door-fill me-2"></i> Address
+                    </th>
+                    <td className="text-start">{currentUser?.address || "Not provided"}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
         </div>
 

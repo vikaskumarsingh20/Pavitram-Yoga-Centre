@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./Header.css";
 import { useAuth } from "../../context/AuthContext"; // Import the auth context
-import profilePic from "../../../assets/Instractor/guruji.jpg"; // Add a sample profile picture
+import defaultProfilePic from "../../../assets/Instractor/defaultimage.png";
 import { Link } from "react-router-dom";
 
 const Header = ({ toggleSidebar }) => {
@@ -27,7 +27,7 @@ const { currentUser } = useAuth(); // Get the current user from auth context
 
         <li className="nav-item dropdown">
           <button className="profile-toggle" type="button">
-            <img src={profilePic} alt="Profile" className="profile-pic img-fluid rounded-4" /> {currentUser?.fullName || "Guest User"}
+            <img src={currentUser?.profileImage || defaultProfilePic} alt="Profile" className="profile-pic img-fluid rounded-4 bg-white" /> {currentUser?.fullName || "Guest User"}
           </button>
           <ul className="dropdown-menu">
             <li><a href="#" className="dropdown-item"><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>

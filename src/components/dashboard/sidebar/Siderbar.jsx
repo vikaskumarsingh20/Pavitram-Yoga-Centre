@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { ListGroup } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { FaUser, FaFileAlt, FaKey, FaShoppingCart, FaVideo, FaQuestionCircle } from "react-icons/fa";
@@ -8,7 +9,11 @@ const Sidebar = ({ isVisible }) => {
     const isActive = (path) => location.pathname === path;
     return (
         <div className={`sidebar-container ${isVisible ? 'visible' : ''}`}>
-            <div className="sidebar-header"> 
+ 
+            <div className="sidebar-header ms-2">
+                <Link to="/" className="text-decoration-none fw-bold d-flex align-items-center">
+                    <i className="me-2 fa fa-home primary1"></i> <span className="primary1"> Home Page</span>
+                </Link>
             </div>
 
             <div className="sidebar-content">

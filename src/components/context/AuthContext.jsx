@@ -111,6 +111,11 @@ const updateUser = async (userData) => {
         // This is where you would typically make an API call to update the user profile
         console.log('Updating user profile:', userData);
         
+        // Handle profile image if it exists
+        if (userData.profileImage) {
+            console.log('Profile image received for update');
+        }
+        
         // Update current user data
         setCurrentUser(prevUser => ({
             ...prevUser,

@@ -8,7 +8,7 @@ function UpdateProfile() {
     const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
-        userName: '',
+        fullName: '',
         phone: '',
         email: '',
         gender: '',
@@ -16,14 +16,15 @@ function UpdateProfile() {
         state: '',
         city: '',
         address: '',
-        photo: null
+        photo: null,
+        profileImage: null
     });
     
     // Populate form with current user data when component mounts
     useEffect(() => {
         if (currentUser) {
             setFormData({
-                userName: currentUser.fullName || currentUser.userName || '',
+                fullName: currentUser.fullName || '',
                 phone: currentUser.phone || '',
                 email: currentUser.email || '',
                 gender: currentUser.gender || '',
@@ -31,7 +32,8 @@ function UpdateProfile() {
                 state: currentUser.state || '',
                 city: currentUser.city || '',
                 address: currentUser.address || '',
-                photo: null
+                photo: null,
+                profileImage: currentUser.profileImage || null
             });
         }
     }, [currentUser]);
@@ -40,10 +42,23 @@ function UpdateProfile() {
         const { name, value, type, files } = e.target;
         
         if (type === 'file') {
+            const file = files[0];
             setFormData(prev => ({
                 ...prev,
-                [name]: files[0]
+                [name]: file
             }));
+            
+            // Convert image to base64 for storage
+            if (file && name === 'photo') {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setFormData(prev => ({
+                        ...prev,
+                        profileImage: reader.result
+                    }));
+                };
+                reader.readAsDataURL(file);
+            }
         } else if (type === 'radio') {
             setFormData(prev => ({
                 ...prev,
@@ -60,9 +75,9 @@ function UpdateProfile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // You would handle file upload separately in a real implementation
+        // Prepare data for update (including profile image if available)
         const profileData = { ...formData };
-        delete profileData.photo;
+        delete profileData.photo; // Remove the actual file object
         
         const success = await updateUser(profileData);
         if (success) {
@@ -95,18 +110,18 @@ function UpdateProfile() {
         <div className="card-body">
         <form onSubmit={handleSubmit}>
         <div className="mb-3">
-            <label className="form-label">User Name *</label>
+            <label className="form-label">Full Name *</label>
             <div className="input-group">
             <span className="input-group-text">
                 <i className="bi bi-person"></i>
             </span>
             <input 
                 type="text" 
-                name="userName"
-                value={formData.userName} 
+                name="fullName"
+                value={formData.fullName} 
                 onChange={handleChange}
                 className="form-control" 
-                placeholder="Enter your name"
+                placeholder="Enter your full name"
                 required 
             />
               </div>
