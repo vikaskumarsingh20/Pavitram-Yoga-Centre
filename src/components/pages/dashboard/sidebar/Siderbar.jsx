@@ -8,7 +8,7 @@ const Sidebar = ({ isVisible }) => {
     const isActive = (path) => location.pathname === path;
     return (
         <div className={`sidebar-container ${isVisible ? 'visible' : ''}`}>
-            <div className="sidebar-header">
+            <div className="sidebar-header"> 
             </div>
 
             <div className="sidebar-content">

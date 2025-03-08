@@ -51,13 +51,15 @@ function ViewOrder() {
               </tbody>
             </table>
           </div>
-          <div className="d-flex justify-content-between">
-            <span>Showing 0 to 0 of 0 entries</span>
-            <div>
-              <button className="btn btn-outline-secondary btn-sm me-2">
+          <div className="d-flex justify-content-between flex-wrap">
+            <span className="me-2 me-sm-3">Showing 0 to 0 of 0 entries</span>
+            <div className="d-flex">
+              <button className="btn btn-outline-secondary btn-sm me-2 me-sm-3">
                 Previous
               </button>
-              <button className="btn btn-outline-secondary btn-sm">Next</button>
+              <button className="btn btn-outline-secondary btn-sm">
+                Next
+              </button>
             </div>
           </div>
         </div>
