@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
@@ -81,7 +81,7 @@ function Forget() {
 
         try {
             await resetPassword(formData.oldPassword, formData.newPassword)
-            toast.success('Password reset successfully!')
+            // toast.success('Password reset successfully!')
             setFormData({
                 oldPassword: '',
                 newPassword: '',
@@ -110,7 +110,7 @@ function Forget() {
 
     return (
         <div className="container-fluid">
-            <Toaster position="top-right" />
+            {/* <Toaster position="top-right" /> */}
             <h2 className="account-title">Forget Password</h2>
 
             <nav aria-label="breadcrumb">
@@ -244,12 +244,12 @@ function Forget() {
                         )}
                     </div>
 
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center mt-3 mb-2">
                         <button
                             type="submit"
+                            className="btn btn-primary bg-primary1"
                             disabled={!formData.oldPassword || !formData.newPassword || !formData.confirmPassword ||
                                 formData.newPassword !== formData.confirmPassword || passwordStrength.score < 3}
-                                className='btn btn-primary bg-primary1'
                         >
                             Reset Password <i className="bi bi-arrow-right-circle-fill ms-2"></i>
                         </button>

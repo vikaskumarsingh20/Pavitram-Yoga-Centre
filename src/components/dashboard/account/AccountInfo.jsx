@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import "./AccountInfo.css"; 
 import profilePic from "../../../assets/Instractor/guruji.jpg";
 import "../dashboard.css"
-
-
+import { useAuth } from "../../context/AuthContext";
 const AccountInfo = () => {
+  
+const { currentUser } = useAuth();
   return (
     <div className="container-fluid">
       <h2 className="account-title">Account Info</h2>
@@ -41,47 +42,53 @@ const AccountInfo = () => {
           <div className="col-md-8">
   <table className="table table-bordered align-middle">
     <tbody>
+    <tr>
+        <th className="text-start align-middle w-25">
+          <i className="bi bi-person-fill me-2"></i> Name
+        </th>
+        <td className="text-start">{currentUser?.fullName || "Not provided"}</td>
+    </tr>
       <tr>
         <th className="text-start align-middle w-25">
           <i className="bi bi-envelope-fill me-2"></i> E-mail
         </th>
-        <td className="text-start">vikaskumarsingh0931@gmail.com</td>
+        <td className="text-start">{currentUser?.email || "Not provided"}</td>
       </tr>
       <tr>
         <th className="text-start align-middle">
           <i className="bi bi-telephone-fill me-2"></i> Phone Number
         </th>
-        <td className="text-start">9821190201</td>
+        <td className="text-start">{currentUser?.phone || "Not provided"}</td>
       </tr>
       <tr>
         <th className="text-start align-middle">
           <i className="bi bi-gender-ambiguous me-2"></i> Gender
         </th>
-        <td className="text-start">Male</td>
+        <td className="text-start">{currentUser?.gender || "Not provided"}</td>
       </tr>
       <tr>
         <th className="text-start align-middle">
           <i className="bi bi-globe me-2"></i> Country
         </th>
-        <td className="text-start">India</td>
+        <td className="text-start">{currentUser?.country || "Not provided"}</td>
       </tr>
       <tr>
         <th className="text-start align-middle">
           <i className="bi bi-map-fill me-2"></i> State
         </th>
-        <td className="text-start">Uttar Pradesh</td>
+        <td className="text-start">{currentUser?.state || "Not provided"}</td>
       </tr>
       <tr>
         <th className="text-start align-middle">
           <i className="fa fa-map-marker me-2"></i> City
         </th>
-        <td className="text-start">Ghaziabad</td>
+        <td className="text-start">{currentUser?.city || "Not provided"}</td>
       </tr>
       <tr>
         <th className="text-start align-middle">
           <i className="bi bi-house-door-fill me-2"></i> Address
         </th>
-        <td className="text-start">sector 2/56 Rajendra nagar ,Ghaziabad</td>
+        <td className="text-start">{currentUser?.address || "Not provided"}</td>
       </tr>
     </tbody>
   </table>

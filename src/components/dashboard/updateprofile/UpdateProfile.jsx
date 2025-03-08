@@ -1,7 +1,75 @@
-import { Link } from 'react-router-dom'
-import "./update.css"
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../components/context/AuthContext';
+import "./update.css";
 
 function UpdateProfile() {
+    const { currentUser, updateUser, loading } = useAuth();
+    const navigate = useNavigate();
+    
+    const [formData, setFormData] = useState({
+        userName: '',
+        phone: '',
+        email: '',
+        gender: '',
+        country: '',
+        state: '',
+        city: '',
+        address: '',
+        photo: null
+    });
+    
+    // Populate form with current user data when component mounts
+    useEffect(() => {
+        if (currentUser) {
+            setFormData({
+                userName: currentUser.fullName || currentUser.userName || '',
+                phone: currentUser.phone || '',
+                email: currentUser.email || '',
+                gender: currentUser.gender || '',
+                country: currentUser.country || '',
+                state: currentUser.state || '',
+                city: currentUser.city || '',
+                address: currentUser.address || '',
+                photo: null
+            });
+        }
+    }, [currentUser]);
+    
+    const handleChange = (e) => {
+        const { name, value, type, files } = e.target;
+        
+        if (type === 'file') {
+            setFormData(prev => ({
+                ...prev,
+                [name]: files[0]
+            }));
+        } else if (type === 'radio') {
+            setFormData(prev => ({
+                ...prev,
+                gender: value
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
+    };
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        // You would handle file upload separately in a real implementation
+        const profileData = { ...formData };
+        delete profileData.photo;
+        
+        const success = await updateUser(profileData);
+        if (success) {
+            navigate('/user/account-info');
+        }
+    };
+    
     return (
         <div className="container-fluid">
             <h2 className="account-title"> Live-Class</h2>
@@ -25,96 +93,179 @@ function UpdateProfile() {
           {/* <button className="btn btn-light btn-sm">×</button> */}
         </div>
         <div className="card-body">
-          <form>
-            <div className="mb-3">
-              <label className="form-label">User Name *</label>
-              <div className="input-group">
-                <span className="input-group-text">
-                  <i className="bi bi-person"></i>
-                </span>
-                <input type="text" className="form-control" placeholder="Enter your name" />
+        <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+            <label className="form-label">User Name *</label>
+            <div className="input-group">
+            <span className="input-group-text">
+                <i className="bi bi-person"></i>
+            </span>
+            <input 
+                type="text" 
+                name="userName"
+                value={formData.userName} 
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter your name"
+                required 
+            />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Contact Number *</label>
-              <div className="input-group">
+            <label className="form-label">Contact Number *</label>
+            <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-telephone"></i>
+                <i className="bi bi-telephone"></i>
                 </span>
-                <input type="text" className="form-control" placeholder="Enter your contact number" />
+                <input 
+                type="text"
+                name="phone" 
+                value={formData.phone}
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter your contact number"
+                required 
+                />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Email *</label>
-              <div className="input-group">
+            <label className="form-label">Email *</label>
+            <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-envelope"></i>
+                <i className="bi bi-envelope"></i>
                 </span>
-                <input type="email" className="form-control" placeholder="Enter your email" />
+                <input 
+                type="email"
+                name="email" 
+                value={formData.email}
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter your email"
+                required 
+                />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Gender *</label>
-              <div>
-                <input type="radio" name="gender" id="male" className="form-check-input" />
+            <label className="form-label">Gender *</label>
+            <div>
+                <input 
+                type="radio" 
+                name="gender" 
+                id="male" 
+                value="male"
+                checked={formData.gender === "male"}
+                onChange={handleChange} 
+                className="form-check-input" 
+                />
                 <label htmlFor="male" className="form-check-label ms-2 me-3">Male</label>
-                <input type="radio" name="gender" id="female" className="form-check-input" />
+                <input 
+                type="radio" 
+                name="gender" 
+                id="female" 
+                value="Female"
+                checked={formData.gender === "female"}
+                onChange={handleChange} 
+                className="form-check-input" 
+                />
                 <label htmlFor="female" className="form-check-label ms-2">Female</label>
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Country *</label>
-              <div className="input-group">
+            <label className="form-label">Country *</label>
+            <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-plus"></i>
+                <i className="bi bi-plus"></i>
                 </span>
-                <input type="text" className="form-control" placeholder="Enter country" />
+                <input 
+                type="text"
+                name="country" 
+                value={formData.country}
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter country"
+                required 
+                />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">State *</label>
-              <div className="input-group">
+            <label className="form-label">State *</label>
+            <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-plus"></i>
+                <i className="bi bi-plus"></i>
                 </span>
-                <input type="text" className="form-control" placeholder="Enter state" />
+                <input 
+                type="text"
+                name="state" 
+                value={formData.state}
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter state"
+                required 
+                />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">City *</label>
-              <div className="input-group">
+            <label className="form-label">City *</label>
+            <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-plus"></i>
+                <i className="bi bi-plus"></i>
                 </span>
-                <input type="text" className="form-control" placeholder="Enter city" />
+                <input 
+                type="text"
+                name="city" 
+                value={formData.city}
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter city"
+                required 
+                />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Address *</label>
-              <div className="input-group">
+            <label className="form-label">Address *</label>
+            <div className="input-group">
                 <span className="input-group-text">
-                  <i className="bi bi-plus"></i>
+                <i className="bi bi-plus"></i>
                 </span>
-                <input type="text" className="form-control" placeholder="Enter address" />
+                <input 
+                type="text"
+                name="address" 
+                value={formData.address}
+                onChange={handleChange}
+                className="form-control" 
+                placeholder="Enter address"
+                required 
+                />
               </div>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Photo *</label>
-              <input type="file" className="form-control" />
+            <label className="form-label">Photo *</label>
+            <input 
+                type="file"
+                name="photo"
+                onChange={handleChange}
+                className="form-control" 
+            />
             </div>
 
             <div className="text-center">
-              <Link to={"/user/account-info"} type="submit" className="btn btn-primary bg-primary1 mt-2">Update</Link>
-            </div>
-          </form>
+            <button 
+                type="submit" 
+                className="btn btn-primary bg-primary1 mt-2"
+                disabled={loading}
+            >
+                {loading ? 'Updating...' : 'Update Profile'}
+            </button>
+        </div>
+        </form>
         </div>
       </div>
     </div>

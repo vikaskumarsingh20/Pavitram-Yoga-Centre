@@ -75,6 +75,60 @@ const submitContactForm = async (contactData) => {
     }
 };
 
+// Reset password
+const resetPassword = async (oldPassword, newPassword) => {
+    setLoading(true);
+    try {
+        // This is where you would typically make an API call to verify old password
+        // and update with the new password
+        console.log('Resetting password:', { oldPassword, newPassword });
+        
+        // Simulate password validation
+        if (oldPassword === 'wrongpassword') {
+            setError('Old password is incorrect');
+            toast.error('Old password is incorrect');
+            return false;
+        }
+        
+        // Simulate successful password update
+        console.log('Password updated successfully');
+        toast.success('Password has been reset successfully');
+        setError('');
+        return true;
+    } catch (error) {
+        setError('Failed to reset password');
+        toast.error('Failed to reset password');
+        return false;
+    } finally {
+        setLoading(false);
+    }
+};
+
+// Update user profile
+const updateUser = async (userData) => {
+    setLoading(true);
+    try {
+        // This is where you would typically make an API call to update the user profile
+        console.log('Updating user profile:', userData);
+        
+        // Update current user data
+        setCurrentUser(prevUser => ({
+            ...prevUser,
+            ...userData
+        }));
+        
+        toast.success('Profile updated successfully!');
+        setError('');
+        return true;
+    } catch (error) {
+        setError('Failed to update profile');
+        toast.error('Failed to update profile');
+        return false;
+    } finally {
+        setLoading(false);
+    }
+};
+
 const value = {
     currentUser,
     loading,
@@ -82,7 +136,9 @@ const value = {
     register,
     login,
     logout,
-    submitContactForm
+    submitContactForm,
+    resetPassword,
+    updateUser
 };
 
 return (
