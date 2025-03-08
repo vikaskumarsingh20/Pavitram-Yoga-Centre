@@ -17,12 +17,17 @@ const [cart, setCart] = useState(() => {
 
 
 const [total, setTotal] = useState(0);
+const [cartCount, setCartCount] = useState(0);
 
 useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
     
     const newTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     setTotal(newTotal);
+    
+    // Calculate total quantity of items in cart
+    const newCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setCartCount(newCartCount);
 }, [cart]);
 
 // Add item to cart
@@ -60,6 +65,7 @@ const clearCart = () => {
 const value = {
     cart,
     total,
+    cartCount,
     addToCart,
     removeFromCart,
     clearCart

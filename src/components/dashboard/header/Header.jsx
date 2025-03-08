@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import "./Header.css";
-import { useAuth } from "../../context/AuthContext"; // Import the auth context
+import { useAuth } from "../../context/AuthContext";  
+import { useCart } from "../../context/CartContext";  
 import defaultProfilePic from "../../../assets/Instractor/defaultimage.png";
 import { Link } from "react-router-dom";
 
 const Header = ({ toggleSidebar }) => {
-const { currentUser } = useAuth(); // Get the current user from auth context
+const { currentUser } = useAuth();  
+const { cartCount } = useCart();  
   return (
     <nav className="header-navbar d-flex d-sm-flex-column align-items-center justify-content-between">
       <div className="brand">
@@ -21,7 +23,8 @@ const { currentUser } = useAuth(); // Get the current user from auth context
         {/* Notification Bell */}
         <li className="nav-item">
           <a href="#" className="notification-icon">
-            <i className="fa-solid fa-bell text-dark"></i> <span className="badge text-danger">4</span>
+            <i className="fa-solid fa-bell text-dark"></i> 
+            {cartCount > 0 && <span className="badge text-danger">{cartCount}</span>}
           </a>
         </li>
 
