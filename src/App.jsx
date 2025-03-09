@@ -5,21 +5,22 @@ import ScrollToTop from './components/floating/ScrollToTop';
 import ScrollToTopButton from './components/floating/ScrollToTopButton';
 import { CartProvider } from './components/context/CartContext';
 import { AuthProvider } from './components/context/AuthContext';
+import { NotificationProvider } from './components/context/NotificationContext';
 
 function App() {
 
 return (
-<>
-<CartProvider>
-    <Router>
-    <ScrollToTop/>
-    <ScrollToTopButton />
-    <AuthProvider>
-    <RootRoutes/> 
-    </AuthProvider>
-    </Router> 
-</CartProvider>
-</>
+    <CartProvider>
+        <NotificationProvider>
+            <Router>
+                <ScrollToTop/>
+                <ScrollToTopButton />
+                <AuthProvider>
+                    <RootRoutes/> 
+                </AuthProvider>
+            </Router> 
+        </NotificationProvider>
+    </CartProvider>
   )
 }
 
