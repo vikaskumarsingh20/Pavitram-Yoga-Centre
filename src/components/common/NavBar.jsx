@@ -3,7 +3,7 @@ import colors from "../../styles/colors";
 import { useCart } from "../../components/context/CartContext";
 import { useAuth } from "../../components/context/AuthContext";
 import logo from "../../assets/images/pavitramlogo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +15,11 @@ const { currentUser, logout } = useAuth();
 const [cartCount, setCartCount] = useState(0);
 const [animate, setAnimate] = useState(false);
 const [showDropdown, setShowDropdown] = useState(false);
+const location = useLocation();
+
+const isActive = (path) => {
+    return location.pathname === path;
+};
 
 useEffect(() => {
     if (cart && cart.length > 0) {
@@ -133,7 +138,7 @@ useEffect(() => {
             <ul className="navbar-nav mb-lg-0">
               <li className="nav-item dropdown mt-0">
                 <Link
-                className="nav-link"
+                className={`nav-link ${isActive('/home/aboutus') ? 'active' : ''}`}
                 to="/home/aboutus"
                 role="button"
                 aria-expanded="false"
@@ -142,29 +147,29 @@ useEffect(() => {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="/home/aboutus">
+                    <Link className={`dropdown-item ${isActive('/home/aboutus') ? 'active' : ''}`} to="/home/aboutus">
                     Pavitram
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/home/Acharya_VivekAditya">
+                    <Link className={`dropdown-item ${isActive('/home/Acharya_VivekAditya') ? 'active' : ''}`} to="/home/Acharya_VivekAditya">
                     Acharya Vivekaditya
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/home/our_centers">
+                    <Link className={`dropdown-item ${isActive('/home/our_centers') ? 'active' : ''}`} to="/home/our_centers">
                     Our Centers
                     </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/home/Courses">
+                <Link className={`nav-link ${isActive('/home/Courses') ? 'active' : ''}`} to="/home/Courses">
                   Trainer's Course
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/home/service">
+                <Link className={`nav-link ${isActive('/home/service') ? 'active' : ''}`} to="/home/service">
                   Our Yoga Services
                 </Link>
               </li>
@@ -180,17 +185,17 @@ useEffect(() => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/home/upcoming_events">
+                <Link className={`nav-link ${isActive('/home/upcoming_events') ? 'active' : ''}`} to="/home/upcoming_events">
                   Our Upcoming Events
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/home/gallery">
+                <Link className={`nav-link ${isActive('/home/gallery') ? 'active' : ''}`} to="/home/gallery">
                   Gallery
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/home/contactus">
+                <Link className={`nav-link ${isActive('/home/contactus') ? 'active' : ''}`} to="/home/contactus">
                   Contact
                 </Link>
               </li>
