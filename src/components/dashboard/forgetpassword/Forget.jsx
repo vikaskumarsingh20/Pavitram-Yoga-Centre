@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
