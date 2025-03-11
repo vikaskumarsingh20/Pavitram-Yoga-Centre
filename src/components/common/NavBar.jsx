@@ -11,7 +11,7 @@ import { faChevronDown, faShoppingCart, faUser } from "@fortawesome/free-solid-s
 
 function NavBar() {
 const { cart } = useCart();
-const { currentUser, logout } = useAuth();
+const { currentUser, logout, isLoggedIn } = useAuth();
 const [cartCount, setCartCount] = useState(0);
 const [animate, setAnimate] = useState(false);
 const [showDropdown, setShowDropdown] = useState(false);
@@ -73,7 +73,7 @@ useEffect(() => {
                 <span className="ms-1">Cart</span>
             </div>
             </Link>
-            {currentUser ? (
+            {isLoggedIn ? (
             <div className="position-relative">
                 <div 
                 style={{ textDecoration: "none", cursor: "pointer" }}
@@ -81,13 +81,13 @@ useEffect(() => {
                 onClick={() => setShowDropdown(!showDropdown)}
                 >
                 <FontAwesomeIcon icon={faUser} className="me-1" /> 
-                {currentUser.email || "User"} <FontAwesomeIcon icon={faChevronDown} className="ms-1" />
+                {currentUser?.email || "User"} <FontAwesomeIcon icon={faChevronDown} className="ms-1" />
                 </div>
                 {showDropdown && (
-                <div className="position-absolute bg-white shadow rounded py-2 mt-1  " style={{ zIndex: 1000, right: 0, minWidth: "150px" }}>
+                <div className="position-absolute bg-white shadow rounded py-2 mt-1" style={{ zIndex: 1000, right: 0, minWidth: "150px" }}>
                     <Link 
                     to="/user/account-info" 
-                    className="dropdown-item text-decoration-none  text-dark py-1 px-3 "
+                    className="dropdown-item text-decoration-none text-dark py-1 px-3"
                     onClick={() => setShowDropdown(false)}
                     >
                     Profile

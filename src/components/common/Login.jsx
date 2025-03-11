@@ -16,7 +16,7 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
 
-    const { login, error } = useAuth();
+    const { login, error, isLoggedIn, setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -29,14 +29,31 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login credentials:', formData);
-        const success = await login(formData.email, formData.password);
-        if (success) {
-            toast.success("Registration successful!", { duration: 5000 });
+
+        try {
+            console.log("Login data:", formData);
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
+              method: "POST",
+              headers: {
+              "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+            console.log("data",data);
+            if (response.ok) {
+                setFormData({ email: "", password: "" });
+              setIsLoggedIn(true);
+              navigate("/");
+              toast.success("Login successful!");
+            } else {
+              console.error("Login Error:", data.error);
+              toast.error(data.error || "Invalid user credentials");
+            }
+          } catch (error) {
+            console.error("Login Error:", error);
+            toast.error("An unexpected error occurred. Please try again later.");
           }
-          if (success) {
-            setTimeout(() => navigate('/'), 1000);
-        }
     };
 
     const togglePasswordVisiblity = (event) => {
