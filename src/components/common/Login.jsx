@@ -1,84 +1,81 @@
 /* eslint-disable no-unused-vars */
-// eslint-disable-next-line no-unused-vars
-import React, { useContext, useState } from 'react'
-import NavBar from './NavBar'
-import Footer from '../Home/FooterCopyright'
-import { Link, useNavigate } from 'react-router-dom'
-import  { useAuth } from '../context/AuthContext'
-import toast, { Toaster } from 'react-hot-toast'
-import { FaEye, FaEyeSlash } from 'react-icons/fa'
-
+import { useState } from 'react';
+import NavBar from './NavBar';
+import Footer from '../Home/FooterCopyright';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import toast, { Toaster } from 'react-hot-toast';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { getEmailError, getPasswordError } from '../../utils/regexPatterns';
 
 function Login() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
-
-
-    const {  setIsLoggedIn, setCurrentUser  } = useAuth();
-
+    const { setIsLoggedIn, setCurrentUser } = useAuth();
+    const [errors, setErrors] = useState({ email: '', password: '' });
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
+        setFormData({ ...formData, [name]: value });
+        setErrors({
+            ...errors,
+            [name]: name === 'email' ? getEmailError(value) : name === 'password' ? getPasswordError(value) : ''
         });
+    };
+
+    const validateForm = () => {
+        const emailError = getEmailError(formData.email);
+        const passwordError = getPasswordError(formData.password);
+        setErrors({ email: emailError, password: passwordError });
+        return !emailError && !passwordError;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-         try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        
-        if (response.ok) {
-            // setFormData({ email: "", password: "" });
-            // setIsLoggedIn(true);
-            // navigate("/");
-            // toast.success("Login successful!");
-            setFormData({ email: "", password: "" });
-            setIsLoggedIn(true);
-            setCurrentUser(data.user); // <-- Ensure this is added
-            console.log("setCurrentUser:", data.user);
-            localStorage.setItem("currentUser", JSON.stringify(data.user)); // <-- Persist user data
-            navigate("/");
-            toast.success("Login successful!");
-        } else {
-            console.error("Login Error:", data.error);
-            toast.error(data.error || "Invalid user credentials");
+        if (!validateForm()) {
+            toast.error("Please fix the form errors");
+            return;
         }
-    } catch (error) {
-        console.error("Login Error:", error);
-        toast.error("An unexpected error occurred. Please try again later.");
-    }
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                setFormData({ email: '', password: '' });
+                setIsLoggedIn(true);
+                setCurrentUser(data.user);
+                localStorage.setItem("currentUser", JSON.stringify(data.user));
+                navigate("/");
+                toast.success("Login successful!");
+            } else {
+                toast.error(data.error || "Invalid user credentials");
+            }
+        } catch (error) {
+            toast.error("An unexpected error occurred. Please try again later.");
+        }
     };
 
-    const togglePasswordVisiblity = (event) => {
+    const togglePasswordVisibility = (event) => {
         event.preventDefault();
         setShowPassword(!showPassword);
-      };
+    };
+
     return (
         <>
-        <Toaster />
+            <Toaster />
             <NavBar />
-            <div className='container-fluid laptop-margin '>
+            <div className='container-fluid laptop-margin'>
                 <div className="d-flex flex-column align-items-center justify-content-center py-5 bg-image">
-                    <h1 className="text-center text-white z-2" > Login</h1>
-                    <Link to="/" className="text-white mt-3 px-4 py-2 home-link">
-                        Home
-                    </Link>
+                    <h1 className="text-center text-white z-2">Login</h1>
+                    <Link to="/" className="text-white mt-3 px-4 py-2 home-link">Home</Link>
                 </div>
+
                 <div className="container mt-5 mb-5">
                     <div className="row justify-content-center">
                         <div className="col-md-5 border p-4 shadow-sm">
@@ -90,6 +87,8 @@ function Login() {
                         <div className="col-md-5 border p-4 shadow-sm">
                             <h3 className="fw-bold">Registered Account</h3>
                             <p>If you have an account with us, please log in.</p>
+
+                            {/* Email Field */}
                             <div className="mb-3">
                                 <label className="form-label">Email Address*</label>
                                 <input
@@ -99,7 +98,10 @@ function Login() {
                                     value={formData.email}
                                     onChange={handleChange}
                                 />
+                                {errors.email && <p className="text-danger">{errors.email}</p>}
                             </div>
+
+                            {/* Password Field */}
                             <div className="mb-3">
                                 <label className="form-label">Password*</label>
                                 <div className="input-group">
@@ -113,38 +115,35 @@ function Login() {
                                     <button
                                         className="btn btn-outline-secondary border-1"
                                         type="button"
-                                        onClick={togglePasswordVisiblity}
+                                        onClick={togglePasswordVisibility}
                                     >
                                         {showPassword ? <FaEye /> : <FaEyeSlash />}
                                     </button>
                                 </div>
+                                {errors.password && <p className="text-danger">{errors.password}</p>}
                             </div>
+
                             <div className='d-flex flex-column'>
                                 <Link to="/Home/forget_password" className="text-muted text-decoration-none mb-3"> Forgot Password? </Link>
 
                                 <div className='d-flex justify-content-start align-items-center'>
-                                    <button type="button" className="btn btn-primary" onClick={handleSubmit}
-                                        disabled={
-                                            !(
-
-                                                formData.email &&
-                                                formData.password &&
-                                                formData.email.trim() !== '' &&
-                                                formData.password.trim() !== ''
-
-                                            )
-                                        }
-                                    >Login</button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        onClick={handleSubmit}
+                                        disabled={!!errors.email || !!errors.password}
+                                    >
+                                        Login
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
             <Footer />
         </>
-    )
+    );
 }
 
-export default Login
+export default Login;

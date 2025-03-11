@@ -6,6 +6,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import AuthContext, { useAuth } from "../context/AuthContext";
 import { Toaster, toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { getEmailError, getPasswordError,getMobileNumberError } from '../../utils/regexPatterns';
 
 function Registration() {
 
@@ -20,20 +21,38 @@ function Registration() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [errors, setErrors] = useState({ email: '', password: '', phone: '' });
  const {  setIsLoggedIn, setCurrentUser  } = useAuth();
   const navigate = useNavigate();
   // Handle input changes
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
+    setErrors({
+      ...errors,
+      [name]: name === 'email' ? getEmailError(value) : name === 'password' ? getPasswordError(value) : name === 'phone' ? getMobileNumberError(value) : ''
+    });
+  };
+
+  const validateForm = () => {
+    const emailError = getEmailError(formData.email);
+    const passwordError = getPasswordError(formData.password);
+    const phoneError = getMobileNumberError(formData.phone);
+    setErrors({ email: emailError, password: passwordError, phone: phoneError });
+    return !emailError && !passwordError && !phoneError;
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      toast.error("Please fix the form errors");
+      return;
+  }
 
     try {
       console.log("Login data:", formData);
@@ -53,7 +72,7 @@ function Registration() {
         localStorage.setItem("currentUser", JSON.stringify(data.user)); // <-- Persist user data
         setIsLoggedIn(true);
         toast.success("Registration successful!", { duration: 5000 });
-        setTimeout(() => navigate("/home/login"), 1000);
+        setTimeout(() => navigate("/"), 1000);
       } else {
         console.error("Login Error:", data.error);
         toast.error(data.error || "Invalid user credentials");
@@ -102,7 +121,9 @@ function Registration() {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
+                    required
                   />
+                  
                 </div>
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
@@ -117,7 +138,9 @@ function Registration() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    maxLength={10}
                   />
+                   {errors.phone && <p className="text-danger">{errors.phone}</p>}
                 </div>
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
@@ -133,7 +156,9 @@ function Registration() {
                     value={formData.email}
                     onChange={handleChange}
                   />
+                  {errors.email && <p className="text-danger">{errors.email}</p>}
                 </div>
+                
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
                     Password
@@ -157,6 +182,7 @@ function Registration() {
                       {showPassword ? <FaEye /> : <FaEyeSlash />}
                     </button>
                   </div>
+                  {errors.password && <p className="text-danger">{errors.password}</p>}
                 </div>
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
@@ -196,6 +222,7 @@ function Registration() {
                       {showRepeatPassword ? <FaEye /> : <FaEyeSlash />}
                     </button>
                   </div>
+                  {errors.password && <p className="text-danger">{errors.password}</p>}
                 </div>
               </div>
               <button
