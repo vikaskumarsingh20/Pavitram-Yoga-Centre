@@ -33,8 +33,6 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Create index for email field for faster queries
-userSchema.index({ email: 1 });
 
 const User = mongoose.model('User', userSchema);
 
