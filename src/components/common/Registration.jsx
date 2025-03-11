@@ -20,7 +20,7 @@ function Registration() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-  const {setIsLoggedIn} = useContext(AuthContext);
+ const {  setIsLoggedIn, setCurrentUser  } = useAuth();
   const navigate = useNavigate();
   // Handle input changes
   const handleChange = (e) => {
@@ -48,6 +48,9 @@ function Registration() {
       console.log("data", data);
       if (response.ok) {
         setFormData({ email: "", password: "" });
+        setCurrentUser(data.user); // <-- Ensure this is added
+        console.log("setCurrentUser:", data.user);
+        localStorage.setItem("currentUser", JSON.stringify(data.user)); // <-- Persist user data
         setIsLoggedIn(true);
         toast.success("Registration successful!", { duration: 5000 });
         setTimeout(() => navigate("/home/login"), 1000);
