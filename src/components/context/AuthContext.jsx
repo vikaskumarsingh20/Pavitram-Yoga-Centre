@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 export const AuthContext = createContext();
@@ -16,6 +16,15 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (storedUser) {
+            setCurrentUser(storedUser);
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     // Register a new user
     const register = async (userData) => {
         setLoading(true);
@@ -23,6 +32,7 @@ export const AuthProvider = ({ children }) => {
             console.log('Registering user:', userData);
             setCurrentUser(userData);
             setIsLoggedIn(true);
+            localStorage.setItem("currentUser", JSON.stringify(userData));
             setError('');
             return true;
         } catch (error) {
@@ -34,12 +44,13 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Login user
-    const login = async (email, password) => {
+    const login = async (userData) => {
         setLoading(true);
         try {
-            console.log('Logging in user:', { email, password });
-            setCurrentUser({ email });
+            console.log('Logging in user:', {  email: userData.email });
+            setCurrentUser(userData);  // <-- Ensure you are saving user data here
             setIsLoggedIn(true);
+            localStorage.setItem("currentUser", JSON.stringify(userData));
             setError('');
             return true;
         } catch (error) {
@@ -54,7 +65,8 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setCurrentUser(null);
         setIsLoggedIn(false);
-        toast.error("Logout successful!", { duration: 3000 });
+        localStorage.removeItem("currentUser");
+        toast.success("Logout successful!", { duration: 3000 });
     };
 
     // Submit contact form
@@ -125,6 +137,7 @@ export const AuthProvider = ({ children }) => {
         error,
         isLoggedIn,
         setIsLoggedIn,
+        setCurrentUser,
         register,
         login,
         logout,
@@ -132,7 +145,8 @@ export const AuthProvider = ({ children }) => {
         resetPassword,
         updateUser
     };
-
+    console.log("Current User in Context:", currentUser); // Debug log
+    
     return (
         <AuthContext.Provider value={value}>
             <Toaster />

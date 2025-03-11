@@ -17,7 +17,7 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
 
-    const {  setIsLoggedIn } = useAuth();
+    const {  setIsLoggedIn, setCurrentUser  } = useAuth();
 
     const navigate = useNavigate();
 
@@ -43,8 +43,15 @@ function Login() {
         const data = await response.json();
         
         if (response.ok) {
+            // setFormData({ email: "", password: "" });
+            // setIsLoggedIn(true);
+            // navigate("/");
+            // toast.success("Login successful!");
             setFormData({ email: "", password: "" });
             setIsLoggedIn(true);
+            setCurrentUser(data.user); // <-- Ensure this is added
+            console.log("setCurrentUser:", data.user);
+            localStorage.setItem("currentUser", JSON.stringify(data.user)); // <-- Persist user data
             navigate("/");
             toast.success("Login successful!");
         } else {
