@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import NavBar from './NavBar'
 import Footer from '../Home/FooterCopyright'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import  { useAuth } from '../context/AuthContext'
 import toast, { Toaster } from 'react-hot-toast'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -16,7 +17,8 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
 
-    const { login, error, isLoggedIn, setIsLoggedIn } = useAuth();
+    const {  setIsLoggedIn } = useAuth();
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -30,30 +32,29 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            console.log("Login data:", formData);
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
-              method: "POST",
-              headers: {
-              "Content-Type": "application/json",
-              },
-              body: JSON.stringify(formData),
-            });
-            const data = await response.json();
-            console.log("data",data);
-            if (response.ok) {
-                setFormData({ email: "", password: "" });
-              setIsLoggedIn(true);
-              navigate("/");
-              toast.success("Login successful!");
-            } else {
-              console.error("Login Error:", data.error);
-              toast.error(data.error || "Invalid user credentials");
-            }
-          } catch (error) {
-            console.error("Login Error:", error);
-            toast.error("An unexpected error occurred. Please try again later.");
-          }
+         try {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+        
+        if (response.ok) {
+            setFormData({ email: "", password: "" });
+            setIsLoggedIn(true);
+            navigate("/");
+            toast.success("Login successful!");
+        } else {
+            console.error("Login Error:", data.error);
+            toast.error(data.error || "Invalid user credentials");
+        }
+    } catch (error) {
+        console.error("Login Error:", error);
+        toast.error("An unexpected error occurred. Please try again later.");
+    }
     };
 
     const togglePasswordVisiblity = (event) => {

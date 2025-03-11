@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Footer from "../Home/FooterCopyright";
 import NavBar from "./NavBar";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import AuthContext, { useAuth } from "../context/AuthContext";
 import { Toaster, toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Registration() {
-  const { register } = useAuth();
 
   // Form state
   const [formData, setFormData] = useState({
@@ -21,6 +20,7 @@ function Registration() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const {setIsLoggedIn} = useContext(AuthContext);
   const navigate = useNavigate();
   // Handle input changes
   const handleChange = (e) => {
@@ -35,22 +35,29 @@ function Registration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Log all form data to console
-    console.log("Form submission data:", formData);
-
-    // Validate passwords match
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords don't match");
-      return;
-    }
-
-    // Call the register function from AuthContext
-    const success = await register(formData);
-    if (success) {
-      toast.success("Registration successful!", { duration: 5000 });
-    }
-    if (success) {
-      setTimeout(() => navigate('/'), 1000);
+    try {
+      console.log("Login data:", formData);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log("data", data);
+      if (response.ok) {
+        setFormData({ email: "", password: "" });
+        setIsLoggedIn(true);
+        toast.success("Registration successful!", { duration: 5000 });
+        setTimeout(() => navigate("/home/login"), 1000);
+      } else {
+        console.error("Login Error:", data.error);
+        toast.error(data.error || "Invalid user credentials");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      toast.error("An unexpected error occurred. Please try again later.");
     }
   };
 

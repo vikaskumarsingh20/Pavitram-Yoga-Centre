@@ -12,6 +12,8 @@ import { faChevronDown, faShoppingCart, faUser } from "@fortawesome/free-solid-s
 function NavBar() {
 const { cart } = useCart();
 const { currentUser, logout, isLoggedIn } = useAuth();
+console.log("currentUser:", currentUser);
+console.log("isLoggedIn:", isLoggedIn);
 const [cartCount, setCartCount] = useState(0);
 const [animate, setAnimate] = useState(false);
 const [showDropdown, setShowDropdown] = useState(false);
@@ -208,3 +210,4 @@ useEffect(() => {
 }
 
 export default NavBar;
+
