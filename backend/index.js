@@ -26,6 +26,7 @@ dbConnect();
 
 // Routes
 app.use("/api/v1", routes);
+// app.use('/api/v1', userRoutes);
 
 // Default route
 app.get("/", (req, res) => {

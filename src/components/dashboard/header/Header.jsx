@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 
 const Header = ({ toggleSidebar }) => {
-const { currentUser } = useAuth();  
+const { currentUser, logout } = useAuth();  
 const { 
   notifications, 
   unreadCount, 
@@ -39,6 +39,12 @@ const handleNotificationClick = (notification) => {
   }
   setShowNotifications(false);
 };
+
+const handleLogout = () => {
+  logout();
+  navigate('/home/login'); // Redirect to login page after logout
+};
+
   return (
     <nav className="header-navbar d-flex d-sm-flex-column align-items-center justify-content-between">
       <div className="brand">
@@ -120,7 +126,15 @@ const handleNotificationClick = (notification) => {
             <img src={currentUser?.profileImage || defaultProfilePic} alt="Profile" className="profile-pic img-fluid rounded-4 bg-white" /> {currentUser?.fullName || "Guest User"}
           </button>
           <ul className="dropdown-menu">
-            <li><a href="#" className="dropdown-item"><i className="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+            <li>
+              <button 
+                className="dropdown-item" 
+                onClick={handleLogout}
+              >
+                <i className="fa-solid fa-right-from-bracket me-2"></i>
+                Logout
+              </button>
+            </li>
           </ul>
         </li>
       </ul>

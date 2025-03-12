@@ -25,6 +25,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Address is required']
   },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+    
+  },
+  Country	: {
+    type: String,
+    default: 'India'
+  },
+  State: {
+    type: String,
+    default: 'Uttar Pradesh'
+  },
+  city: {
+    type: String,
+    default: 'Gh'
+  },
   createdAt: {
     type: Date,
     default: Date.now
