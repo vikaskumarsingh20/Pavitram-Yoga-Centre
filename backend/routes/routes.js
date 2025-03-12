@@ -4,6 +4,7 @@ const { signup, login } = require("../controllers/AuthController");
 const { updateUserDetails, getUserDetails } = require('../controllers/updateUserDetails');
 const authMiddleware = require('../middleware/authMiddleware');
 
+// Auth Routes
 router.post("/auth/signup", signup);
 router.post("/auth/login", login);
 
