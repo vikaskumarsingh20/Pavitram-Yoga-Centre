@@ -11,7 +11,7 @@ import { getEmailError, getPasswordError } from '../../utils/regexPatterns';
 function Login() {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
-    const { setIsLoggedIn, setCurrentUser } = useAuth();
+    const { login } = useAuth();
     const [errors, setErrors] = useState({ email: '', password: '' });
     const navigate = useNavigate();
 
@@ -46,11 +46,9 @@ function Login() {
             });
             const data = await response.json();
 
-            if (response.ok) {
+            if (response.ok && data.token) {
                 setFormData({ email: '', password: '' });
-                setIsLoggedIn(true);
-                setCurrentUser(data.user);
-                localStorage.setItem("currentUser", JSON.stringify(data.user));
+                login(data.user, data.token);
                 navigate("/");
                 toast.success("Login successful!");
             } else {

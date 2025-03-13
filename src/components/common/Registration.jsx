@@ -22,7 +22,7 @@ function Registration() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '', phone: '' });
- const {  setIsLoggedIn, setCurrentUser  } = useAuth();
+ const { login } = useAuth();
   const navigate = useNavigate();
   // Handle input changes
 
@@ -55,7 +55,6 @@ function Registration() {
   }
 
     try {
-      console.log("Login data:", formData);
       const response = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: {
@@ -64,21 +63,29 @@ function Registration() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      console.log("data", data);
-      if (response.ok) {
-        setFormData({ email: "", password: "" });
-        setCurrentUser(data.user); // <-- Ensure this is added
-        console.log("setCurrentUser:", data.user);
-        localStorage.setItem("currentUser", JSON.stringify(data.user)); // <-- Persist user data
-        setIsLoggedIn(true);
+
+      if (response.ok && data.token) {
+        // Use login function instead of separate setters
+        login(data.user, data.token);
+        
+        // Reset form
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          password: "",
+          address: "",
+          confirmPassword: "",
+        });
+
         toast.success("Registration successful!", { duration: 5000 });
-        setTimeout(() => navigate("/"), 1000);
+        navigate("/");
       } else {
-        console.error("Login Error:", data.error);
-        toast.error(data.error || "Invalid user credentials");
+        console.error("Registration Error:", data.error);
+        toast.error(data.error || "Registration failed");
       }
     } catch (error) {
-      console.error("Login Error:", error);
+      console.error("Registration Error:", error);
       toast.error("An unexpected error occurred. Please try again later.");
     }
   };

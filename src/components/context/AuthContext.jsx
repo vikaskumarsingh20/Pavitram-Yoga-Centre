@@ -4,7 +4,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 export const useAuth = () => {
     return useContext(AuthContext);
@@ -12,16 +12,17 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [error, setError] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const login = async (userData, token) => {
         try {
-            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('currentUser', JSON.stringify(userData));
             localStorage.setItem('token', token);
             setCurrentUser(userData);
+            setIsLoggedIn(true);
         } catch (error) {
             console.error('Login error:', error);
             throw error;
@@ -31,18 +32,20 @@ export const AuthProvider = ({ children }) => {
     // Check for existing auth on mount
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
+        const user = localStorage.getItem('currentUser');
         
         if (token && user) {
             try {
                 setCurrentUser(JSON.parse(user));
+                setIsLoggedIn(true);
             } catch (error) {
                 console.error('Auth restoration error:', error);
                 // Clear invalid data
                 localStorage.removeItem('token');
-                localStorage.removeItem('user');
+                localStorage.removeItem('currentUser');
             }
         }
+        setLoading(false);
     }, []);
 
     // Register a new user
@@ -69,7 +72,7 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
         setIsLoggedIn(false);
         localStorage.removeItem("currentUser");
-        localStorage.removeItem('user');
+        localStorage.removeItem('currentUser');
         localStorage.removeItem('token');
         toast.success("Logout successful!", { duration: 3000 });
     };
