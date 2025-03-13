@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../components/context/AuthContext';
+import { toast } from 'react-hot-toast';
+import { updateProfile } from '../../../services/apis'; // Adjust the path if needed
+
 import "./update.css";
 
 function UpdateProfile() {
-    const { currentUser, updateUser, loading } = useAuth();
+    const { currentUser, updateUser, loading,setLoading, logout } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -75,13 +78,45 @@ function UpdateProfile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Prepare data for update (including profile image if available)
-        const profileData = { ...formData };
-        delete profileData.photo; // Remove the actual file object
+        if (!currentUser?._id) {
+            toast.error('User not authenticated');
+            return;
+        }
 
-        const success = await updateUser(profileData);
-        if (success) {
-            navigate('/user/account-info');
+        try {
+            // Show loading state
+            setLoading(true);
+
+            // Prepare the form data
+            const profileData = { ...formData };
+            delete profileData.photo;
+
+            // Add token check
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Please login again to continue');
+            }
+
+            const response = await updateProfile(currentUser._id, profileData);
+            
+            if (response.success) {
+                // Update local user data
+                updateUser(response.user);
+                toast.success('Profile updated successfully');
+                navigate('/user/account-info');
+            }
+        } catch (error) {
+            console.error('Update profile error:', error);
+            if (error.message.includes('Please login again')) {
+                // Clear auth state and redirect
+                logout();
+                navigate('/home/login');
+                toast.error('Session expired. Please login again.');
+            } else {
+                toast.error(error.message || 'Failed to update profile');
+            }
+        } finally {
+            setLoading(false);
         }
     };
 

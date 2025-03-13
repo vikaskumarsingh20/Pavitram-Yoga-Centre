@@ -36,11 +36,11 @@ const userSchema = new mongoose.Schema({
 //     type: String,
 //     default: null
 // },
-  Country	: {
+  country	: {
     type: String,
     default: 'India'
   },
-  State: {
+  state: {
     type: String,
     default: 'Uttar Pradesh'
   },

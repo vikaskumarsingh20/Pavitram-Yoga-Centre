@@ -3,9 +3,16 @@ import "./AccountInfo.css";
 import defaultProfilePic from "../../../assets/Instractor/defaultimage.png";
 import "../dashboard.css"
 import { useAuth } from "../../context/AuthContext";
-const AccountInfo = () => {
+import { useEffect } from "react";
 
+const AccountInfo = () => {
   const { currentUser } = useAuth();
+  
+  // Add this debug log
+  useEffect(() => {
+    console.log('Current User Data:', currentUser);
+  }, [currentUser]);
+
   return (
     <div className="container-fluid">
       <h2 className="account-title">Account Info</h2>

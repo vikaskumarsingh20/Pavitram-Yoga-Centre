@@ -13,15 +13,35 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem('token'));
     const [error, setError] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const login = async (userData, token) => {
+        try {
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('token', token);
+            setCurrentUser(userData);
+        } catch (error) {
+            console.error('Login error:', error);
+            throw error;
+        }
+    };
 
+    // Check for existing auth on mount
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-        if (storedUser) {
-            setCurrentUser(storedUser);
-            setIsLoggedIn(true);
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        
+        if (token && user) {
+            try {
+                setCurrentUser(JSON.parse(user));
+            } catch (error) {
+                console.error('Auth restoration error:', error);
+                // Clear invalid data
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+            }
         }
     }, []);
 
@@ -43,29 +63,14 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // Login user
-    const login = async (userData) => {
-        setLoading(true);
-        try {
-            console.log('Logging in user:', {  email: userData.email });
-            setCurrentUser(userData);  // <-- Ensure you are saving user data here
-            setIsLoggedIn(true);
-            localStorage.setItem("currentUser", JSON.stringify(userData));
-            setError('');
-            return true;
-        } catch (error) {
-            setError('Failed to login');
-            return false;
-        } finally {
-            setLoading(false);
-        }
-    };
-
     // Logout user
     const logout = () => {
         setCurrentUser(null);
+        setToken(null);
         setIsLoggedIn(false);
         localStorage.removeItem("currentUser");
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
         toast.success("Logout successful!", { duration: 3000 });
     };
 
@@ -108,32 +113,25 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Update user profile
-    const updateUser = async (userData) => {
-        setLoading(true);
-        try {
-            console.log('Updating user profile:', userData);
-            if (userData.profileImage) {
-                console.log('Profile image received for update');
-            }
-            setCurrentUser(prevUser => ({
-                ...prevUser,
-                ...userData
-            }));
-            toast.success('Profile updated successfully!');
-            setError('');
-            return true;
-        } catch (error) {
-            setError('Failed to update profile');
-            toast.error('Failed to update profile');
-            return false;
-        } finally {
-            setLoading(false);
-        }
+    const updateUser = (userData) => {
+        const updatedUser = {
+            ...currentUser,
+            ...userData,
+            gender: userData.gender || currentUser?.gender,
+            country: userData.country || currentUser?.country,
+            state: userData.state || currentUser?.state,
+            city: userData.city || currentUser?.city,
+            _id: userData._id || currentUser?._id // Ensure ID is preserved
+        };
+        setCurrentUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
     };
 
     const value = {
         currentUser,
+        token,
         loading,
+        setLoading,
         error,
         isLoggedIn,
         setIsLoggedIn,
