@@ -56,7 +56,7 @@ function Registration() {
 
     try {
       console.log("Login data:", formData);
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/signup`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -39,7 +39,7 @@ function Login() {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
