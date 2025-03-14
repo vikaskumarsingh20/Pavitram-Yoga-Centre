@@ -1,11 +1,33 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import titlelogo from "../../assets/images/title-icon.png"
-import { Link } from 'react-router-dom'
-import { services } from '../data/services'
+import React, { useState, useEffect } from 'react';
+import titlelogo from "../../assets/images/title-icon.png";
+import { Link } from 'react-router-dom';
 
 function LatestServices() {
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_BASE_URL}/blogs`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch services');
+                }
+                const data = await response.json();
+                setServices(data.blogs || []); // Adjust based on your API response structure
+            } catch (error) {
+                console.error('Error fetching services:', error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchServices();
+    }, []);
 
     const ServiceCard = ({ service, index }) => {
         return (
@@ -29,24 +51,32 @@ function LatestServices() {
             </div>
         );
     };
+
+    if (loading) {
+        return <div className="text-center">Loading services...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center text-danger">Error: {error}</div>;
+    }
+
     return (
         <>
-            <div className="container-fluid mb-3 ">
+            <div className="container-fluid mb-3">
                 <p className='border border-3 border-dark bg-light'></p>
-                          <h2 className='text-center'>Latest <span className='text-danger'>Services</span></h2>
-                          <img src={titlelogo} className='mx-auto d-block mb-3' alt="Title Logo" />
+                <h2 className='text-center'>Latest <span className='text-danger'>Services</span></h2>
+                <img src={titlelogo} className='mx-auto d-block mb-3' alt="Title Logo" />
                 <div className="row">
                     {services.map((service, index) => (
-                        <ServiceCard key={index} service={service} index={index} />
+                        <ServiceCard key={service._id || index} service={service} index={index} />
                     ))}
                 </div>
-                {/* More Button */}
                 <div className="text-center">
                     <Link to="/home/service" className="btn btn-danger">More</Link>
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default LatestServices
+export default LatestServices;
