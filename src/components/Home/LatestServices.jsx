@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import { services } from "../data/services";
+import titlelogo from "../../assets/images/title-icon.png"
 
 
 function Services() {
 
     return (
         <>
-            <p className="border border-3 border-dark bg-light"></p>
+          <p className='border border-3 border-dark bg-light'></p>
+          <h2 className='text-center'>Latest <span className='text-danger'> Services</span></h2>
+          <img src={titlelogo} className='mx-auto d-block' alt="Title Logo" />
             <div className="container">
                 <div className="row">
                     {services.map((service, index) => (
-                        <div key={index} className="col-md-4 mb-4">
+                        <div key={index} className="col-md-4">
                             <div className="card   p-3 border-0">
                                 <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{ minHeight: '250px', maxHeight: '250px' }} />
                                 <h5 className="mt-3 text-center fw-bold">{service.title}</h5>
