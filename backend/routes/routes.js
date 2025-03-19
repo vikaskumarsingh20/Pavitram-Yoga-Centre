@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { signup, login } = require("../controllers/AuthController");
 const { updateUserDetails, getUserDetails } = require('../controllers/updateUserDetails');
-const { createOrder, verifyPayment } = require('../controllers/paymentController');
+const { createOrder, verifyPayment, getPaymentDetails } = require('../controllers/paymentController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // Auth Routes
@@ -14,10 +14,9 @@ router.post("/auth/login", login);
 router.put('/user/:userId', authMiddleware, updateUserDetails);
 router.get('/user/:userId', authMiddleware, getUserDetails);
 
-
-//razorpay routes
-router.post('/create-order', createOrder);
-router.post('/verify-payment', verifyPayment);
-
+// Razorpay routes - Add proper prefix
+router.post('/payment/create-order', authMiddleware, createOrder);
+router.post('/payment/verify-payment', authMiddleware, verifyPayment);
+router.get('/payment/order/:orderId', authMiddleware, getPaymentDetails);
 
 module.exports = router;
