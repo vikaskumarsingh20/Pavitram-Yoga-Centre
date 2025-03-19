@@ -1,12 +1,97 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { useCart } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 import Footer from '../Home/FooterCopyright'
 import NavBar from '../common/NavBar'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 function Cart() {
-const { cart, total, removeFromCart, clearCart } = useCart();
+    const { cart, total, removeFromCart, clearCart } = useCart();
+    const { isLoggedIn, currentUser } = useAuth();
+    const navigate = useNavigate();
+
+    const handleCheckout = async () => {
+        if (!isLoggedIn) {
+            toast.error('Please login to continue with payment');
+            navigate('/home/login');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/payment/create-order`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    amount: total,
+                    currency: 'INR',
+                    receipt: `receipt_${Date.now()}`,
+                    userId: currentUser._id,
+                    cartItems: cart
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                const options = {
+                    key: data.key,
+                    amount: data.order.amount,
+                    currency: data.order.currency,
+                    name: "Pavitram Yoga",
+                    description: "Payment for yoga services",
+                    order_id: data.order.id,
+                    handler: async function (response) {
+                        try {
+                            const verifyResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/payment/verify-payment`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                                },
+                                body: JSON.stringify({
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_signature: response.razorpay_signature
+                                })
+                            });
+
+                            const verifyData = await verifyResponse.json();
+
+                            if (verifyData.success) {
+                                clearCart();
+                                toast.success('Payment successful!');
+                                navigate('/user/orders');
+                            }
+                        } catch (error) {
+                            toast.error('Payment verification failed');
+                        }
+                    },
+                    prefill: {
+                        name: currentUser.fullName,
+                        email: currentUser.email,
+                        contact: currentUser.phone
+                    },
+                    theme: {
+                        color: "#3399cc"
+                    }
+                };
+
+                const rzp = new window.Razorpay(options);
+                rzp.open();
+            }
+        } catch (error) {
+            console.error('Payment error:', error);
+            toast.error('Failed to initialize payment');
+        }
+    };
+
   return (
     <>
       <NavBar />
@@ -93,8 +178,11 @@ const { cart, total, removeFromCart, clearCart } = useCart();
                 <span>Total Amount:</span>
                 <span>₹{total}.00</span>
                 </div>
-                <button className="btn btn-primary w-100 mt-3">
-                Proceed to Checkout
+                <button 
+                    className="btn btn-primary w-100 mt-3"
+                    onClick={handleCheckout}
+                >
+                    {isLoggedIn ? 'Proceed to Payment' : 'Login to Checkout'}
                 </button>
             </div>
             </div>
