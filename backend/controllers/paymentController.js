@@ -23,13 +23,20 @@ exports.createOrder = async (req, res) => {
             });
         }
 
+        // Ensure cartItems have titles
+        const processedCartItems = cartItems.map(item => ({
+            ...item,
+            title: item.title || item.name || item.serviceName || 'Service',
+            price: Number(item.price).toFixed(2)
+        }));
+
         const options = {
             amount: Math.round(amount * 100), // Convert to paise
             currency,
             receipt,
             notes: {
                 userId: userId,
-                cartItems: JSON.stringify(cartItems)
+                cartItems: JSON.stringify(processedCartItems)
             }
         };
 
@@ -41,7 +48,7 @@ exports.createOrder = async (req, res) => {
             amount: amount,
             userId: new mongoose.Types.ObjectId(userId),
             status: 'created',
-            cartItems: cartItems
+            cartItems: processedCartItems
         });
 
         res.status(201).json({

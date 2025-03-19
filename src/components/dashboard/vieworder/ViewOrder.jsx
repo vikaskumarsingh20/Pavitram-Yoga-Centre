@@ -32,7 +32,15 @@ function ViewOrder() {
         }
 
         const data = await response.json();
-        setOrders(data.orders);
+        // Transform orders data to ensure title is available
+        const transformedOrders = data.orders.map(order => ({
+          ...order,
+          cartItems: order.cartItems.map(item => ({
+            ...item,
+            title: item.title || item.name || item.serviceName || 'Service' // Fallback options
+          }))
+        }));
+        setOrders(transformedOrders);
       } catch (error) {
         console.error('Error fetching orders:', error);
         toast.error('Failed to load orders');
@@ -90,23 +98,20 @@ function ViewOrder() {
             <table className="table table-bordered table-striped">
               <thead className="table-light">
                 <tr>
-                  <th>Order ID</th>
-                  <th>Date</th>
-                  <th>Amount</th>
-                  <th>Payment ID</th>
-                  <th>Status</th>
+                  <th style={{width: "12%"}}>Order ID</th>
+                  <th style={{width: "15%"}}>Date</th>
+                  <th style={{width: "15%"}}>Title Name</th>
+                  <th style={{width: "12%"}}>Amount</th>
+                  <th style={{width: "15%"}}>Payment ID</th>
+                  <th style={{width: "18%"}}>Status</th>
                   <th>Items</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <tr>
-                    <td colSpan="6" className="text-center">Loading orders...</td>
-                  </tr>
+                  <tr><td colSpan="7" className="text-center">Loading orders...</td></tr>
                 ) : currentOrders.length === 0 ? (
-                  <tr>
-                    <td colSpan="6" className="text-center">No orders found</td>
-                  </tr>
+                  <tr><td colSpan="7" className="text-center">No orders found</td></tr>
                 ) : (
                   currentOrders.map((order) => (
                     <tr key={order.orderId}>
@@ -121,6 +126,11 @@ function ViewOrder() {
                           hour: '2-digit',
                           minute: '2-digit'
                         })}
+                      </td>
+                      <td className="align-middle">
+                        <span className=" px-2 py-1 position-relative top-0">
+                          {order.cartItems[0]?.title || 'N/A'}
+                        </span>
                       </td>
                       <td className="align-middle fw-bold">₹{Number(order.amount).toFixed(2)}</td>
                       <td className="align-middle">
@@ -149,9 +159,9 @@ function ViewOrder() {
                         {order.cartItems.map((item, index) => (
                           <div key={index} className="d-flex align-items-center mb-1">
                            
-                            <span className="text-truncate" style={{maxWidth: '150px'}}>
+                            {/* <span className="text-truncate" style={{maxWidth: '150px'}}>
                               {item.title}
-                            </span>
+                            </span> */}
                             <span className="ms-auto text-muted small">
                               ₹{Number(item.price).toFixed(2)}
                             </span>
