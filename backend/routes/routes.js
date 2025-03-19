@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { signup, login } = require("../controllers/AuthController");
 const { updateUserDetails, getUserDetails } = require('../controllers/updateUserDetails');
-const { createOrder, verifyPayment, getPaymentDetails } = require('../controllers/paymentController');
+const { createOrder, verifyPayment, getPaymentDetails, getUserOrders } = require('../controllers/paymentController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // Auth Routes
@@ -18,5 +18,6 @@ router.get('/user/:userId', authMiddleware, getUserDetails);
 router.post('/payment/create-order', authMiddleware, createOrder);
 router.post('/payment/verify-payment', authMiddleware, verifyPayment);
 router.get('/payment/order/:orderId', authMiddleware, getPaymentDetails);
+router.get('/payment/orders/:userId', authMiddleware, getUserOrders);
 
 module.exports = router;

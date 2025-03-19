@@ -144,3 +144,31 @@ exports.getPaymentDetails = async (req, res) => {
         });
     }
 };
+
+exports.getUserOrders = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid user ID format"
+            });
+        }
+
+        const orders = await Payment.find({ userId })
+            .sort({ createdAt: -1 })
+            .select('-__v');
+
+        res.status(200).json({
+            success: true,
+            orders
+        });
+    } catch (error) {
+        console.error('Get orders error:', error);
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
