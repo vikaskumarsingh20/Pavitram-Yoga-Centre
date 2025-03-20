@@ -1,72 +1,44 @@
 const User = require('../models/user');
+const path = require('path');
 
 exports.updateUserDetails = async (req, res) => {
     try {
         const { userId } = req.params;
-        const updateData = req.body;
+        const updateData = { ...req.body };
 
-        // Validate user exists
-        const user = await User.findById(userId);
-        if (!user) {
+        // Handle file upload
+        if (req.file) {
+            const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+            updateData.profileImage = fileUrl;
+        }
+
+        // Convert gender to lowercase for consistency
+        if (updateData.gender) {
+            updateData.gender = updateData.gender.toLowerCase();
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            updateData,
+            { new: true, runValidators: true }
+        ).select('-password');
+
+        if (!updatedUser) {
             return res.status(404).json({
                 success: false,
                 message: "User not found"
             });
         }
 
-        // Fields that are allowed to be updated
-        const allowedUpdates = [
-            'fullName',
-            'phone',
-            'email',
-            'address',
-            'gender',
-            'Country',
-            'State'
-        ];
-
-        // Filter out any fields that aren't in allowedUpdates
-        const filteredData = Object.keys(updateData)
-            .filter(key => allowedUpdates.includes(key))
-            .reduce((obj, key) => {
-                obj[key] = updateData[key];
-                return obj;
-            }, {});
-
-        // If email is being updated, check if it's already in use
-        if (filteredData.email && filteredData.email !== user.email) {
-            const emailExists = await User.findOne({ email: filteredData.email });
-            if (emailExists) {
-                return res.status(400).json({
-                    success: false,
-                    message: "Email already in use"
-                });
-            }
-        }
-
-        // Update user details
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            { $set: filteredData },
-            { new: true, runValidators: true }
-        );
-
-        // Remove sensitive information
-        const userResponse = updatedUser.toObject();
-        delete userResponse.password;
-
         res.status(200).json({
             success: true,
-            message: "User details updated successfully",
-            user: userResponse
+            user: updatedUser
         });
-
     } catch (error) {
-        console.error('Update error:', error);
+        console.error('Update user error:', error);
         res.status(500).json({
             success: false,
-            message: "Error updating user details",
-            error: error.message
+            message: error.message || "Failed to update user details"
         });
     }
 };

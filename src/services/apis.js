@@ -1,34 +1,16 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-export const updateProfile = async (userId, userData) => {
+export const updateProfile = async (userId, formData) => {
     try {
-        // Get token from localStorage
-        const token = localStorage.getItem('token');
-        
-        // Validate token exists
-        if (!token) {
-            throw new Error('Please login again to continue');
-        }
-
-        // Make the API call
-        const response = await fetch(`${BASE_URL}/user/${userId}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/user/${userId}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
-            credentials: 'include', // Include cookies
-            body: JSON.stringify(userData)
+            body: formData, // FormData will set the correct content-type
         });
 
-        // Parse response
         const data = await response.json();
 
-        // Handle non-200 responses
         if (!response.ok) {
-            if (response.status === 401) {
-                throw new Error('Please login again to continue');
-            }
             throw new Error(data.message || 'Failed to update profile');
         }
 

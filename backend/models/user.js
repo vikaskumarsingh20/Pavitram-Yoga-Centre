@@ -27,26 +27,23 @@ const userSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female', 'other'],
-    default: 'male',
-    // required: [true, 'Gender is required']
-    
+    enum: ['male', 'female'],
+    required: true
   },
-//   profileImage: {
-//     type: String,
-//     default: null
-// },
-  country	: {
+  country: {
     type: String,
-    default: 'India'
+    required: true
   },
   state: {
     type: String,
-    default: 'Uttar Pradesh'
+    required: true
   },
   city: {
     type: String,
-    default: 'Ghaziabad'
+    required: true
+  },
+  profileImage: {
+    type: String
   },
   createdAt: {
     type: Date,

@@ -46,27 +46,14 @@ function UpdateProfile() {
 
         if (type === 'file') {
             const file = files[0];
-            setFormData(prev => ({
-                ...prev,
-                [name]: file
-            }));
-
-            // Convert image to base64 for storage
-            if (file && name === 'photo') {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setFormData(prev => ({
-                        ...prev,
-                        profileImage: reader.result
-                    }));
-                };
-                reader.readAsDataURL(file);
+            if (file) {
+                // Update both photo and formData
+                setFormData(prev => ({
+                    ...prev,
+                    photo: file,
+                    profileImage: URL.createObjectURL(file)
+                }));
             }
-        } else if (type === 'radio') {
-            setFormData(prev => ({
-                ...prev,
-                gender: value
-            }));
         } else {
             setFormData(prev => ({
                 ...prev,
@@ -77,44 +64,37 @@ function UpdateProfile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!currentUser?._id) {
-            toast.error('User not authenticated');
-            return;
-        }
-
+        
         try {
-            // Show loading state
             setLoading(true);
+            const formDataToSend = new FormData();
 
-            // Prepare the form data
-            const profileData = { ...formData };
-            delete profileData.photo;
+            // Append all form fields including gender, country, city etc.
+            ['fullName', 'phone', 'email', 'gender', 'country', 'state', 'city', 'address'].forEach(field => {
+                if (formData[field]) {
+                    formDataToSend.append(field, formData[field]);
+                }
+            });
 
-            // Add token check
-            const token = localStorage.getItem('token');
-            if (!token) {
-                throw new Error('Please login again to continue');
+            // Append photo if selected
+            if (formData.photo instanceof File) {
+                formDataToSend.append('photo', formData.photo);
             }
 
-            const response = await updateProfile(currentUser._id, profileData);
+            const response = await updateProfile(currentUser._id, formDataToSend);
             
             if (response.success) {
-                // Update local user data
-                updateUser(response.user);
+                // Update local state with new user data
+                updateUser({
+                    ...currentUser,
+                    ...response.user
+                });
                 toast.success('Profile updated successfully');
                 navigate('/user/account-info');
             }
         } catch (error) {
             console.error('Update profile error:', error);
-            if (error.message.includes('Please login again')) {
-                // Clear auth state and redirect
-                logout();
-                navigate('/home/login');
-                toast.error('Session expired. Please login again.');
-            } else {
-                toast.error(error.message || 'Failed to update profile');
-            }
+            toast.error(error.message || 'Failed to update profile');
         } finally {
             setLoading(false);
         }
@@ -122,7 +102,7 @@ function UpdateProfile() {
 
     return (
         <div className="container-fluid">
-            <h2 className="account-title"> Live-Class</h2>
+            <h2 className="account-title"> Update Profile</h2>
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb bg-light py-2 px-3 rounded-3">
                     <li className="breadcrumb-item">
@@ -206,7 +186,7 @@ function UpdateProfile() {
                                         name="gender"
                                         id="male"
                                         value="male"
-                                        checked={formData.gender === "male"}
+                                        checked={formData.gender.toLowerCase() === "male"}
                                         onChange={handleChange}
                                         className="form-check-input"
                                     />
@@ -215,8 +195,8 @@ function UpdateProfile() {
                                         type="radio"
                                         name="gender"
                                         id="female"
-                                        value="Female"
-                                        checked={formData.gender === "female"}
+                                        value="female"
+                                        checked={formData.gender.toLowerCase() === "female"}
                                         onChange={handleChange}
                                         className="form-check-input"
                                     />
@@ -295,7 +275,7 @@ function UpdateProfile() {
                                 </div>
                             </div>
 
-                            <div className="mb-3">
+                            {/* <div className="mb-3">
                                 <label className="form-label">Photo *</label>
                                 <input
                                     type="file"
@@ -303,6 +283,27 @@ function UpdateProfile() {
                                     onChange={handleChange}
                                     className="form-control"
                                 />
+                            </div> */}
+
+                            <div className="mb-3">
+                                <label className="form-label">Photo</label>
+                                <input
+                                    type="file"
+                                    name="photo"
+                                    accept="image/*"
+                                    onChange={handleChange}
+                                    className="form-control"
+                                />
+                                {(formData.profileImage || currentUser?.profileImage) && (
+                                    <div className="mt-2">
+                                        <img 
+                                            src={formData.profileImage || currentUser.profileImage}
+                                            alt="Profile"
+                                            className="img-thumbnail"
+                                            style={{ maxWidth: '200px' }}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div className="text-center">
