@@ -5,13 +5,14 @@ const { signup, login } = require("../controllers/AuthController");
 const { updateUserDetails, getUserDetails } = require('../controllers/updateUserDetails');
 const { createOrder, verifyPayment, getPaymentDetails, getUserOrders } = require('../controllers/paymentController');
 const authMiddleware = require('../middleware/authMiddleware');
+const { uploadMiddleware, handleUploadError } = require('../middleware/fileUpload');
 
 // Auth Routes
 router.post("/auth/signup", signup);
 router.post("/auth/login", login);
 
 // Protected routes
-router.put('/user/:userId', authMiddleware, updateUserDetails);
+router.put('/user/:userId', authMiddleware, uploadMiddleware, handleUploadError, updateUserDetails);
 router.get('/user/:userId', authMiddleware, getUserDetails);
 
 // Razorpay routes - Add proper prefix

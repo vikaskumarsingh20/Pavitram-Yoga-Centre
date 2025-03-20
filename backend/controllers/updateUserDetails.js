@@ -4,12 +4,26 @@ const path = require('path');
 exports.updateUserDetails = async (req, res) => {
     try {
         const { userId } = req.params;
+        console.log('Updating user with ID:', userId);
+        
+        // Validate userId
+        if (!userId) {
+            return res.status(400).json({
+                success: false,
+                message: "User ID is required"
+            });
+        }
+        
         const updateData = { ...req.body };
+        console.log('Update data received:', updateData);
 
         // Handle file upload
         if (req.file) {
+            console.log('File uploaded:', req.file.filename);
             const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
             updateData.profileImage = fileUrl;
+        } else {
+            console.log('No file uploaded');
         }
 
         // Convert gender to lowercase for consistency
@@ -24,11 +38,14 @@ exports.updateUserDetails = async (req, res) => {
         ).select('-password');
 
         if (!updatedUser) {
+            console.log('User not found with ID:', userId);
             return res.status(404).json({
                 success: false,
                 message: "User not found"
             });
         }
+        
+        console.log('User updated successfully:', updatedUser._id);
 
         res.status(200).json({
             success: true,

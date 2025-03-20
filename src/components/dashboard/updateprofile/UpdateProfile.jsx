@@ -47,6 +47,17 @@ function UpdateProfile() {
         if (type === 'file') {
             const file = files[0];
             if (file) {
+                // Validate file size and type
+                if (file.size > 5 * 1024 * 1024) {
+                    toast.error("File size should not exceed 5MB");
+                    return;
+                }
+                
+                if (!file.type.startsWith('image/')) {
+                    toast.error("Only image files are allowed");
+                    return;
+                }
+                
                 // Update both photo and formData
                 setFormData(prev => ({
                     ...prev,
@@ -61,29 +72,73 @@ function UpdateProfile() {
             }));
         }
     };
+    
+    // Validate all form fields
+    const validateForm = () => {
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            toast.error("Please enter a valid email address");
+            return false;
+        }
+        
+        // Phone number validation (simple version)
+        if (formData.phone.length < 10) {
+            toast.error("Please enter a valid phone number");
+            return false;
+        }
+        
+        // Check required fields
+        const requiredFields = ['fullName', 'email', 'phone', 'gender', 'country', 'state', 'city', 'address'];
+        for (const field of requiredFields) {
+            if (!formData[field] || formData[field].trim() === '') {
+                toast.error(`${field.charAt(0).toUpperCase() + field.slice(1)} is required`);
+                return false;
+            }
+        }
+        
+        return true;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validate form before submission
+        if (!validateForm()) {
+            return;
+        }
         
         try {
             setLoading(true);
             const formDataToSend = new FormData();
 
+            // Log the data being sent
+            console.log('Updating profile with data:', JSON.stringify(formData, null, 2));
+            
             // Append all form fields including gender, country, city etc.
             ['fullName', 'phone', 'email', 'gender', 'country', 'state', 'city', 'address'].forEach(field => {
                 if (formData[field]) {
                     formDataToSend.append(field, formData[field]);
+                    console.log(`Adding field ${field}: ${formData[field]}`);
                 }
             });
 
             // Append photo if selected
             if (formData.photo instanceof File) {
                 formDataToSend.append('photo', formData.photo);
+                console.log(`Adding photo: ${formData.photo.name}, size: ${formData.photo.size}`);
             }
 
+            // Make sure we have a user ID
+            if (!currentUser?._id) {
+                throw new Error('User ID is missing. Please log in again.');
+            }
+
+            console.log(`Submitting update for user ID: ${currentUser._id}`);
             const response = await updateProfile(currentUser._id, formDataToSend);
             
             if (response.success) {
+                console.log('Profile update successful:', response);
                 // Update local state with new user data
                 updateUser({
                     ...currentUser,
@@ -91,10 +146,25 @@ function UpdateProfile() {
                 });
                 toast.success('Profile updated successfully');
                 navigate('/user/account-info');
+            } else {
+                // Handle unsuccessful response
+                console.error('Update failed with response:', response);
+                toast.error(response.message || 'Failed to update profile');
             }
         } catch (error) {
+            // Enhanced error logging
             console.error('Update profile error:', error);
-            toast.error(error.message || 'Failed to update profile');
+            
+            // Network error detection and handling
+            if (error.name === 'NetworkError' || !navigator.onLine || error.message.includes('network')) {
+                toast.error('Network error. Please check your internet connection and try again.');
+            } else if (error.response) {
+                // Server responded with an error status
+                console.error('Server error:', error.response);
+                toast.error(`Server error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+            } else {
+                toast.error(error.message || 'Failed to update profile');
+            }
         } finally {
             setLoading(false);
         }

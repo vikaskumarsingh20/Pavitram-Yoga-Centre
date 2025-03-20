@@ -5,7 +5,18 @@ const User = require("../models/user");
 
 exports.signup = async (req, res) => {
   try {
-    const { fullName, phone, email, password, address, confirmPassword } = req.body;
+    const { 
+      fullName, 
+      phone, 
+      email, 
+      password, 
+      address, 
+      confirmPassword, 
+      gender, 
+      country, 
+      state, 
+      city 
+    } = req.body;
 
     // Check if all required fields are present
     if (!fullName || !phone || !email || !password || !address || !confirmPassword) {
@@ -35,13 +46,23 @@ exports.signup = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new user with all fields
+    // Set default values for missing required fields
+    const defaultGender = gender || 'male'; // Default to 'male' if not provided
+    const defaultCountry = country || 'India'; // Default to 'India' if not provided
+    const defaultState = state || 'Default State'; // Default value if not provided
+    const defaultCity = city || 'Default City'; // Default value if not provided
+
+    // Create new user with all required fields
     const user = await User.create({
       fullName,
       phone,
       email,
       password: hashedPassword,
       address,
+      gender: defaultGender,
+      country: defaultCountry,
+      state: defaultState,
+      city: defaultCity,
     });
 
     // Create JWT token after successful registration
@@ -66,7 +87,7 @@ exports.signup = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Signup error:", error.message, error);
     return res.status(500).json({
       success: false,
       message: "User cannot be registered. Please try again.",

@@ -27,13 +27,19 @@ function Profile() {
 
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
-            <i className="bi bi-envelope-fill me-2"></i> Email : <span className="fw-bold">example@example.com</span>
+            <i className="bi bi-envelope-fill me-2"></i> Email : <span className="fw-bold">{currentUser?.email || 'N/A'}</span>
           </li>
           <li className="list-group-item">
-            <i className="bi bi-phone-fill me-2"></i> Phone : <span className="fw-bold">123-456-7890</span>
+            <i className="bi bi-phone-fill me-2"></i> Phone : <span className="fw-bold">{currentUser?.phone || 'N/A'}</span>
           </li>
           <li className="list-group-item">
-            <i className="bi bi-map-fill me-2"></i> Address : <span className="fw-bold">New York, USA</span>
+            <i className="bi bi-map-fill me-2"></i> Address : <span className="fw-bold">{currentUser?.address || 'N/A'}</span>
+          </li>
+          <li className="list-group-item">
+            <i className="bi bi-gender-ambiguous me-2"></i> Gender : <span className="fw-bold">{currentUser?.gender || 'N/A'}</span>
+          </li>
+          <li className="list-group-item">
+            <i className="bi bi-geo-alt-fill me-2"></i> Location : <span className="fw-bold">{`${currentUser?.city || ''} ${currentUser?.state || ''} ${currentUser?.country || 'N/A'}`}</span>
           </li>
         </ul>
       

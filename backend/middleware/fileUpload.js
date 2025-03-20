@@ -11,7 +11,7 @@ if (!fs.existsSync(uploadsDir)) {
 // Configure multer storage
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, uploadsDir);
     },
     filename: function (req, file, cb) {
         // Create unique filename with timestamp
@@ -38,6 +38,10 @@ const upload = multer({
     },
     fileFilter: fileFilter
 });
+
+// Log details about the upload path
+console.log('File upload directory configured as:', uploadsDir);
+console.log('Directory exists:', fs.existsSync(uploadsDir));
 
 // Middleware to handle file upload errors
 const handleUploadError = (err, req, res, next) => {

@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }) => {
             _id: userData._id || currentUser?._id // Ensure ID is preserved
         };
         setCurrentUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
     };
 
     const value = {
