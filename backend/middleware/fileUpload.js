@@ -3,10 +3,35 @@ const path = require('path');
 const fs = require('fs');
 
 // Create uploads directory if it doesn't exist
+// Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
 }
+
+// Function to delete previous profile image
+const deleteUserImage = (filename) => {
+    if (!filename) return false;
+    
+    // Extract just the filename from the full URL if needed
+    const baseFilename = filename.includes('/uploads/') 
+        ? filename.split('/uploads/')[1] 
+        : filename;
+    
+    const filePath = path.join(uploadsDir, baseFilename);
+    
+    try {
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+            console.log(`Deleted previous profile image: ${filePath}`);
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.error('Error deleting previous profile image:', error);
+        return false;
+    }
+};
 
 // Configure multer storage
 const storage = multer.diskStorage({
@@ -14,9 +39,11 @@ const storage = multer.diskStorage({
         cb(null, uploadsDir);
     },
     filename: function (req, file, cb) {
-        // Create unique filename with timestamp
+        // Preserve original filename with a unique identifier
+        const originalName = file.originalname.replace(/\s+/g, '-');
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+        // Format: originalname-timestamp-random.extension
+        cb(null, `${path.parse(originalName).name}-${uniqueSuffix}${path.extname(originalName)}`);
     }
 });
 
@@ -71,5 +98,6 @@ const handleUploadError = (err, req, res, next) => {
 module.exports = {
     uploadMiddleware: upload.single('photo'),
     handleUploadError,
-    uploadsDir
+    uploadsDir,
+    deleteUserImage
 };

@@ -14,7 +14,7 @@ function Services() {
                 <div className="row">
                     {services.map((service, index) => (
                         <div key={index} className="col-md-4">
-                            <div className="card   p-3 border-0">
+                            <div className="  p-1 border-0">
                                 <img src={service.image} alt={service.title} className="img-fluid rounded border-0" style={{ minHeight: '250px', maxHeight: '250px' }} />
                                 <h5 className="mt-3 text-center fw-bold">{service.title}</h5>
                                 <p className="text-center"><small> <i className="fa-solid fa-user-group text-danger me-1"></i> By {service.trainer} | <i className="fa-solid fa-calendar-days text-danger me-1"></i> {service.duration} | 🎯 {service.audience}</small></p>
