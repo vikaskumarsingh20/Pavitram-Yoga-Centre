@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faShoppingCart, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
 const { cart } = useCart();
@@ -92,6 +92,7 @@ useEffect(() => {
                     className="dropdown-item text-decoration-none text-dark py-1 px-3"
                     onClick={() => setShowDropdown(false)}
                     >
+                    <FontAwesomeIcon icon={faUser} className="me-2" />
                     Profile
                     </Link>
                     <div 
@@ -102,6 +103,7 @@ useEffect(() => {
                         setShowDropdown(false);
                     }}
                     >
+                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
                     Logout
                     </div>
                 </div>

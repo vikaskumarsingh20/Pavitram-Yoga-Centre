@@ -7,7 +7,7 @@ import { coursesData } from '../data/coursedata'
 function LatestCourses() {
       const CourseCard = ({ course }) => {
         return (
-          <div className="col-md-4 mb-4">
+          <div className="col-12 col-sm-6 col-lg-4 mb-4">
             <div className="card mb-3 border-0">
               <h4 className='text-center mt-1 mb-2 fs-5'>{course.title}</h4>
               <img src={course.image} className="img-fluid rounded border-0 card-img-top" alt={course.title} style={{ height: "278px" }} />
