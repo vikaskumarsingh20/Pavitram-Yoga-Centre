@@ -80,7 +80,28 @@ function Login() {
                             <h3 className="fw-bold">New Account</h3>
                             <p>By creating an account with Pavitram, you will be able to move through the checkout process faster</p>
                             <Link to="/home/registration" className="btn btn-primary">Register</Link>
+
+
+                            <div className="admin-login-section text-center p-4 mt-4 border-top">
+                                <div className="admin-icon mb-3">
+                                    <i className="fas fa-user-shield fa-2x text-secondary"></i>
+                                </div>
+                                <h3 className="fw-bold mb-3">Admin Login</h3>
+                                <p className="text-muted mb-3">Access administrative dashboard</p>
+                                <Link
+                                    to="/home/admin_login"
+                                    className="btn btn-admin-login position-relative overflow-hidden"
+                                >
+                                    <span className="btn-text">
+                                        <i className="fas fa-lock me-2"></i>
+                                        Login as Admin
+                                    </span>
+                                </Link>
+                            </div>
+
                         </div>
+
+
 
                         <div className="col-md-5 border p-4 shadow-sm">
                             <h3 className="fw-bold">Registered Account</h3>

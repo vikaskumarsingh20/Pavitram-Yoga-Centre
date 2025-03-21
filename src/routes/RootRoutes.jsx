@@ -20,6 +20,7 @@ import HomeClasses from '../components/pages/HomeClasses';
 import HomeclassDetails from '../components/pages/Homeclass_details';
 import BlogDetails from '../components/pages/BlogDetails';
 import DashboardRoutes from '../components/dashboard/dashboardRoutes';
+import AdminLogin from '../../Admin/login/AdminLogin';
 
 function RootRoutes() {
   return (
@@ -46,6 +47,9 @@ function RootRoutes() {
       <Route path="/home/service_detail" element={<ServiceDetails />} />
       <Route path="/home/service_detail/:serviceId" element={<ServiceDetails />} />
       <Route path="/user/*" element={<DashboardRoutes />} />
+
+      {/* admin routes */}
+      <Route path="/home/admin_login" element={<AdminLogin />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
