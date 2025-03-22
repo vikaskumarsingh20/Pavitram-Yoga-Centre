@@ -20,7 +20,8 @@ import HomeClasses from '../components/pages/HomeClasses';
 import HomeclassDetails from '../components/pages/Homeclass_details';
 import BlogDetails from '../components/pages/BlogDetails';
 import DashboardRoutes from '../components/dashboard/dashboardRoutes';
-import AdminLogin from '../../Admin/login/AdminLogin';
+// import AdminLogin from '../../Admin/login/AdminLogin';
+import AdminRoutes from '../../Admin/routes/Routes';
 
 function RootRoutes() {
   return (
@@ -49,7 +50,9 @@ function RootRoutes() {
       <Route path="/user/*" element={<DashboardRoutes />} />
 
       {/* admin routes */}
-      <Route path="/home/admin_login" element={<AdminLogin />} />
+      {/* <Route path="/home/admin_login" element={<AdminLogin />} /> */}
+      <Route path="/admin/*" element={<AdminRoutes />} />
+      
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
