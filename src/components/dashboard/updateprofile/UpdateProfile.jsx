@@ -10,7 +10,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import "./update.css";
 
 function UpdateProfile() {
-    const { currentUser, updateUser, loading,setLoading, logout } = useAuth();
+    const { currentUser, updateUser, loading,setLoading } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
