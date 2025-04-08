@@ -89,7 +89,7 @@ function Login() {
                                 <h3 className="fw-bold mb-3">Admin Login</h3>
                                 <p className="text-muted mb-3">Access administrative dashboard</p>
                                 <Link
-                                    to="/home/admin_login"
+                                    to="/admin/login"
                                     className="btn btn-admin-login position-relative overflow-hidden"
                                 >
                                     <span className="btn-text">

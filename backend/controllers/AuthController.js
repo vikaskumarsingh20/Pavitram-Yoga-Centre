@@ -3,6 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+// Add JWT_SECRET validation at the top of the file
+if (!process.env.JWT_SECRET) {
+  console.error("JWT_SECRET is not defined in environment variables!");
+  throw new Error("JWT_SECRET must be defined");
+}
+
 exports.signup = async (req, res) => {
   try {
     const { 
@@ -66,11 +72,28 @@ exports.signup = async (req, res) => {
     });
 
     // Create JWT token after successful registration
-    const token = jwt.sign(
-      { userId: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "24h" }
-    );
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET is missing");
+      return res.status(500).json({
+        success: false,
+        message: "Server configuration error",
+      });
+    }
+
+    let token;
+    try {
+      token = jwt.sign(
+        { userId: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "24h" }
+      );
+    } catch (tokenError) {
+      console.error("Token creation failed:", tokenError);
+      return res.status(500).json({
+        success: false,
+        message: "Error during authentication",
+      });
+    }
 
     // Set cookie with token
     res.cookie("token", token, {
@@ -118,11 +141,28 @@ exports.login = async (req, res) => {
     }
 
     // Create JWT token
-    const token = jwt.sign(
-      { userId: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "24h" }
-    );
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET is missing");
+      return res.status(500).json({
+        success: false,
+        message: "Server configuration error",
+      });
+    }
+
+    let token;
+    try {
+      token = jwt.sign(
+        { userId: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "24h" }
+      );
+    } catch (tokenError) {
+      console.error("Token creation failed:", tokenError);
+      return res.status(500).json({
+        success: false,
+        message: "Error during authentication",
+      });
+    }
 
     // Set cookie with token
     res.cookie("token", token, {

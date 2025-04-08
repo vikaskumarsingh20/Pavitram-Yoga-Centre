@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUserShield, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 import './login.css';
+import { fetchDashboardData } from '../../services/adminService';
 
 function AdminLogin() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -22,8 +25,35 @@ function AdminLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        // Add your login logic here
-        setTimeout(() => setIsLoading(false), 2000);
+
+        // Get credentials from environment variables
+        const defaultEmail = import.meta.env.VITE_ADMIN_EMAIL;
+        const defaultPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+
+        try {
+            if (formData.email === defaultEmail && formData.password === defaultPassword) {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Store admin token
+                const token = 'dummy-admin-token'; // Replace with real JWT token
+                localStorage.setItem('adminToken', token);
+
+                // Fetch dashboard data
+                const dashboardData = await fetchDashboardData();
+                localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+                
+                toast.success('Login successful!');
+                navigate('/admin/dashboard');
+            } else {
+                toast.error('Invalid credentials');
+            }
+        } catch (error) {
+            toast.error('Login failed');
+            console.error('Login error:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

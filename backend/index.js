@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 const path = require('path');
 
 // Load environment variables
-dotenv.config();
+require('dotenv').config();
 
 // Initialize express
 const app = express();
