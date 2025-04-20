@@ -3,7 +3,7 @@ import Login from '../components/common/Login';
 import LandingPage from '../components/Home/LandingPage';
 import PageNotFound from '../components/Home/PageNotFound';
 import Registration from '../components/common/Registration';
-import Aboutus from '../components/pages/aboutus';
+import Aboutus from '../components/pages/Aboutus';
 import Acharya_VivekAditya from '../components/pages/Acharya_VivekAditya';
 import Our_centers from '../components/pages/Our_centers';
 import Courses from '../components/pages/Courses';
