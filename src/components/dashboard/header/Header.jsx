@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import "./Header.css";
+import "./header.css";
 import { useAuth } from "../../context/AuthContext";  
 import { useNotification } from "../../context/NotificationContext";  
 import defaultProfilePic from "../../../assets/Instractor/defaultimage.png";
