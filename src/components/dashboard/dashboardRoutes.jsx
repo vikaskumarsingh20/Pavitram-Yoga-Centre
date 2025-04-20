@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import AccountInfo from './account/AccountInfo';
 import Dashboard from './Dashboard';
 import Profile from './profile/Profile';
-import Forget from './forgetpassword/forget';
+import Forget from './forgetpassword/Forget';
 import ViewOrder from './vieworder/ViewOrder';
 import LiveClass from './liveclasses/LiveClass';
 import Help from './help/Help';
