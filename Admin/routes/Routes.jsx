@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import AdminDashboard from '../Dashboard/AdminDashboard';
+// import AdminDashboard from '../dashboard/AdminDashboard';
 import AdminLogin from '../login/AdminLogin';
 
 function AdminRoutes() {
     return (
         <Routes>
             {/* Direct Routes without authentication */}
-            <Route path="/" element={<AdminDashboard />} />
-            <Route path="dashboard" element={<AdminDashboard />} />
+            {/* <Route path="/" element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} /> */}
             <Route path="login" element={<AdminLogin/>} />
         </Routes>
     );
